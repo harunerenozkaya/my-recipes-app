@@ -8,6 +8,8 @@ void main() {
 }
 
 class MyApp extends StatelessWidget {
+  //
+  // Route ile veri gönderme
   MaterialPageRoute generateRoute(RouteSettings settings) {
     List args = settings.name.split("/");
     switch (args[0]) {

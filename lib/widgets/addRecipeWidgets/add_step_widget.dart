@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:myRecipes/widgets/addRecipeWidgets/stepWidget.dart';
 
 class AddStepsWidget extends StatefulWidget {
   AddStepsWidget({
@@ -14,7 +15,7 @@ class AddStepsWidget extends StatefulWidget {
 
 class _AddStepsWidgetState extends State<AddStepsWidget> {
   List<String> steps = [];
-  String step;
+  String step = "";
 
   void updateStateMainWidget() {
     setState(() {});
@@ -22,7 +23,11 @@ class _AddStepsWidgetState extends State<AddStepsWidget> {
 
   @override
   Widget build(BuildContext context) {
+    double phoneWidth = MediaQuery.of(context).size.width;
+    double phoneHeight = MediaQuery.of(context).size.height;
+
     return Stack(
+      alignment: Alignment.bottomRight,
       children: [
         Container(
           child: Column(
@@ -40,14 +45,19 @@ class _AddStepsWidgetState extends State<AddStepsWidget> {
               Expanded(
                 flex: 5,
                 child: Container(
+                  padding: EdgeInsets.fromLTRB(phoneWidth * 0.01,
+                      widget.phoneHeight * 0.005, phoneWidth * 0.25, 0),
                   decoration: BoxDecoration(
                     border: Border.all(width: 3),
                     color: Color.fromARGB(255, 235, 172, 215),
                   ),
                   child: ListView.separated(
-                      itemBuilder: (context, index) =>
-                          Text("${index + 1} ) ${steps[index]}"),
-                      separatorBuilder: (context, index) => Divider(),
+                      primary: false,
+                      itemBuilder: (context, index) => StepWidget(
+                          steps[index], index, steps, updateStateMainWidget),
+                      separatorBuilder: (context, index) => Container(
+                            height: phoneHeight * 0.008,
+                          ),
                       itemCount: steps.length),
                 ),
               ),
@@ -55,8 +65,8 @@ class _AddStepsWidgetState extends State<AddStepsWidget> {
           ),
         ),
         Container(
-          margin: EdgeInsets.only(top: widget.phoneHeight * 0.19),
-          alignment: Alignment.topRight,
+          width: phoneWidth * 0.25,
+          height: phoneHeight * 0.05,
           child: RaisedButton(
             shape: Border.all(width: 3),
             color: Color.fromARGB(255, 252, 242, 249),
@@ -75,37 +85,39 @@ class _AddStepsWidgetState extends State<AddStepsWidget> {
       context: (context),
       builder: (context) => StatefulBuilder(
         builder: (context, setState) {
-          return AlertDialog(
-            actions: [
-              RaisedButton(
-                onPressed: () {
-                  Navigator.pop(context);
-                },
-                child: Text("Cancel"),
-              ),
-              RaisedButton(
-                onPressed: () => addNewStepFunction(),
-                child: Text("Add"),
-                color: Color.fromARGB(255, 235, 172, 215),
-              ),
-            ],
-            title: Text("Add New Step"),
-            content: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                TextField(
-                  onChanged: (value) => step = value,
-                  maxLength: 50,
-                  cursorHeight: 30,
-                  decoration: InputDecoration(
-                      labelText: "Step Description",
-                      hintText: "Step Description",
-                      border: OutlineInputBorder(gapPadding: 10)),
+          return SingleChildScrollView(
+            child: AlertDialog(
+              actions: [
+                RaisedButton(
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
+                  child: Text("Cancel"),
                 ),
-                SizedBox(
-                  height: widget.phoneHeight * 0.01,
+                RaisedButton(
+                  onPressed: () => addNewStepFunction(),
+                  child: Text("Add"),
+                  color: Color.fromARGB(255, 235, 172, 215),
                 ),
               ],
+              title: Text("Add New Step"),
+              content: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  TextField(
+                    onChanged: (value) => step = value,
+                    maxLength: 50,
+                    cursorHeight: 30,
+                    decoration: InputDecoration(
+                        labelText: "Step Description",
+                        hintText: "Step Description",
+                        border: OutlineInputBorder(gapPadding: 10)),
+                  ),
+                  SizedBox(
+                    height: widget.phoneHeight * 0.01,
+                  ),
+                ],
+              ),
             ),
           );
         },
@@ -114,8 +126,29 @@ class _AddStepsWidgetState extends State<AddStepsWidget> {
   }
 
   void addNewStepFunction() {
-    steps.add(step);
-    Navigator.pop(context);
-    updateStateMainWidget();
+    if (step != "") {
+      steps.add(step);
+      Navigator.pop(context);
+      updateStateMainWidget();
+      step = "";
+    } else {
+      showDialog(
+        context: context,
+        builder: (context) => AlertDialog(
+          content: Text(
+            "Step can't be blank.",
+            style: TextStyle(fontWeight: FontWeight.bold),
+          ),
+          backgroundColor: Colors.red,
+          actions: [
+            RaisedButton(
+              onPressed: () => Navigator.pop(context),
+              child: Text("Okay"),
+              color: Colors.white,
+            )
+          ],
+        ),
+      );
+    }
   }
 }

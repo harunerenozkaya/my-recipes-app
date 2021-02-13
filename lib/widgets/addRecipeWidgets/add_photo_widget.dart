@@ -11,7 +11,7 @@ class AddPhotoWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Stack(children: [
+    return Stack(alignment: Alignment.bottomRight, children: [
       Container(
         child: Column(
           children: [
@@ -21,7 +21,7 @@ class AddPhotoWidget extends StatelessWidget {
                 alignment: Alignment.bottomLeft,
                 child: Text(
                   "Photos",
-                  style: TextStyle(fontSize: phoneHeight * 0.03),
+                  style: TextStyle(fontSize: phoneHeight * 0.027),
                 ),
               ),
             ),
@@ -52,8 +52,7 @@ class AddPhotoWidget extends StatelessWidget {
         ),
       ),
       Container(
-        margin: EdgeInsets.only(top: phoneHeight * 0.15),
-        alignment: Alignment.topRight,
+        height: phoneHeight * 0.05,
         child: RaisedButton(
           shape: Border.all(width: 3),
           color: Color.fromARGB(255, 252, 242, 249),

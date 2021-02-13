@@ -43,38 +43,48 @@ class AddNewRecipePage extends StatelessWidget {
         ),
       ),
       backgroundColor: Color.fromARGB(255, 252, 242, 249),
-      appBar: AppBar(
-        title: Text(
-          "Add New Recipe",
-          style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
+      appBar: PreferredSize(
+        preferredSize: Size.fromHeight(phoneHeight * 0.06),
+        child: AppBar(
+          title: Text(
+            "Add New Recipe",
+            style: TextStyle(
+                fontSize: phoneHeight * 0.04, fontWeight: FontWeight.bold),
+          ),
+          centerTitle: true,
         ),
-        centerTitle: true,
       ),
       body: Container(
         padding: EdgeInsets.all(10),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Expanded(
-              flex: 5,
-              child: AddPhotoWidget(phoneHeight: phoneHeight),
+        child: SingleChildScrollView(
+          child: ConstrainedBox(
+            constraints: BoxConstraints(
+                maxHeight: MediaQuery.of(context).size.height * 0.81),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Expanded(
+                  flex: 5,
+                  child: AddPhotoWidget(phoneHeight: phoneHeight),
+                ),
+                Expanded(flex: 1, child: SizedBox()),
+                Expanded(
+                  flex: 6,
+                  child: AddIngredientsWidget(phoneHeight: phoneHeight),
+                ),
+                Expanded(flex: 1, child: SizedBox()),
+                Expanded(
+                  flex: 6,
+                  child: AddStepsWidget(phoneHeight: phoneHeight),
+                ),
+                Expanded(flex: 1, child: SizedBox()),
+                Expanded(
+                  flex: 1,
+                  child: AddCustomsWidget(),
+                ),
+              ],
             ),
-            Expanded(flex: 1, child: SizedBox()),
-            Expanded(
-              flex: 6,
-              child: AddIngredientsWidget(phoneHeight: phoneHeight),
-            ),
-            Expanded(flex: 1, child: SizedBox()),
-            Expanded(
-              flex: 6,
-              child: AddStepsWidget(phoneHeight: phoneHeight),
-            ),
-            Expanded(flex: 1, child: SizedBox()),
-            Expanded(
-              flex: 1,
-              child: AddCustomsWidget(),
-            ),
-          ],
+          ),
         ),
       ),
     );
