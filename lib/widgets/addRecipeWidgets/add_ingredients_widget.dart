@@ -31,6 +31,7 @@ class _AddIngredientsWidgetState extends State<AddIngredientsWidget> {
   @override
   Widget build(BuildContext context) {
     double phoneWidth = MediaQuery.of(context).size.width;
+    double keyboardHeight = MediaQuery.of(context).viewInsets.bottom;
 
     return Stack(
       alignment: Alignment.bottomRight,
@@ -85,7 +86,7 @@ class _AddIngredientsWidgetState extends State<AddIngredientsWidget> {
               "     Add Ingredient",
             ),
             onPressed: () {
-              showIngredientAlert(context);
+              showIngredientAlert(context, keyboardHeight);
             },
           ),
         ),
@@ -93,12 +94,13 @@ class _AddIngredientsWidgetState extends State<AddIngredientsWidget> {
     );
   }
 
-  Future showIngredientAlert(BuildContext context) {
+  Future showIngredientAlert(BuildContext context, kh) {
     return showDialog(
       context: (context),
       builder: (context) => StatefulBuilder(
         builder: (context, setState) {
-          return SingleChildScrollView(
+          return Container(
+            margin: EdgeInsets.only(top: widget.phoneHeight * 0 - kh),
             child: AlertDialog(
               actions: [
                 RaisedButton(
@@ -114,65 +116,67 @@ class _AddIngredientsWidgetState extends State<AddIngredientsWidget> {
                 ),
               ],
               title: Text("Add New Ingredients"),
-              content: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  TextField(
-                    onChanged: (value) => ingredientName = value,
-                    maxLength: 15,
-                    cursorHeight: 30,
-                    decoration: InputDecoration(
-                        labelText: "Ingredient Name",
-                        hintText: "Ingredint Name",
-                        border: OutlineInputBorder(gapPadding: 10)),
-                  ),
-                  SizedBox(
-                    height: widget.phoneHeight * 0.01,
-                  ),
-                  Row(
-                    children: [
-                      Expanded(
-                        flex: 3,
-                        child: TextField(
-                          keyboardType: TextInputType.number,
-                          onChanged: (value) => ingredientAmount = value,
-                          cursorHeight: 30,
-                          decoration: InputDecoration(
-                              labelText: "Amount",
-                              hintText: "Amount",
-                              border: OutlineInputBorder(gapPadding: 10)),
+              content: SingleChildScrollView(
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    TextField(
+                      onChanged: (value) => ingredientName = value,
+                      maxLength: 15,
+                      cursorHeight: 30,
+                      decoration: InputDecoration(
+                          labelText: "Ingredient Name",
+                          hintText: "Ingredint Name",
+                          border: OutlineInputBorder(gapPadding: 10)),
+                    ),
+                    SizedBox(
+                      height: widget.phoneHeight * 0.01,
+                    ),
+                    Row(
+                      children: [
+                        Expanded(
+                          flex: 3,
+                          child: TextField(
+                            keyboardType: TextInputType.number,
+                            onChanged: (value) => ingredientAmount = value,
+                            cursorHeight: 30,
+                            decoration: InputDecoration(
+                                labelText: "Amount",
+                                hintText: "Amount",
+                                border: OutlineInputBorder(gapPadding: 10)),
+                          ),
                         ),
-                      ),
-                      Expanded(
-                        flex: 1,
-                        child: SizedBox(),
-                      ),
-                      Expanded(
-                        flex: 2,
-                        child: RaisedButton(
-                          onPressed: () {
-                            showMaterialScrollPicker(
-                              selectedItem: "lb",
-                              context: context,
-                              cancelText: "Cancel",
-                              confirmText: "Choose",
-                              title: "Choose unit",
-                              items: AddIngredientsWidget.units,
-                              onChanged: (value) {
-                                setState(
-                                  () {
-                                    ingredientUnit = value;
-                                  },
-                                );
-                              },
-                            );
-                          },
-                          child: Text("$ingredientUnit"),
+                        Expanded(
+                          flex: 1,
+                          child: SizedBox(),
                         ),
-                      ),
-                    ],
-                  )
-                ],
+                        Expanded(
+                          flex: 2,
+                          child: RaisedButton(
+                            onPressed: () {
+                              showMaterialScrollPicker(
+                                selectedItem: "lb",
+                                context: context,
+                                cancelText: "Cancel",
+                                confirmText: "Choose",
+                                title: "Choose unit",
+                                items: AddIngredientsWidget.units,
+                                onChanged: (value) {
+                                  setState(
+                                    () {
+                                      ingredientUnit = value;
+                                    },
+                                  );
+                                },
+                              );
+                            },
+                            child: Text("$ingredientUnit"),
+                          ),
+                        ),
+                      ],
+                    )
+                  ],
+                ),
               ),
             ),
           );

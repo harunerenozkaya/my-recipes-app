@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 
 class StepWidget extends StatelessWidget {
-  String stepDescription;
-  int index;
+  final String stepDescription;
+  final int index;
   List steps = [];
-  Function updateState;
+  final Function updateState;
 
   StepWidget(this.stepDescription, this.index, this.steps, this.updateState);
 
@@ -21,7 +21,7 @@ class StepWidget extends StatelessWidget {
           Expanded(
             flex: 1,
             child: Container(
-              color: Colors.green,
+              color: Colors.purple[300],
               child: Center(
                 child: Text(
                   "${index + 1}",
@@ -50,10 +50,11 @@ class StepWidget extends StatelessWidget {
                 updateState();
               },
               child: Container(
-                color: Colors.red,
+                color: Colors.purple[300],
                 child: Icon(
                   Icons.delete,
                   size: phoneHeight * 0.06,
+                  color: Colors.white,
                 ),
               ),
             ),

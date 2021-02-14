@@ -57,9 +57,10 @@ class AddNewRecipePage extends StatelessWidget {
       body: Container(
         padding: EdgeInsets.all(10),
         child: SingleChildScrollView(
+          primary: true,
           child: ConstrainedBox(
             constraints: BoxConstraints(
-                maxHeight: MediaQuery.of(context).size.height * 0.81),
+                maxHeight: MediaQuery.of(context).size.height * 0.80),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [

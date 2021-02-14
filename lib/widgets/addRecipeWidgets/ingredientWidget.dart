@@ -2,12 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 
 class IngredientWidget extends StatelessWidget {
-  String indgredientName;
-  String ingredientUnit;
-  String ingredientAmount;
-  int index;
+  final String indgredientName;
+  final String ingredientUnit;
+  final String ingredientAmount;
+  final int index;
   List<Map> ingredients = [];
-  Function updateState;
+  final Function updateState;
 
   IngredientWidget(this.indgredientName, this.ingredientUnit,
       this.ingredientAmount, this.index, this.ingredients, this.updateState);
@@ -24,7 +24,7 @@ class IngredientWidget extends StatelessWidget {
           Expanded(
             flex: 1,
             child: Container(
-              color: Colors.green,
+              color: Colors.purple[300],
               child: Center(
                 child: AutoSizeText(
                   "$ingredientAmount $ingredientUnit",
@@ -54,10 +54,11 @@ class IngredientWidget extends StatelessWidget {
                 updateState();
               },
               child: Container(
-                color: Colors.red,
+                color: Colors.purple[300],
                 child: Icon(
                   Icons.delete,
                   size: phoneHeight * 0.06,
+                  color: Colors.white,
                 ),
               ),
             ),

@@ -85,39 +85,37 @@ class _AddStepsWidgetState extends State<AddStepsWidget> {
       context: (context),
       builder: (context) => StatefulBuilder(
         builder: (context, setState) {
-          return SingleChildScrollView(
-            child: AlertDialog(
-              actions: [
-                RaisedButton(
-                  onPressed: () {
-                    Navigator.pop(context);
-                  },
-                  child: Text("Cancel"),
+          return AlertDialog(
+            actions: [
+              RaisedButton(
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+                child: Text("Cancel"),
+              ),
+              RaisedButton(
+                onPressed: () => addNewStepFunction(),
+                child: Text("Add"),
+                color: Color.fromARGB(255, 235, 172, 215),
+              ),
+            ],
+            title: Text("Add New Step"),
+            content: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                TextField(
+                  onChanged: (value) => step = value,
+                  maxLength: 50,
+                  cursorHeight: 30,
+                  decoration: InputDecoration(
+                      labelText: "Step Description",
+                      hintText: "Step Description",
+                      border: OutlineInputBorder(gapPadding: 10)),
                 ),
-                RaisedButton(
-                  onPressed: () => addNewStepFunction(),
-                  child: Text("Add"),
-                  color: Color.fromARGB(255, 235, 172, 215),
+                SizedBox(
+                  height: widget.phoneHeight * 0.01,
                 ),
               ],
-              title: Text("Add New Step"),
-              content: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  TextField(
-                    onChanged: (value) => step = value,
-                    maxLength: 50,
-                    cursorHeight: 30,
-                    decoration: InputDecoration(
-                        labelText: "Step Description",
-                        hintText: "Step Description",
-                        border: OutlineInputBorder(gapPadding: 10)),
-                  ),
-                  SizedBox(
-                    height: widget.phoneHeight * 0.01,
-                  ),
-                ],
-              ),
             ),
           );
         },
