@@ -62,6 +62,7 @@ class _AddPhotoWidgetState extends State<AddPhotoWidget> {
       setState(
         () {
           // Fotoğrafı dosyalara kaydeder.
+
           image.copy('$path/$randomIdd.png');
           // Fotoğrafı widget listesine kaydeder
           _images.add(image);

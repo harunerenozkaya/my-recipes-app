@@ -1,16 +1,24 @@
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
-import 'package:hive_flutter/hive_flutter.dart';
+import 'dart:io';
+import 'package:path_provider/path_provider.dart';
 
 class RecipeBox extends StatelessWidget {
   final String recipeName;
   final String recipeImageLink;
-  final String hardness;
+  final String category;
   final String time;
   final String money;
 
-  RecipeBox(this.recipeName, this.recipeImageLink, this.hardness, this.time,
+  RecipeBox(this.recipeName, this.recipeImageLink, this.category, this.time,
       this.money);
+
+  var path;
+
+  getPath() async {
+    var directory = await getApplicationDocumentsDirectory();
+    path = directory.path;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -19,7 +27,7 @@ class RecipeBox extends StatelessWidget {
     return GestureDetector(
       onTap: () {
         Hive.box("recipes").values.toList().forEach((element) {
-          print(element.imagesPath);
+          print(element.isFavorite);
         });
       },
       child: Container(
@@ -41,12 +49,37 @@ class RecipeBox extends StatelessWidget {
             ),
             Expanded(
               flex: 7,
-              child: Container(
-                padding: EdgeInsets.all(2),
-                child: Image.network(
-                  "$recipeImageLink",
-                  fit: BoxFit.fill,
-                ),
+              child: FutureBuilder(
+                future: getPath(),
+                builder: (context, snapshot) {
+                  switch (snapshot.connectionState) {
+                    case ConnectionState.active:
+                      return Container(
+                        padding: EdgeInsets.all(2),
+                        child: Image.file(
+                          File("$path/$recipeImageLink.png"),
+                          fit: BoxFit.fill,
+                        ),
+                      );
+
+                    case ConnectionState.done:
+                      return Container(
+                        padding: EdgeInsets.all(2),
+                        child: Image.file(
+                          File("$path/$recipeImageLink"),
+                          fit: BoxFit.fill,
+                        ),
+                      );
+                    case ConnectionState.none:
+                      return Container(
+                        padding: EdgeInsets.all(2),
+                      );
+                    case ConnectionState.waiting:
+                      return Container(
+                        padding: EdgeInsets.all(2),
+                      );
+                  }
+                },
               ),
             ),
             Expanded(
@@ -59,7 +92,7 @@ class RecipeBox extends StatelessWidget {
                       child: Container(
                         color: Colors.green,
                         child: Center(
-                          child: Text("$hardness"),
+                          child: Text("$category"),
                         ),
                       ),
                     ),

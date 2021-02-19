@@ -13,39 +13,6 @@ class CategoryPage extends StatelessWidget {
     final phoneHeight = MediaQuery.of(context).size.height;
     final phoneWidth = MediaQuery.of(context).size.width;
 
-    final List<RecipeBox> recipeBoxes = [
-      RecipeBox(
-          "Köfte",
-          "https://imgrosetta.mynet.com.tr/file/9951142/9951142-728xauto.jpg",
-          "Hard",
-          "20",
-          "1"),
-      RecipeBox(
-          "Çorba",
-          "https://im.haberturk.com/2020/04/23/ver1587621896/2655814_414x414.jpg",
-          "Easy",
-          "30",
-          "2"),
-      RecipeBox(
-          "Mantı",
-          "https://im.haberturk.com/2020/11/28/ver1606574471/2885324_810x458.jpg",
-          "Medium",
-          "10",
-          "3"),
-      RecipeBox(
-          "Salata",
-          "https://i4.hurimg.com/i/hurriyet/75/750x422/5e5920c4c9de3d09c015ab50.jpg",
-          "Hard",
-          "15",
-          "4"),
-      RecipeBox(
-          "Pasta",
-          "https://www.lifeloveandsugar.com/wp-content/uploads/2018/04/Raspberry-Chocolate-Layer-Cake3.jpg",
-          "Easy",
-          "25",
-          "5")
-    ];
-
     return Scaffold(
       drawer: MenuDrawer(),
       backgroundColor: Color.fromARGB(255, 252, 242, 249),
@@ -80,11 +47,11 @@ class CategoryPage extends StatelessWidget {
                 color: Color.fromARGB(255, 235, 172, 215),
                 child: ListView.separated(
                   scrollDirection: Axis.horizontal,
-                  itemCount: recipeBoxes.length,
+                  itemCount: 0,
                   separatorBuilder: (context, index) => SizedBox(
                     width: phoneWidth * 0.02,
                   ),
-                  itemBuilder: (context, index) => recipeBoxes[index],
+                  itemBuilder: (context, index) => Container(),
                 ),
               ),
             ),
@@ -103,12 +70,12 @@ class CategoryPage extends StatelessWidget {
               child: Container(
                 color: Color.fromARGB(255, 235, 172, 215),
                 child: GridView.builder(
-                  itemCount: recipeBoxes.length,
+                  itemCount: 0,
                   gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                       crossAxisCount: 2),
                   itemBuilder: (context, index) => Container(
                     padding: EdgeInsets.all(6),
-                    child: recipeBoxes[index],
+                    child: Container(),
                   ),
                 ),
               ),
