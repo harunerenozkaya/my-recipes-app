@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:hive/hive.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 
 class RecipeBox extends StatelessWidget {
   final String recipeName;
@@ -14,62 +16,85 @@ class RecipeBox extends StatelessWidget {
   Widget build(BuildContext context) {
     final phoneWidth = MediaQuery.of(context).size.width;
 
-    return Container(
-      width: phoneWidth * 0.35,
-      color: Colors.white,
-      padding: EdgeInsets.all(3),
-      child: Column(
-        children: [
-          Expanded(
-            flex: 1,
-            child: Container(
-              color: Colors.black,
-              child: Center(
-                  child: Text(
-                "$recipeName",
-                style: TextStyle(color: Colors.white),
-              )),
-            ),
-          ),
-          Expanded(
-            flex: 7,
-            child: Container(
-              padding: EdgeInsets.all(2),
-              child: Image.network(
-                "$recipeImageLink",
-                fit: BoxFit.fill,
+    return GestureDetector(
+      onTap: () {
+        Hive.box("recipes").values.toList().forEach((element) {
+          print(element.imagesPath);
+        });
+      },
+      child: Container(
+        width: phoneWidth * 0.35,
+        color: Colors.white,
+        padding: EdgeInsets.all(3),
+        child: Column(
+          children: [
+            Expanded(
+              flex: 1,
+              child: Container(
+                color: Colors.black,
+                child: Center(
+                    child: Text(
+                  "$recipeName",
+                  style: TextStyle(color: Colors.white),
+                )),
               ),
             ),
-          ),
-          Expanded(
-            flex: 1,
-            child: Container(
-              child: Row(
-                children: [
-                  Expanded(
-                    flex: 7,
-                    child: Container(
-                      color: Colors.green,
-                      child: Center(child: Text("$hardness")),
+            Expanded(
+              flex: 7,
+              child: Container(
+                padding: EdgeInsets.all(2),
+                child: Image.network(
+                  "$recipeImageLink",
+                  fit: BoxFit.fill,
+                ),
+              ),
+            ),
+            Expanded(
+              flex: 1,
+              child: Container(
+                child: Row(
+                  children: [
+                    Expanded(
+                      flex: 7,
+                      child: Container(
+                        color: Colors.green,
+                        child: Center(
+                          child: Text("$hardness"),
+                        ),
+                      ),
                     ),
-                  ),
-                  Expanded(flex: 1, child: SizedBox()),
-                  Expanded(
+                    Expanded(
+                      flex: 1,
+                      child: SizedBox(),
+                    ),
+                    Expanded(
                       flex: 7,
                       child: Container(
-                          color: Colors.yellow,
-                          child: Center(child: Text("$time")))),
-                  Expanded(flex: 1, child: SizedBox()),
-                  Expanded(
+                        color: Colors.yellow,
+                        child: Center(
+                          child: Text("$time"),
+                        ),
+                      ),
+                    ),
+                    Expanded(
+                      flex: 1,
+                      child: SizedBox(),
+                    ),
+                    Expanded(
                       flex: 7,
                       child: Container(
-                          color: Colors.blue,
-                          child: Center(child: Text("$money"))))
-                ],
+                        color: Colors.blue,
+                        child: Center(
+                          child: Text("$money"),
+                        ),
+                      ),
+                    )
+                  ],
+                ),
               ),
-            ),
-          )
-        ],
+            )
+          ],
+        ),
       ),
     );
   }

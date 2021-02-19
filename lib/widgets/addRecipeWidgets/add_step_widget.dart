@@ -5,9 +5,11 @@ class AddStepsWidget extends StatefulWidget {
   AddStepsWidget({
     Key key,
     @required this.phoneHeight,
+    @required this.getStep,
   }) : super(key: key);
 
   final double phoneHeight;
+  final Function getStep;
 
   @override
   _AddStepsWidgetState createState() => _AddStepsWidgetState();
@@ -53,8 +55,8 @@ class _AddStepsWidgetState extends State<AddStepsWidget> {
                   ),
                   child: ListView.separated(
                       primary: false,
-                      itemBuilder: (context, index) => StepWidget(
-                          steps[index], index, steps, updateStateMainWidget),
+                      itemBuilder: (context, index) => StepWidget(steps[index],
+                          index, steps, updateStateMainWidget, widget.getStep),
                       separatorBuilder: (context, index) => Container(
                             height: phoneHeight * 0.008,
                           ),
@@ -126,6 +128,7 @@ class _AddStepsWidgetState extends State<AddStepsWidget> {
   void addNewStepFunction() {
     if (step != "") {
       steps.add(step);
+      widget.getStep(steps);
       Navigator.pop(context);
       updateStateMainWidget();
       step = "";
@@ -143,7 +146,7 @@ class _AddStepsWidgetState extends State<AddStepsWidget> {
               onPressed: () => Navigator.pop(context),
               child: Text("Okay"),
               color: Colors.white,
-            )
+            ),
           ],
         ),
       );

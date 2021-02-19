@@ -1,13 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 
+// ignore: must_be_immutable
 class StepWidget extends StatelessWidget {
   final String stepDescription;
   final int index;
   List steps = [];
   final Function updateState;
+  final Function getStep;
 
-  StepWidget(this.stepDescription, this.index, this.steps, this.updateState);
+  StepWidget(this.stepDescription, this.index, this.steps, this.updateState,
+      this.getStep);
 
   @override
   Widget build(BuildContext context) {
@@ -47,6 +50,7 @@ class StepWidget extends StatelessWidget {
               onTap: () {
                 // Step box'ı silme
                 steps.removeAt(index);
+                getStep(steps);
                 updateState();
               },
               child: Container(

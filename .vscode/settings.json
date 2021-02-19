@@ -1,6 +1,8 @@
 {
-    "editor.fontFamily": "'Roboto Mono',monospace",
+    "editor.fontFamily": "'Consolas',monospace",
     "editor.fontLigatures": "true",
     "editor.fontSize": 14,
+
+    //'Roboto Mono'
     
 }

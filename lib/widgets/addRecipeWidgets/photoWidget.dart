@@ -1,12 +1,23 @@
 import 'package:flutter/material.dart';
+import 'package:path_provider/path_provider.dart';
 import 'dart:io';
 
+// ignore: must_be_immutable
 class PhotoWidget extends StatelessWidget {
   List<File> _images;
   int index;
   Function _updateState;
+  Function getPhotos;
+  List<String> imagesPath;
 
-  PhotoWidget(this._images, this.index, this._updateState);
+  PhotoWidget(this._images, this.index, this._updateState, this.getPhotos,
+      this.imagesPath);
+
+  // Uygulamanın path'ini verir.
+  Future getPath() async {
+    Directory pathD = await getApplicationDocumentsDirectory();
+    return pathD.path;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -25,9 +36,22 @@ class PhotoWidget extends StatelessWidget {
               0, phoneHeight * 0.007, phoneWidth * 0.013, 0),
           height: phoneHeight * 0.03,
           child: GestureDetector(
-            onTap: () {
+            onTap: () async {
+              var path = await getPath();
               // Ingredient box'ı silme
+              // Kaldırılmış resmi widget litesinden siler.
               _images.removeAt(index);
+
+              // Kaldırılmış resmi dosyalardan siler
+              Directory('$path/${imagesPath[index]}.png')
+                  .delete(recursive: true);
+
+              //Kaldırılmış resmin path'ını path listesinden siler
+              imagesPath.removeAt(index);
+
+              //Main recipe screen'teki image path listesini item silindikten sonraki hali olarak günceller
+              getPhotos(imagesPath);
+              //Yeni recipe ekleme ekranının statesini günceller
               _updateState();
             },
             child: Container(

@@ -56,15 +56,6 @@ class CategoryPage extends StatelessWidget {
         ),
         centerTitle: true,
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {},
-        tooltip: 'Add New Recipe',
-        child: Icon(
-          Icons.add,
-          size: 40,
-          color: Color.fromARGB(255, 235, 172, 215),
-        ),
-      ),
       body: Container(
         padding: EdgeInsets.all(10),
         child: Column(
@@ -88,12 +79,13 @@ class CategoryPage extends StatelessWidget {
                     horizontal: phoneWidth * 0.015),
                 color: Color.fromARGB(255, 235, 172, 215),
                 child: ListView.separated(
-                    scrollDirection: Axis.horizontal,
-                    itemCount: recipeBoxes.length,
-                    separatorBuilder: (context, index) => SizedBox(
-                          width: phoneWidth * 0.02,
-                        ),
-                    itemBuilder: (context, index) => recipeBoxes[index]),
+                  scrollDirection: Axis.horizontal,
+                  itemCount: recipeBoxes.length,
+                  separatorBuilder: (context, index) => SizedBox(
+                    width: phoneWidth * 0.02,
+                  ),
+                  itemBuilder: (context, index) => recipeBoxes[index],
+                ),
               ),
             ),
             Expanded(
@@ -111,11 +103,14 @@ class CategoryPage extends StatelessWidget {
               child: Container(
                 color: Color.fromARGB(255, 235, 172, 215),
                 child: GridView.builder(
-                    itemCount: recipeBoxes.length,
-                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                        crossAxisCount: 2),
-                    itemBuilder: (context, index) => Container(
-                        padding: EdgeInsets.all(6), child: recipeBoxes[index])),
+                  itemCount: recipeBoxes.length,
+                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: 2),
+                  itemBuilder: (context, index) => Container(
+                    padding: EdgeInsets.all(6),
+                    child: recipeBoxes[index],
+                  ),
+                ),
               ),
             ),
           ],

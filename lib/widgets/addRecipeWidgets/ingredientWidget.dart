@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 
+// ignore: must_be_immutable
 class IngredientWidget extends StatelessWidget {
   final String indgredientName;
   final String ingredientUnit;
@@ -8,9 +9,16 @@ class IngredientWidget extends StatelessWidget {
   final int index;
   List<Map> ingredients = [];
   final Function updateState;
+  final Function getIngredient;
 
-  IngredientWidget(this.indgredientName, this.ingredientUnit,
-      this.ingredientAmount, this.index, this.ingredients, this.updateState);
+  IngredientWidget(
+      this.indgredientName,
+      this.ingredientUnit,
+      this.ingredientAmount,
+      this.index,
+      this.ingredients,
+      this.updateState,
+      this.getIngredient);
 
   @override
   Widget build(BuildContext context) {
@@ -51,6 +59,7 @@ class IngredientWidget extends StatelessWidget {
               onTap: () {
                 // Ingredient box'ı silme
                 ingredients.removeAt(index);
+                getIngredient(ingredients);
                 updateState();
               },
               child: Container(

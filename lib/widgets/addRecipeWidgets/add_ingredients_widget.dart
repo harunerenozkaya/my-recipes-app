@@ -7,9 +7,11 @@ class AddIngredientsWidget extends StatefulWidget {
   AddIngredientsWidget({
     Key key,
     @required this.phoneHeight,
+    @required this.getIngredients,
   }) : super(key: key);
 
   final double phoneHeight;
+  final Function getIngredients;
 
   static const List<String> units = ["kg", "g", "lb", "spoon", "glass"];
 
@@ -66,7 +68,8 @@ class _AddIngredientsWidgetState extends State<AddIngredientsWidget> {
                           ingredients[index].values.toList()[1],
                           index,
                           ingredients,
-                          updateStateMainWidget),
+                          updateStateMainWidget,
+                          widget.getIngredients),
                       separatorBuilder: (context, index) => Container(
                             height: widget.phoneHeight * 0.008,
                           ),
@@ -193,6 +196,7 @@ class _AddIngredientsWidgetState extends State<AddIngredientsWidget> {
         "ingredientUnit": ingredientUnit
       };
       ingredients.add(addingMap);
+      widget.getIngredients(ingredients);
       Navigator.pop(context);
       updateStateMainWidget();
 
@@ -212,7 +216,7 @@ class _AddIngredientsWidgetState extends State<AddIngredientsWidget> {
               onPressed: () => Navigator.pop(context),
               child: Text("Okay"),
               color: Colors.white,
-            )
+            ),
           ],
         ),
       );
