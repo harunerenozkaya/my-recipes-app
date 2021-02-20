@@ -10,7 +10,6 @@ void main() async {
   await Hive.initFlutter("db");
   Hive.registerAdapter<Recipe>(RecipeAdapter());
   await Hive.openBox("recipes");
-
   runApp(MyApp());
 }
 

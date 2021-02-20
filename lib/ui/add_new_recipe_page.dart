@@ -16,6 +16,7 @@ class AddNewRecipePage extends StatelessWidget {
   String category;
   String price;
 
+  // Child widgetlerden gelen verileri buraya taşıyoruz ki saveReceipt fonskiyonu ile db'ye ekleyebilelim.
   void getPhotos(List<String> photoss) => imagesPath = photoss;
   void getIngredients(List<Map> ingredientss) => ingredients = ingredientss;
   void getSteps(List stepss) => steps = stepss;
@@ -43,7 +44,9 @@ class AddNewRecipePage extends StatelessWidget {
                   },
                   child: Container(
                     child: Center(
-                      child: Text("Abort"),
+                      child: Text(
+                        "Abort",
+                      ),
                     ),
                   ),
                 ),
@@ -138,6 +141,8 @@ class AddNewRecipePage extends StatelessWidget {
 
   // Recipe'yi veritabanına kaydeder.
   void saveReceipt(BuildContext context) async {
+    String recipeName;
+
     if (ingredients.isEmpty) {
       showFinishAlert(context, "Please add any ingredient.");
     } else if (steps.isEmpty) {
@@ -152,23 +157,11 @@ class AddNewRecipePage extends StatelessWidget {
       var recipeBox = Hive.box("recipes");
       String recipeId = getRandomString();
 
-      //Veritabanına ekle
-      await recipeBox.add(
-        Recipe(recipeId, imagesPath, ingredients, steps, recipeDuration,
-            category, price),
-      );
-
-      // Test için eklenen recipe'yi yazdırma
-      recipeBox.values.forEach(
-        (element) {
-          debugPrint(
-              "$recipeId,$imagesPath,$ingredients,$steps,$recipeDuration,$category,$price");
-        },
-      );
-      showFinishSuccesfulAlert(context);
+      showGetRecipeNameAndSaveRecipe(context, recipeName, recipeBox, recipeId);
     }
   }
 
+  // Rastgele bir string döndürür.
   String getRandomString() {
     const _chars =
         'AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz1234567890';
@@ -184,6 +177,7 @@ class AddNewRecipePage extends StatelessWidget {
     );
   }
 
+  // Eğer herhangi bir değer girilmemişsse uyarı verir .
   showFinishAlert(context, title) {
     showDialog(
         context: context,
@@ -192,6 +186,7 @@ class AddNewRecipePage extends StatelessWidget {
             ));
   }
 
+  // Recipenin başarıyla eklendiğine dair uyarı verir.
   showFinishSuccesfulAlert(context) {
     showDialog(
       barrierDismissible: false,
@@ -201,7 +196,45 @@ class AddNewRecipePage extends StatelessWidget {
         actions: [
           RaisedButton(
             child: Text("Okay"),
+            //Ana menüye yönlendirir.
             onPressed: () => Navigator.popAndPushNamed(context, "/"),
+          ),
+        ],
+      ),
+    );
+  }
+
+  showGetRecipeNameAndSaveRecipe(
+      BuildContext context, String recipeName, Box recipeBox, String recipeId) {
+    showDialog(
+      barrierDismissible: false,
+      context: context,
+      builder: (context) => AlertDialog(
+        title: Text("What is your recipe name?"),
+        content: TextField(
+          decoration: InputDecoration(
+            labelText: "Recipe Name",
+            hintText: "Recipe Name",
+            border: OutlineInputBorder(
+              borderSide: BorderSide(width: 3),
+            ),
+          ),
+          onChanged: (val) {
+            recipeName = val;
+          },
+        ),
+        actions: [
+          RaisedButton(
+            onPressed: () async {
+              //Veritabanına ekle
+              await recipeBox.add(
+                Recipe(recipeId, imagesPath, ingredients, steps, recipeDuration,
+                    category, price, recipeName),
+              );
+              Navigator.pop(context);
+              showFinishSuccesfulAlert(context);
+            },
+            child: Text("Okay"),
           ),
         ],
       ),

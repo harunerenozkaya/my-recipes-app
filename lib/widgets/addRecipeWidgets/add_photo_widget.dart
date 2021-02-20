@@ -1,8 +1,8 @@
+import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'dart:io';
 import 'package:image_picker/image_picker.dart';
 import 'package:myRecipes/widgets/addRecipeWidgets/photoWidget.dart';
-import 'package:path_provider/path_provider.dart';
 import 'dart:math';
 
 class AddPhotoWidget extends StatefulWidget {
@@ -28,20 +28,21 @@ class _AddPhotoWidgetState extends State<AddPhotoWidget> {
   }
 
   _imgFromCamera() async {
-    Directory pathD = await getApplicationDocumentsDirectory();
-    String path = pathD.path;
-    String randomId = getRandomString();
-
     // ignore: deprecated_member_use
     File image = await ImagePicker.pickImage(
-        source: ImageSource.camera, imageQuality: 30);
+        source: ImageSource.camera, imageQuality: 5);
+
     if (image != null) {
+      List<int> imageBytes = await image.readAsBytes();
+      String base64Image = base64Encode(imageBytes);
+
       setState(
         () {
-          image.copy('$path/$randomId.png');
-
+          // Image'yi widget listesine kaydeder
           _images.add(image);
-          imagesPath.add(randomId);
+          // Image'yi path listesine kaydeder.
+          imagesPath.add(base64Image);
+          // Path listesini günceller
           widget.getPhotos(imagesPath);
         },
       );
@@ -49,25 +50,20 @@ class _AddPhotoWidgetState extends State<AddPhotoWidget> {
   }
 
   _imgFromGallery() async {
-    Directory pathD = await getApplicationDocumentsDirectory();
-    String path = pathD.path;
-
-    String randomIdd = getRandomString();
-
     // ignore: deprecated_member_use
     File image = await ImagePicker.pickImage(
-        source: ImageSource.gallery, imageQuality: 30);
+        source: ImageSource.gallery, imageQuality: 5);
 
     if (image != null) {
+      List<int> imageBytes = await image.readAsBytes();
+      String base64Image = base64Encode(imageBytes);
+
       setState(
         () {
-          // Fotoğrafı dosyalara kaydeder.
-
-          image.copy('$path/$randomIdd.png');
-          // Fotoğrafı widget listesine kaydeder
+          // Image'yi widget listesine kaydeder
           _images.add(image);
-          //Fotoğrafı path listesine kaydeder.
-          imagesPath.add(randomIdd);
+          // Image'yi path listesine kaydeder.
+          imagesPath.add(base64Image);
           // Path listesini günceller
           widget.getPhotos(imagesPath);
         },

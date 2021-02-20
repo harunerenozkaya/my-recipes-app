@@ -200,7 +200,7 @@ class _AddCustomsWidgetState extends State<AddCustomsWidget> {
         "Practical",
         "Soup",
         "Meat Meal",
-        "Vegetable Meal",
+        "Vegetable",
         "Legumes",
         "Salad",
         "Pastry",

@@ -36,15 +36,10 @@ class PhotoWidget extends StatelessWidget {
               0, phoneHeight * 0.007, phoneWidth * 0.013, 0),
           height: phoneHeight * 0.03,
           child: GestureDetector(
-            onTap: () async {
-              var path = await getPath();
+            onTap: () {
               // Ingredient box'ı silme
               // Kaldırılmış resmi widget litesinden siler.
               _images.removeAt(index);
-
-              // Kaldırılmış resmi dosyalardan siler
-              Directory('$path/${imagesPath[index]}.png')
-                  .delete(recursive: true);
 
               //Kaldırılmış resmin path'ını path listesinden siler
               imagesPath.removeAt(index);

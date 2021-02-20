@@ -1,9 +1,7 @@
-import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:myRecipes/widgets/menu_drawer.dart';
 import 'package:myRecipes/widgets/recipe_box.dart';
 import 'package:hive/hive.dart';
-import 'package:path_provider/path_provider.dart';
 
 class MyHomePage extends StatelessWidget {
   @override
@@ -84,12 +82,15 @@ class MyHomePage extends StatelessWidget {
                   gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                       crossAxisCount: 2),
                   itemBuilder: (context, index) {
-                    var recipeName = "Deneme";
+                    var recipeName =
+                        Hive.box("recipes").values.toList()[index].recipeName;
                     //Fotosu olmayanalarda hata veriyo burayı düzelt.
-                    var recipeFirstPhotoPath = Hive.box("recipes")
+                    bool isRecipeFirstPhoto = Hive.box("recipes")
                         .values
                         .toList()[index]
-                        .imagesPath[0];
+                        .imagesPath
+                        .isEmpty;
+                    String recipeFirstPhoto;
                     var recipeDuration = Hive.box("recipes")
                         .values
                         .toList()[index]
@@ -99,16 +100,16 @@ class MyHomePage extends StatelessWidget {
                     var recipePrice =
                         Hive.box("recipes").values.toList()[index].price;
 
-                    return Container(
-                      padding: EdgeInsets.all(6),
-                      child: RecipeBox(recipeName, recipeFirstPhotoPath,
-                          recipeCategory, recipeDuration, recipePrice),
-                    );
+                    // Recipe'nin fotografı varsa foto yolla
+                    if (isRecipeFirstPhoto == false) {
+                      recipeFirstPhoto = Hive.box("recipes")
+                          .values
+                          .toList()[index]
+                          .imagesPath[0];
+                    }
 
-                    /*Container(
-                    padding: EdgeInsets.all(6),
-                    child: recipeBoxes[index],
-                  )*/
+                    return RecipeBox(recipeName, recipeFirstPhoto,
+                        recipeCategory, recipeDuration, recipePrice);
                   },
                 ),
               ),
