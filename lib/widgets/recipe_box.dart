@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:hive/hive.dart';
+import 'dart:io';
+
+import 'package:loading_gifs/loading_gifs.dart';
 
 class RecipeBox extends StatelessWidget {
   final String recipeName;
@@ -56,9 +60,10 @@ class RecipeBox extends StatelessWidget {
                 child: Container(
                   padding: EdgeInsets.all(2),
                   child: recipeImagePath != null
-                      ? Image.asset(
-                          recipeImagePath,
-                          fit: BoxFit.fill,
+                      ? FadeInImage(
+                          placeholder:
+                              AssetImage(circularProgressIndicatorSmall),
+                          image: FileImage(File(recipeImagePath)),
                         )
                       : Image.asset("assets/images/cupcake.jpg"),
                 ),

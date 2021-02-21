@@ -16,7 +16,7 @@ class AddNewRecipePage extends StatelessWidget {
   String category;
   String price;
 
-  // Child widgetlerden gelen verileri buraya taşıyoruz ki saveReceipt fonskiyonu ile db'ye ekleyebilelim.
+  // Child widgetlerden gelen verileri buraya taşıyoruz ki saveRecipe fonskiyonu ile db'ye ekleyebilelim.
   void getPhotos(List<String> photoss) => imagesPath = photoss;
   void getIngredients(List<Map> ingredientss) => ingredients = ingredientss;
   void getSteps(List stepss) => steps = stepss;
@@ -58,7 +58,7 @@ class AddNewRecipePage extends StatelessWidget {
                 child: RaisedButton(
                   shape: Border.all(color: Colors.purple[300], width: 4),
                   color: Color.fromARGB(255, 235, 172, 215),
-                  onPressed: () => saveReceipt(context),
+                  onPressed: () => saveRecipe(context),
                   child: Container(
                     child: Center(
                       child: Text("Okay"),
@@ -140,7 +140,7 @@ class AddNewRecipePage extends StatelessWidget {
   }
 
   // Recipe'yi veritabanına kaydeder.
-  void saveReceipt(BuildContext context) async {
+  void saveRecipe(BuildContext context) async {
     String recipeName;
 
     if (ingredients.isEmpty) {

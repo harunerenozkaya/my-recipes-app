@@ -78,9 +78,11 @@ class MyHomePage extends StatelessWidget {
               child: Container(
                 color: Color.fromARGB(255, 235, 172, 215),
                 child: GridView.builder(
+                  primary: false,
                   itemCount: Hive.box("recipes").values.length,
                   gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                      crossAxisCount: 2),
+                    crossAxisCount: 2,
+                  ),
                   itemBuilder: (context, index) {
                     var recipeName =
                         Hive.box("recipes").values.toList()[index].recipeName;

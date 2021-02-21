@@ -129,7 +129,7 @@ class _AddIngredientsWidgetState extends State<AddIngredientsWidget> {
                       cursorHeight: 30,
                       decoration: InputDecoration(
                           labelText: "Ingredient Name",
-                          hintText: "Ingredint Name",
+                          hintText: "Ingredient Name",
                           border: OutlineInputBorder(gapPadding: 10)),
                     ),
                     SizedBox(
