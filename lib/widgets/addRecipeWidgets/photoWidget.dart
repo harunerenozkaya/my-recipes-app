@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:hive/hive.dart';
 import 'package:loading_gifs/loading_gifs.dart';
 import 'dart:io';
 
@@ -27,7 +26,7 @@ class PhotoWidget extends StatelessWidget {
             child: FadeInImage(
               width: phoneWidth * 0.3,
               height: phoneHeight * 0.145,
-              fit: BoxFit.contain,
+              fit: BoxFit.cover,
               image: FileImage(
                 File(imagesPath[index]),
               ),

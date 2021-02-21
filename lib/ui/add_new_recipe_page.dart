@@ -1,4 +1,5 @@
 import 'dart:math';
+import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:myRecipes/models/recipe.dart';
 import 'package:myRecipes/widgets/addRecipeWidgets/add_customs_widget.dart';
@@ -24,6 +25,15 @@ class AddNewRecipePage extends StatelessWidget {
   void getCategory(String categoryx) => category = categoryx;
   void getPrice(String pricex) => price = pricex;
 
+  // Resim seçildiğinde ancak abort'a tıklandığında storage'ye kaydedilmiş olan image'ler silinir.
+  void deleteImagesWhenAbort() async {
+    imagesPath.forEach(
+      (element) {
+        File(element).delete();
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     final phoneHeight = MediaQuery.of(context).size.height;
@@ -40,6 +50,7 @@ class AddNewRecipePage extends StatelessWidget {
                   shape: Border.all(color: Colors.purple[300], width: 4),
                   color: Color.fromARGB(255, 235, 172, 215),
                   onPressed: () {
+                    deleteImagesWhenAbort();
                     Navigator.popAndPushNamed(context, "/");
                   },
                   child: Container(
@@ -180,10 +191,11 @@ class AddNewRecipePage extends StatelessWidget {
   // Eğer herhangi bir değer girilmemişsse uyarı verir .
   showFinishAlert(context, title) {
     showDialog(
-        context: context,
-        builder: (context) => AlertDialog(
-              title: Text(title),
-            ));
+      context: context,
+      builder: (context) => AlertDialog(
+        title: Text(title),
+      ),
+    );
   }
 
   // Recipenin başarıyla eklendiğine dair uyarı verir.
@@ -226,13 +238,18 @@ class AddNewRecipePage extends StatelessWidget {
         actions: [
           RaisedButton(
             onPressed: () async {
-              //Veritabanına ekle
-              await recipeBox.add(
-                Recipe(recipeId, imagesPath, ingredients, steps, recipeDuration,
-                    category, price, recipeName),
-              );
-              Navigator.pop(context);
-              showFinishSuccesfulAlert(context);
+              // Name boş mu dolu mu kontrol eder.
+              if ((recipeName == null) | (recipeName == "")) {
+              } else {
+                //Veritabanına ekle
+                await recipeBox.add(
+                  Recipe(recipeId, imagesPath, ingredients, steps,
+                      recipeDuration, category, price, recipeName),
+                );
+                Navigator.pop(context);
+                // Başarılı mesajını döndürür.
+                showFinishSuccesfulAlert(context);
+              }
             },
             child: Text("Okay"),
           ),

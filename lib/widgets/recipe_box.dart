@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:hive/hive.dart';
 import 'dart:io';
 
@@ -16,10 +15,14 @@ class RecipeBox extends StatelessWidget {
       this.money);
 
   String parseTime(String time) {
-    if (time.split(":")[0] == "0") {
-      return "${time.split(":")[1]}m";
+    List timePeriods = time.split(":");
+
+    if (timePeriods[0] == "0") {
+      return "${timePeriods[1]}m";
+    } else if (timePeriods[0] != "0" && timePeriods[1] == "00") {
+      return "${timePeriods[0]}h";
     } else {
-      return "${time.split(":")[0]}h ${time.split(":")[1]}m";
+      return "${timePeriods[0]}h ${timePeriods[1]}m";
     }
   }
 
@@ -61,6 +64,7 @@ class RecipeBox extends StatelessWidget {
                   padding: EdgeInsets.all(2),
                   child: recipeImagePath != null
                       ? FadeInImage(
+                          fit: BoxFit.cover,
                           placeholder:
                               AssetImage(circularProgressIndicatorSmall),
                           image: FileImage(File(recipeImagePath)),

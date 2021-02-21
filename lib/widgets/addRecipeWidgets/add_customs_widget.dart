@@ -56,7 +56,10 @@ class _AddCustomsWidgetState extends State<AddCustomsWidget> {
                             ? "  Duration"
                             : recipeDuration.inHours < 1
                                 ? "     ${recipeDuration.inMinutes}m"
-                                : "    ${recipeDuration.inHours}h ${recipeDuration.inMinutes % 60}m",
+                                : recipeDuration.inHours > 0 &&
+                                        recipeDuration.inMinutes % 60 == 0
+                                    ? "       ${recipeDuration.inHours}h"
+                                    : "   ${recipeDuration.inHours}h ${recipeDuration.inMinutes % 60}m ",
                         style: TextStyle(fontWeight: FontWeight.w600),
                         maxLines: 1,
                       ),
