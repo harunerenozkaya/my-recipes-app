@@ -4,14 +4,12 @@ import 'dart:io';
 
 // ignore: must_be_immutable
 class PhotoWidget extends StatelessWidget {
-  List<File> _images;
   int index;
   Function _updateState;
   Function getPhotos;
   List<String> imagesPath;
 
-  PhotoWidget(this._images, this.index, this._updateState, this.getPhotos,
-      this.imagesPath);
+  PhotoWidget(this.index, this._updateState, this.getPhotos, this.imagesPath);
 
   // Uygulamanın path'ini verir.
   Future getPath() async {
@@ -29,17 +27,19 @@ class PhotoWidget extends StatelessWidget {
       children: [
         Container(
           padding: EdgeInsets.all(5),
-          child: Image.file(_images[index]),
+          child: Image.asset(imagesPath[index]),
         ),
         Container(
           margin: EdgeInsets.fromLTRB(
               0, phoneHeight * 0.007, phoneWidth * 0.013, 0),
           height: phoneHeight * 0.03,
           child: GestureDetector(
-            onTap: () {
+            onTap: () async {
               // Ingredient box'ı silme
-              // Kaldırılmış resmi widget litesinden siler.
-              _images.removeAt(index);
+
+              //Fotoyu dosyalardan silme
+              File deletingImage = File(imagesPath[index]);
+              await deletingImage.delete();
 
               //Kaldırılmış resmin path'ını path listesinden siler
               imagesPath.removeAt(index);

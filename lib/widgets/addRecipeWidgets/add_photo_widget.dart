@@ -1,9 +1,6 @@
-import 'dart:convert';
 import 'package:flutter/material.dart';
-import 'dart:io';
 import 'package:image_picker/image_picker.dart';
 import 'package:myRecipes/widgets/addRecipeWidgets/photoWidget.dart';
-import 'dart:math';
 
 class AddPhotoWidget extends StatefulWidget {
   const AddPhotoWidget({
@@ -20,28 +17,24 @@ class AddPhotoWidget extends StatefulWidget {
 }
 
 class _AddPhotoWidgetState extends State<AddPhotoWidget> {
-  List<File> _images = [];
   List<String> imagesPath = [];
+  final _picker = ImagePicker();
 
   _updateState() {
     setState(() {});
   }
 
   _imgFromCamera() async {
-    // ignore: deprecated_member_use
-    File image = await ImagePicker.pickImage(
-        source: ImageSource.camera, imageQuality: 5);
+    PickedFile pick =
+        await _picker.getImage(source: ImageSource.camera, imageQuality: 50);
 
-    if (image != null) {
-      List<int> imageBytes = await image.readAsBytes();
-      String base64Image = base64Encode(imageBytes);
+    print(pick.path);
 
+    if (pick != null) {
       setState(
         () {
-          // Image'yi widget listesine kaydeder
-          _images.add(image);
           // Image'yi path listesine kaydeder.
-          imagesPath.add(base64Image);
+          imagesPath.add(pick.path);
           // Path listesini günceller
           widget.getPhotos(imagesPath);
         },
@@ -50,40 +43,21 @@ class _AddPhotoWidgetState extends State<AddPhotoWidget> {
   }
 
   _imgFromGallery() async {
-    // ignore: deprecated_member_use
-    File image = await ImagePicker.pickImage(
-        source: ImageSource.gallery, imageQuality: 5);
+    PickedFile pick =
+        await _picker.getImage(source: ImageSource.gallery, imageQuality: 50);
 
-    if (image != null) {
-      List<int> imageBytes = await image.readAsBytes();
-      String base64Image = base64Encode(imageBytes);
+    print(pick.path);
 
+    if (pick != null) {
       setState(
         () {
-          // Image'yi widget listesine kaydeder
-          _images.add(image);
           // Image'yi path listesine kaydeder.
-          imagesPath.add(base64Image);
+          imagesPath.add(pick.path);
           // Path listesini günceller
           widget.getPhotos(imagesPath);
         },
       );
     }
-  }
-
-  String getRandomString() {
-    const _chars =
-        'AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz1234567890';
-    Random _rnd = Random();
-
-    return String.fromCharCodes(
-      Iterable.generate(
-        7,
-        (_) => _chars.codeUnitAt(
-          _rnd.nextInt(_chars.length),
-        ),
-      ),
-    );
   }
 
   @override
@@ -113,9 +87,9 @@ class _AddPhotoWidgetState extends State<AddPhotoWidget> {
                   ),
                   child: ListView.builder(
                       scrollDirection: Axis.horizontal,
-                      itemBuilder: (context, index) => PhotoWidget(_images,
+                      itemBuilder: (context, index) => PhotoWidget(
                           index, _updateState, widget.getPhotos, imagesPath),
-                      itemCount: _images.length),
+                      itemCount: imagesPath.length),
                 ),
               ),
             ],

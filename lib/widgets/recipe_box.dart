@@ -1,16 +1,14 @@
-import 'dart:convert';
-import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
 
 class RecipeBox extends StatelessWidget {
   final String recipeName;
-  final String recipeImageBase64;
+  final String recipeImagePath;
   final String category;
   final String time;
   final String money;
 
-  RecipeBox(this.recipeName, this.recipeImageBase64, this.category, this.time,
+  RecipeBox(this.recipeName, this.recipeImagePath, this.category, this.time,
       this.money);
 
   String parseTime(String time) {
@@ -31,7 +29,7 @@ class RecipeBox extends StatelessWidget {
         onTap: () {
           Hive.box("recipes").values.toList().forEach(
             (element) {
-              print(element.recipeId);
+              print(element.imagesPath);
             },
           );
         },
@@ -57,9 +55,9 @@ class RecipeBox extends StatelessWidget {
                 flex: 7,
                 child: Container(
                   padding: EdgeInsets.all(2),
-                  child: recipeImageBase64 != null
-                      ? Image.memory(
-                          base64Decode(recipeImageBase64),
+                  child: recipeImagePath != null
+                      ? Image.asset(
+                          recipeImagePath,
                           fit: BoxFit.fill,
                         )
                       : Image.asset("assets/images/cupcake.jpg"),
