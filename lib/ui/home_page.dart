@@ -84,6 +84,8 @@ class MyHomePage extends StatelessWidget {
                     crossAxisCount: 2,
                   ),
                   itemBuilder: (context, index) {
+                    var recipeId =
+                        Hive.box("recipes").values.toList()[index].recipeId;
                     var recipeName =
                         Hive.box("recipes").values.toList()[index].recipeName;
                     //Fotosu olmayanalarda hata veriyo burayı düzelt.
@@ -110,7 +112,7 @@ class MyHomePage extends StatelessWidget {
                           .imagesPath[0];
                     }
 
-                    return RecipeBox(recipeName, recipeFirstPhoto,
+                    return RecipeBox(recipeId, recipeName, recipeFirstPhoto,
                         recipeCategory, recipeDuration, recipePrice);
                   },
                 ),

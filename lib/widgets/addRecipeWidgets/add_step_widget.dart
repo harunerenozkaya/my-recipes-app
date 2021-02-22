@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:myRecipes/widgets/addRecipeWidgets/stepWidget.dart';
+import 'package:myRecipes/widgets/addRecipeWidgets/stepWidgetAdded.dart';
 
 class AddStepsWidget extends StatefulWidget {
   AddStepsWidget({

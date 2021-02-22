@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:myRecipes/ui/add_new_recipe_page.dart';
 import 'package:myRecipes/ui/category_page.dart';
 import 'package:myRecipes/ui/home_page.dart';
+import './ui/recipe_detail_page.dart';
 import 'package:hive/hive.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'models/recipe.dart';
@@ -32,6 +33,9 @@ class MyApp extends StatelessWidget {
             ),
           );
         }
+        break;
+      case "detailPage":
+        return MaterialPageRoute(builder: (context) => RecipeDetail(args[1]));
     }
   }
 

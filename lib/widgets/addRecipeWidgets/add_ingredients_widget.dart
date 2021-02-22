@@ -1,7 +1,7 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_material_pickers/flutter_material_pickers.dart';
-import 'package:myRecipes/widgets/addRecipeWidgets/ingredientWidget.dart';
+import 'package:myRecipes/widgets/addRecipeWidgets/ingredientWidgetAdded.dart';
 
 class AddIngredientsWidget extends StatefulWidget {
   AddIngredientsWidget({

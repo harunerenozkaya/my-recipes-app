@@ -1,18 +1,18 @@
 import 'package:flutter/material.dart';
-import 'package:hive/hive.dart';
 import 'dart:io';
 
 import 'package:loading_gifs/loading_gifs.dart';
 
 class RecipeBox extends StatelessWidget {
+  final String recipeId;
   final String recipeName;
   final String recipeImagePath;
   final String category;
   final String time;
   final String money;
 
-  RecipeBox(this.recipeName, this.recipeImagePath, this.category, this.time,
-      this.money);
+  RecipeBox(this.recipeId, this.recipeName, this.recipeImagePath, this.category,
+      this.time, this.money);
 
   String parseTime(String time) {
     List timePeriods = time.split(":");
@@ -34,11 +34,8 @@ class RecipeBox extends StatelessWidget {
       padding: EdgeInsets.all(7),
       child: GestureDetector(
         onTap: () {
-          Hive.box("recipes").values.toList().forEach(
-            (element) {
-              print(element.imagesPath);
-            },
-          );
+          Navigator.of(context).pushNamedAndRemoveUntil(
+              "detailPage/$recipeId", (Route<dynamic> route) => false);
         },
         child: Container(
           width: phoneWidth * 0.35,

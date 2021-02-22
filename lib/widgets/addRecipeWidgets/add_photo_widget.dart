@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:myRecipes/widgets/addRecipeWidgets/photoWidget.dart';
+import 'package:myRecipes/widgets/addRecipeWidgets/photoWidgetAdded.dart';
 
 class AddPhotoWidget extends StatefulWidget {
   const AddPhotoWidget({
