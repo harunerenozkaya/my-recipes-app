@@ -2,9 +2,9 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 
 class DetailCustomsWidget extends StatefulWidget {
-  String recipeDuration;
-  String category;
-  String price;
+  final String recipeDuration;
+  final String category;
+  final String price;
 
   DetailCustomsWidget(
     this.recipeDuration,
@@ -42,8 +42,12 @@ class _DetailCustomsWidgetState extends State<DetailCustomsWidget> {
               child: Container(
                 padding: EdgeInsets.all(1),
                 decoration: BoxDecoration(
+                  borderRadius: BorderRadius.all(Radius.elliptical(8, 8)),
                   color: Color.fromARGB(255, 252, 242, 249),
-                  border: Border.all(width: 3, color: Colors.purple[300]),
+                  border: Border.all(
+                    width: 3,
+                    color: Colors.purple[300],
+                  ),
                 ),
                 child: Row(
                   children: [
@@ -77,6 +81,7 @@ class _DetailCustomsWidgetState extends State<DetailCustomsWidget> {
               child: Container(
                 padding: EdgeInsets.all(1),
                 decoration: BoxDecoration(
+                  borderRadius: BorderRadius.all(Radius.elliptical(8, 8)),
                   color: Color.fromARGB(255, 252, 242, 249),
                   border: Border.all(
                     width: 3,
@@ -113,6 +118,7 @@ class _DetailCustomsWidgetState extends State<DetailCustomsWidget> {
               child: Container(
                 padding: EdgeInsets.all(1),
                 decoration: BoxDecoration(
+                  borderRadius: BorderRadius.all(Radius.elliptical(8, 8)),
                   color: Color.fromARGB(255, 252, 242, 249),
                   border: Border.all(
                     width: 3,

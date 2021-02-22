@@ -36,7 +36,7 @@ class PhotoWidgetDetailed extends StatelessWidget {
                 0, phoneHeight * 0.007, phoneWidth * 0.013, 0),
             height: phoneHeight * 0.03,
             child: GestureDetector(
-              onTap: () {},
+              onTap: () => zoomImage(context),
               child: Container(
                 color: Colors.purple[300],
                 child: Icon(
@@ -48,6 +48,19 @@ class PhotoWidgetDetailed extends StatelessWidget {
             ),
           ),
         ],
+      ),
+    );
+  }
+
+  zoomImage(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        insetPadding: EdgeInsets.symmetric(horizontal: 20, vertical: 0),
+        contentPadding: EdgeInsets.all(4),
+        content: Image.file(
+          File(imagePath),
+        ),
       ),
     );
   }

@@ -38,15 +38,21 @@ class RecipeBox extends StatelessWidget {
               "detailPage/$recipeId", (Route<dynamic> route) => false);
         },
         child: Container(
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.all(Radius.elliptical(8, 8)),
+            color: Colors.white,
+          ),
           width: phoneWidth * 0.35,
-          color: Colors.white,
-          padding: EdgeInsets.all(5),
+          padding: EdgeInsets.all(4),
           child: Column(
             children: [
               Expanded(
                 flex: 1,
                 child: Container(
-                  color: Colors.purple[300],
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.all(Radius.elliptical(3, 3)),
+                    color: Colors.purple[300],
+                  ),
                   child: Center(
                     child: Text(
                       "$recipeName",
@@ -58,7 +64,7 @@ class RecipeBox extends StatelessWidget {
               Expanded(
                 flex: 7,
                 child: Container(
-                  padding: EdgeInsets.all(2),
+                  padding: EdgeInsets.symmetric(vertical: 4),
                   child: recipeImagePath != null
                       ? FadeInImage(
                           fit: BoxFit.cover,
@@ -75,9 +81,13 @@ class RecipeBox extends StatelessWidget {
                   child: Row(
                     children: [
                       Expanded(
-                        flex: 7,
+                        flex: 10,
                         child: Container(
-                          color: Colors.purple[300],
+                          decoration: BoxDecoration(
+                            borderRadius:
+                                BorderRadius.all(Radius.elliptical(3, 3)),
+                            color: Colors.purple[300],
+                          ),
                           child: Center(
                             child: FittedBox(
                               fit: BoxFit.fitWidth,
@@ -95,9 +105,13 @@ class RecipeBox extends StatelessWidget {
                         child: SizedBox(),
                       ),
                       Expanded(
-                        flex: 7,
+                        flex: 10,
                         child: Container(
-                          color: Colors.purple[300],
+                          decoration: BoxDecoration(
+                            borderRadius:
+                                BorderRadius.all(Radius.elliptical(3, 3)),
+                            color: Colors.purple[300],
+                          ),
                           child: Center(
                             child: FittedBox(
                               fit: BoxFit.fitWidth,
@@ -114,9 +128,13 @@ class RecipeBox extends StatelessWidget {
                         child: SizedBox(),
                       ),
                       Expanded(
-                        flex: 7,
+                        flex: 10,
                         child: Container(
-                          color: Colors.purple[300],
+                          decoration: BoxDecoration(
+                            borderRadius:
+                                BorderRadius.all(Radius.elliptical(3, 3)),
+                            color: Colors.purple[300],
+                          ),
                           child: Center(
                             child: FittedBox(
                               fit: BoxFit.fitWidth,

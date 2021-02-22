@@ -26,13 +26,18 @@ class IngredientWidget extends StatelessWidget {
     double phoneWidth = MediaQuery.of(context).size.width;
     return Container(
       height: phoneHeight * 0.06,
-      color: Colors.white,
       child: Row(
         children: [
           Expanded(
             flex: 1,
             child: Container(
-              color: Colors.purple[300],
+              decoration: BoxDecoration(
+                color: Colors.purple[300],
+                borderRadius: BorderRadius.only(
+                  topLeft: Radius.circular(8),
+                  bottomLeft: Radius.circular(8),
+                ),
+              ),
               child: Center(
                 child: AutoSizeText(
                   "$ingredientAmount $ingredientUnit",
@@ -45,6 +50,9 @@ class IngredientWidget extends StatelessWidget {
           Expanded(
             flex: 4,
             child: Container(
+              alignment: Alignment.centerLeft,
+              height: phoneHeight * 0.06,
+              color: Colors.white,
               padding: EdgeInsets.only(left: phoneWidth * 0.01),
               child: AutoSizeText(
                 "$indgredientName",
@@ -63,7 +71,13 @@ class IngredientWidget extends StatelessWidget {
                 updateState();
               },
               child: Container(
-                color: Colors.purple[300],
+                decoration: BoxDecoration(
+                  color: Colors.purple[300],
+                  borderRadius: BorderRadius.only(
+                    topRight: Radius.circular(8),
+                    bottomRight: Radius.circular(8),
+                  ),
+                ),
                 child: Icon(
                   Icons.delete,
                   size: phoneHeight * 0.06,

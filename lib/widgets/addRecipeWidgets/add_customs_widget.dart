@@ -38,8 +38,12 @@ class _AddCustomsWidgetState extends State<AddCustomsWidget> {
               child: Container(
                 padding: EdgeInsets.all(1),
                 decoration: BoxDecoration(
+                  borderRadius: BorderRadius.all(Radius.elliptical(8, 8)),
                   color: Color.fromARGB(255, 252, 242, 249),
-                  border: Border.all(width: 3, color: Colors.purple[300]),
+                  border: Border.all(
+                    width: 3,
+                    color: Colors.purple[300],
+                  ),
                 ),
                 child: Row(
                   children: [
@@ -82,6 +86,7 @@ class _AddCustomsWidgetState extends State<AddCustomsWidget> {
               child: Container(
                 padding: EdgeInsets.all(1),
                 decoration: BoxDecoration(
+                  borderRadius: BorderRadius.all(Radius.elliptical(8, 8)),
                   color: Color.fromARGB(255, 252, 242, 249),
                   border: Border.all(
                     width: 3,
@@ -120,6 +125,7 @@ class _AddCustomsWidgetState extends State<AddCustomsWidget> {
               child: Container(
                 padding: EdgeInsets.all(1),
                 decoration: BoxDecoration(
+                  borderRadius: BorderRadius.all(Radius.elliptical(8, 8)),
                   color: Color.fromARGB(255, 252, 242, 249),
                   border: Border.all(
                     width: 3,

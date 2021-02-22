@@ -41,44 +41,51 @@ class AddNewRecipePage extends StatelessWidget {
     return Scaffold(
       bottomNavigationBar: Container(
         height: phoneHeight * 0.06,
-        child: Row(
-          children: [
-            Expanded(
-              child: Container(
-                padding: EdgeInsets.symmetric(horizontal: 5),
-                child: RaisedButton(
-                  shape: Border.all(color: Colors.purple[300], width: 4),
-                  color: Color.fromARGB(255, 235, 172, 215),
-                  onPressed: () {
-                    deleteImagesWhenAbort();
-                    Navigator.popAndPushNamed(context, "/");
-                  },
-                  child: Container(
-                    child: Center(
-                      child: Text(
-                        "Abort",
+        child: Container(
+          margin: EdgeInsets.only(bottom: phoneHeight * 0.01),
+          child: Row(
+            children: [
+              Expanded(
+                child: Container(
+                  padding: EdgeInsets.symmetric(horizontal: 5),
+                  child: RaisedButton(
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(7),
+                        side: BorderSide(color: Colors.purple[300], width: 3)),
+                    color: Color.fromARGB(255, 235, 172, 215),
+                    onPressed: () {
+                      deleteImagesWhenAbort();
+                      Navigator.popAndPushNamed(context, "/");
+                    },
+                    child: Container(
+                      child: Center(
+                        child: Text(
+                          "Abort",
+                        ),
                       ),
                     ),
                   ),
                 ),
               ),
-            ),
-            Expanded(
-              child: Container(
-                padding: EdgeInsets.symmetric(horizontal: 5),
-                child: RaisedButton(
-                  shape: Border.all(color: Colors.purple[300], width: 4),
-                  color: Color.fromARGB(255, 235, 172, 215),
-                  onPressed: () => saveRecipe(context),
-                  child: Container(
-                    child: Center(
-                      child: Text("Okay"),
+              Expanded(
+                child: Container(
+                  padding: EdgeInsets.symmetric(horizontal: 5),
+                  child: RaisedButton(
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(7),
+                        side: BorderSide(color: Colors.purple[300], width: 3)),
+                    color: Color.fromARGB(255, 235, 172, 215),
+                    onPressed: () => saveRecipe(context),
+                    child: Container(
+                      child: Center(
+                        child: Text("Okay"),
+                      ),
                     ),
                   ),
                 ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
       backgroundColor: Color.fromARGB(255, 252, 242, 249),

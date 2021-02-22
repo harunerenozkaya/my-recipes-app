@@ -82,8 +82,9 @@ class _AddPhotoWidgetState extends State<AddPhotoWidget> {
                 flex: 5,
                 child: Container(
                   decoration: BoxDecoration(
-                    border: Border.all(width: 3),
                     color: Color.fromARGB(255, 235, 172, 215),
+                    borderRadius: BorderRadius.all(Radius.elliptical(8, 8)),
+                    border: Border.all(color: Colors.purple[300], width: 3),
                   ),
                   child: ListView.builder(
                       scrollDirection: Axis.horizontal,
@@ -98,7 +99,9 @@ class _AddPhotoWidgetState extends State<AddPhotoWidget> {
         Container(
           height: widget.phoneHeight * 0.05,
           child: RaisedButton(
-            shape: Border.all(width: 3),
+            shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(7),
+                side: BorderSide(color: Colors.purple[300], width: 3)),
             color: Color.fromARGB(255, 252, 242, 249),
             child: Text("Add Photo"),
             onPressed: () => _showPicker(context),

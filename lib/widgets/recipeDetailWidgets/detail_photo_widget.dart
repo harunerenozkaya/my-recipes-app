@@ -31,8 +31,9 @@ class _DetailPhotoWidgetState extends State<DetailPhotoWidget> {
             flex: 5,
             child: Container(
               decoration: BoxDecoration(
-                border: Border.all(width: 3),
                 color: Color.fromARGB(255, 235, 172, 215),
+                borderRadius: BorderRadius.all(Radius.elliptical(8, 8)),
+                border: Border.all(color: Colors.purple[300], width: 3),
               ),
               child: ListView.builder(
                   scrollDirection: Axis.horizontal,

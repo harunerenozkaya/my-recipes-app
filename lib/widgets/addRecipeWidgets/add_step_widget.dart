@@ -50,8 +50,9 @@ class _AddStepsWidgetState extends State<AddStepsWidget> {
                   padding: EdgeInsets.fromLTRB(phoneWidth * 0.01,
                       widget.phoneHeight * 0.005, phoneWidth * 0.25, 0),
                   decoration: BoxDecoration(
-                    border: Border.all(width: 3),
                     color: Color.fromARGB(255, 235, 172, 215),
+                    borderRadius: BorderRadius.all(Radius.elliptical(8, 8)),
+                    border: Border.all(color: Colors.purple[300], width: 3),
                   ),
                   child: ListView.separated(
                       primary: false,
@@ -70,7 +71,9 @@ class _AddStepsWidgetState extends State<AddStepsWidget> {
           width: phoneWidth * 0.25,
           height: phoneHeight * 0.05,
           child: RaisedButton(
-            shape: Border.all(width: 3),
+            shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(7),
+                side: BorderSide(color: Colors.purple[300], width: 3)),
             color: Color.fromARGB(255, 252, 242, 249),
             child: Text("Add Step"),
             onPressed: () {

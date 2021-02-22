@@ -39,6 +39,7 @@ class MyHomePage extends StatelessWidget {
             Expanded(
               flex: 1,
               child: Container(
+                padding: EdgeInsets.only(bottom: phoneHeight * 0.004),
                 alignment: Alignment.bottomLeft,
                 child: Text(
                   "My Favorite Recipes",
@@ -49,24 +50,67 @@ class MyHomePage extends StatelessWidget {
             Expanded(
               flex: 6,
               child: Container(
-                padding: EdgeInsets.symmetric(
-                    vertical: phoneHeight * 0.01,
-                    horizontal: phoneWidth * 0.015),
-                color: Color.fromARGB(255, 235, 172, 215),
-                child: ListView.separated(
-                  scrollDirection: Axis.horizontal,
-                  itemCount: 0,
-                  separatorBuilder: (context, index) => SizedBox(
-                    width: phoneWidth * 0.02,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.all(Radius.elliptical(8, 8)),
+                  color: Color.fromARGB(255, 235, 172, 215),
+                  border: Border.all(
+                    width: 3,
+                    color: Colors.purple[300],
                   ),
-                  itemBuilder: (context, index) => Container(),
                 ),
+                padding: EdgeInsets.symmetric(
+                    vertical: phoneHeight * 0.005,
+                    horizontal: phoneWidth * 0.001),
+                child: findFavoriteRecipeCount() != 0
+                    ? ListView.separated(
+                        scrollDirection: Axis.horizontal,
+                        itemCount: findFavoriteRecipeCount(),
+                        separatorBuilder: (context, index) => SizedBox(
+                          width: phoneWidth * 0.02,
+                        ),
+                        itemBuilder: (context, index) {
+                          var recipe =
+                              Hive.box("recipes").values.toList()[index];
+                          if (recipe.isFavorite == true) {
+                            var recipeId = recipe.recipeId;
+                            var recipeName = recipe.recipeName;
+                            //Fotosu olmayanlarda hata veriyo burayı düzelt.
+                            bool isRecipeFirstPhoto = recipe.imagesPath.isEmpty;
+                            String recipeFirstPhoto;
+                            var recipeDuration = recipe.recipeDuration;
+                            var recipeCategory = recipe.category;
+                            var recipePrice = recipe.price;
+
+                            // Recipe'nin fotografı varsa foto yolla
+                            if (isRecipeFirstPhoto == false) {
+                              recipeFirstPhoto = Hive.box("recipes")
+                                  .values
+                                  .toList()[index]
+                                  .imagesPath[0];
+                            }
+
+                            return RecipeBox(
+                                recipeId,
+                                recipeName,
+                                recipeFirstPhoto,
+                                recipeCategory,
+                                recipeDuration,
+                                recipePrice);
+                          }
+                        },
+                      )
+                    : Container(
+                        child: Center(
+                          child: Text("There is not any favorite recipe."),
+                        ),
+                      ),
               ),
             ),
             Expanded(
               flex: 1,
               child: Container(
                 alignment: Alignment.bottomLeft,
+                padding: EdgeInsets.only(bottom: phoneHeight * 0.004),
                 child: Text(
                   "All Recipes",
                   style: TextStyle(fontSize: 20),
@@ -76,51 +120,98 @@ class MyHomePage extends StatelessWidget {
             Expanded(
               flex: 12,
               child: Container(
-                color: Color.fromARGB(255, 235, 172, 215),
-                child: GridView.builder(
-                  primary: false,
-                  itemCount: Hive.box("recipes").values.length,
-                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 2,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.all(Radius.elliptical(8, 8)),
+                  color: Color.fromARGB(255, 235, 172, 215),
+                  border: Border.all(
+                    width: 3,
+                    color: Colors.purple[300],
                   ),
-                  itemBuilder: (context, index) {
-                    var recipeId =
-                        Hive.box("recipes").values.toList()[index].recipeId;
-                    var recipeName =
-                        Hive.box("recipes").values.toList()[index].recipeName;
-                    //Fotosu olmayanalarda hata veriyo burayı düzelt.
-                    bool isRecipeFirstPhoto = Hive.box("recipes")
-                        .values
-                        .toList()[index]
-                        .imagesPath
-                        .isEmpty;
-                    String recipeFirstPhoto;
-                    var recipeDuration = Hive.box("recipes")
-                        .values
-                        .toList()[index]
-                        .recipeDuration;
-                    var recipeCategory =
-                        Hive.box("recipes").values.toList()[index].category;
-                    var recipePrice =
-                        Hive.box("recipes").values.toList()[index].price;
-
-                    // Recipe'nin fotografı varsa foto yolla
-                    if (isRecipeFirstPhoto == false) {
-                      recipeFirstPhoto = Hive.box("recipes")
-                          .values
-                          .toList()[index]
-                          .imagesPath[0];
-                    }
-
-                    return RecipeBox(recipeId, recipeName, recipeFirstPhoto,
-                        recipeCategory, recipeDuration, recipePrice);
-                  },
                 ),
+                child: findAllRecipeCount() != 0
+                    ? GridView.builder(
+                        primary: false,
+                        itemCount: Hive.box("recipes").values.length,
+                        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                          crossAxisCount: 2,
+                        ),
+                        itemBuilder: (context, index) {
+                          var recipeId = Hive.box("recipes")
+                              .values
+                              .toList()[index]
+                              .recipeId;
+                          var recipeName = Hive.box("recipes")
+                              .values
+                              .toList()[index]
+                              .recipeName;
+                          //Fotosu olmayanalarda hata veriyo burayı düzelt.
+                          bool isRecipeFirstPhoto = Hive.box("recipes")
+                              .values
+                              .toList()[index]
+                              .imagesPath
+                              .isEmpty;
+                          String recipeFirstPhoto;
+                          var recipeDuration = Hive.box("recipes")
+                              .values
+                              .toList()[index]
+                              .recipeDuration;
+                          var recipeCategory = Hive.box("recipes")
+                              .values
+                              .toList()[index]
+                              .category;
+                          var recipePrice =
+                              Hive.box("recipes").values.toList()[index].price;
+
+                          // Recipe'nin fotografı varsa foto yolla
+                          if (isRecipeFirstPhoto == false) {
+                            recipeFirstPhoto = Hive.box("recipes")
+                                .values
+                                .toList()[index]
+                                .imagesPath[0];
+                          }
+
+                          return RecipeBox(
+                              recipeId,
+                              recipeName,
+                              recipeFirstPhoto,
+                              recipeCategory,
+                              recipeDuration,
+                              recipePrice);
+                        },
+                      )
+                    : Container(
+                        child: Center(
+                          child: Text(
+                            "There is not any recipe.\nYou can add new recipes with the button in the \nbottom right corner.",
+                            textAlign: TextAlign.center,
+                          ),
+                        ),
+                      ),
               ),
             ),
           ],
         ),
       ),
     );
+  }
+
+  int findFavoriteRecipeCount() {
+    int count = 0;
+    Hive.box("recipes").values.toList().forEach((element) {
+      if (element.isFavorite == true) {
+        count++;
+      }
+    });
+
+    return count;
+  }
+
+  int findAllRecipeCount() {
+    int count = 0;
+    Hive.box("recipes").values.toList().forEach((element) {
+      count++;
+    });
+
+    return count;
   }
 }
