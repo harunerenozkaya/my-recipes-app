@@ -98,6 +98,7 @@ class _EditStepsWidgetState extends State<EditStepsWidget> {
           return AlertDialog(
             actions: [
               RaisedButton(
+                color: Color.fromARGB(255, 220, 220, 220),
                 onPressed: () {
                   Navigator.pop(context);
                 },

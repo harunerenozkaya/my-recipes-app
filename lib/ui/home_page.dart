@@ -21,8 +21,7 @@ class MyHomePage extends StatelessWidget {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          Navigator.of(context).pushNamedAndRemoveUntil(
-              "/addNewRecipe", (Route<dynamic> route) => false);
+          Navigator.of(context).pushNamed("/addNewRecipe");
         },
         tooltip: 'Add New Recipe',
         child: Icon(
@@ -109,31 +108,16 @@ class MyHomePage extends StatelessWidget {
                           crossAxisCount: 2,
                         ),
                         itemBuilder: (context, index) {
-                          var recipeId = Hive.box("recipes")
-                              .values
-                              .toList()[index]
-                              .recipeId;
-                          var recipeName = Hive.box("recipes")
-                              .values
-                              .toList()[index]
-                              .recipeName;
+                          var recipes = Hive.box("recipes").values.toList();
+                          var recipeId = recipes[index].recipeId;
+                          var recipeName = recipes[index].recipeName;
                           //Fotosu olmayanalarda hata veriyo burayı düzelt.
-                          bool isRecipeFirstPhoto = Hive.box("recipes")
-                              .values
-                              .toList()[index]
-                              .imagesPath
-                              .isEmpty;
+                          bool isRecipeFirstPhoto =
+                              recipes[index].imagesPath.isEmpty;
                           String recipeFirstPhoto;
-                          var recipeDuration = Hive.box("recipes")
-                              .values
-                              .toList()[index]
-                              .recipeDuration;
-                          var recipeCategory = Hive.box("recipes")
-                              .values
-                              .toList()[index]
-                              .category;
-                          var recipePrice =
-                              Hive.box("recipes").values.toList()[index].price;
+                          var recipeDuration = recipes[index].recipeDuration;
+                          var recipeCategory = recipes[index].category;
+                          var recipePrice = recipes[index].price;
 
                           // Recipe'nin fotografı varsa foto yolla
                           if (isRecipeFirstPhoto == false) {

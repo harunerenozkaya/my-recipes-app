@@ -34,8 +34,7 @@ class RecipeBox extends StatelessWidget {
       padding: EdgeInsets.all(7),
       child: GestureDetector(
         onTap: () {
-          Navigator.of(context).pushNamedAndRemoveUntil(
-              "detailPage/$recipeId", (Route<dynamic> route) => false);
+          Navigator.of(context).pushNamed("detailPage/$recipeId");
         },
         child: Container(
           decoration: BoxDecoration(

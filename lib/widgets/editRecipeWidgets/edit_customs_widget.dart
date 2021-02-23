@@ -161,7 +161,7 @@ class _EditCustomsWidgetState extends State<EditCustomsWidget> {
                       child: Container(
                         child: Center(
                           child: AutoSizeText(
-                            "$price",
+                            price == null ? "${widget.ownPrice}" : "$price",
                             style: TextStyle(fontWeight: FontWeight.w600),
                             maxLines: 1,
                           ),
@@ -200,6 +200,7 @@ class _EditCustomsWidgetState extends State<EditCustomsWidget> {
         ),
         actions: [
           RaisedButton(
+            color: Color.fromARGB(255, 220, 220, 220),
             onPressed: () {
               setState(
                 () {

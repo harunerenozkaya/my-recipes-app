@@ -110,6 +110,7 @@ class _AddIngredientsWidgetState extends State<AddIngredientsWidget> {
             child: AlertDialog(
               actions: [
                 RaisedButton(
+                  color: Color.fromARGB(255, 220, 220, 220),
                   onPressed: () {
                     Navigator.pop(context);
                   },

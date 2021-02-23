@@ -55,8 +55,15 @@ class MyApp extends StatelessWidget {
           backgroundColor: Color.fromARGB(255, 252, 242, 249),
         ),
         appBarTheme: AppBarTheme(
-          color: Color.fromARGB(255, 235, 172, 215),
+            color: Color.fromARGB(255, 235, 172, 215),
+            iconTheme: IconThemeData(color: Colors.white)),
+        accentColor: Color.fromARGB(255, 235, 172, 215),
+        primaryColor: Color.fromARGB(255, 235, 172, 215),
+        primaryColorDark: Color.fromARGB(255, 235, 172, 215),
+        primaryTextTheme: TextTheme(
+          headline6: TextStyle(color: Colors.white),
         ),
+        buttonColor: Color.fromARGB(255, 235, 172, 215),
       ),
       title: 'My Recipes',
       debugShowCheckedModeBanner: false,

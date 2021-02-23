@@ -93,6 +93,7 @@ class _AddStepsWidgetState extends State<AddStepsWidget> {
           return AlertDialog(
             actions: [
               RaisedButton(
+                color: Color.fromARGB(255, 220, 220, 220),
                 onPressed: () {
                   Navigator.pop(context);
                 },

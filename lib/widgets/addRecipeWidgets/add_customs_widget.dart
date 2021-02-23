@@ -178,6 +178,7 @@ class _AddCustomsWidgetState extends State<AddCustomsWidget> {
         ),
         actions: [
           RaisedButton(
+            color: Color.fromARGB(255, 220, 220, 220),
             onPressed: () {
               setState(
                 () {
@@ -197,6 +198,7 @@ class _AddCustomsWidgetState extends State<AddCustomsWidget> {
               );
             },
             child: Text("Okay"),
+            color: Color.fromARGB(255, 235, 172, 215),
           ),
         ],
       ),
@@ -219,7 +221,7 @@ class _AddCustomsWidgetState extends State<AddCustomsWidget> {
         "Drink"
       ],
       title: "What is the category?",
-      headerColor: Colors.purple[300],
+      headerColor: Color.fromARGB(255, 235, 172, 215),
       context: context,
       onChanged: (val) {
         setState(
@@ -252,6 +254,7 @@ class _AddCustomsWidgetState extends State<AddCustomsWidget> {
           ),
           actions: [
             RaisedButton(
+              color: Color.fromARGB(255, 235, 172, 215),
               child: Text("Okay"),
               onPressed: () {
                 Navigator.pop(context);
