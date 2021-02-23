@@ -6,7 +6,7 @@ class MenuDrawer extends StatelessWidget {
     "Practical": "practical",
     "Soup": "soup",
     "Meat Meal": "meat_meal",
-    "Vegetable Meal": "vegetable_meal",
+    "Vegetable": "vegetable_meal",
     "Legumes": "legumes",
     "Salad": "salad",
     "Pastry": "pastry",
@@ -70,8 +70,6 @@ class MenuDrawer extends StatelessWidget {
                         ),
                         visualDensity: VisualDensity(horizontal: -4),
                         onTap: () {
-                          //Navigator.popUntil(context, ModalRoute.withName("/"));
-                          // "categoryPage/${menuItemNamesId.keys.toList()[index]}/${menuItemNamesId.values.toList()[index]}"
                           Navigator.of(context).pushNamedAndRemoveUntil(
                               "categoryPage/${menuItemNamesId.keys.toList()[index]}/${menuItemNamesId.values.toList()[index]}",
                               (Route<dynamic> route) => false);

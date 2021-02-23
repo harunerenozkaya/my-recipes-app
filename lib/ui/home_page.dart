@@ -69,34 +69,7 @@ class MyHomePage extends StatelessWidget {
                           width: phoneWidth * 0.02,
                         ),
                         itemBuilder: (context, index) {
-                          var recipe =
-                              Hive.box("recipes").values.toList()[index];
-                          if (recipe.isFavorite == true) {
-                            var recipeId = recipe.recipeId;
-                            var recipeName = recipe.recipeName;
-                            //Fotosu olmayanlarda hata veriyo burayı düzelt.
-                            bool isRecipeFirstPhoto = recipe.imagesPath.isEmpty;
-                            String recipeFirstPhoto;
-                            var recipeDuration = recipe.recipeDuration;
-                            var recipeCategory = recipe.category;
-                            var recipePrice = recipe.price;
-
-                            // Recipe'nin fotografı varsa foto yolla
-                            if (isRecipeFirstPhoto == false) {
-                              recipeFirstPhoto = Hive.box("recipes")
-                                  .values
-                                  .toList()[index]
-                                  .imagesPath[0];
-                            }
-
-                            return RecipeBox(
-                                recipeId,
-                                recipeName,
-                                recipeFirstPhoto,
-                                recipeCategory,
-                                recipeDuration,
-                                recipePrice);
-                          }
+                          return getAllFavoriteRecipesList()[index];
                         },
                       )
                     : Container(
@@ -213,5 +186,32 @@ class MyHomePage extends StatelessWidget {
     });
 
     return count;
+  }
+
+  List<Widget> getAllFavoriteRecipesList() {
+    List<Widget> recipes = [];
+    Hive.box("recipes").values.toList().forEach(
+      (element) {
+        if (element.isFavorite == true) {
+          var recipeId = element.recipeId;
+          var recipeName = element.recipeName;
+          //Fotosu olmayanlarda hata veriyo burayı düzelt.
+          bool isRecipeFirstPhoto = element.imagesPath.isEmpty;
+          String recipeFirstPhoto;
+          var recipeDuration = element.recipeDuration;
+          var recipeCategory = element.category;
+          var recipePrice = element.price;
+
+          // Recipe'nin fotografı varsa foto yolla
+          if (isRecipeFirstPhoto == false) {
+            recipeFirstPhoto = element.imagesPath[0];
+          }
+
+          recipes.add(RecipeBox(recipeId, recipeName, recipeFirstPhoto,
+              recipeCategory, recipeDuration, recipePrice));
+        }
+      },
+    );
+    return recipes;
   }
 }
