@@ -4,14 +4,12 @@ import 'package:flutter_material_pickers/flutter_material_pickers.dart';
 import 'package:myRecipes/widgets/addRecipeWidgets/ingredientWidgetAdded.dart';
 
 class EditIngredientsWidget extends StatefulWidget {
-  EditIngredientsWidget({
-    Key key,
-    @required this.phoneHeight,
-    @required this.getIngredients,
-  }) : super(key: key);
-
   final double phoneHeight;
   final Function getIngredients;
+  List<Map> ingredients;
+
+  EditIngredientsWidget(
+      this.phoneHeight, this.getIngredients, this.ingredients);
 
   static const List<String> units = ["kg", "g", "lb", "spoon", "glass"];
 
@@ -25,6 +23,11 @@ class _EditIngredientsWidgetState extends State<EditIngredientsWidget> {
   String ingredientUnit = "kg";
   String ingredientName = "";
   String ingredientAmount = "";
+
+  initState() {
+    ingredients = widget.ingredients.toList();
+    widget.getIngredients(ingredients);
+  }
 
   void updateStateMainWidget() {
     setState(() {});

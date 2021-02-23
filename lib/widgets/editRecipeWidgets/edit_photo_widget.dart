@@ -3,22 +3,24 @@ import 'package:image_picker/image_picker.dart';
 import 'package:myRecipes/widgets/editRecipeWidgets/photoWidgetEdited.dart';
 
 class EditPhotoWidget extends StatefulWidget {
-  const EditPhotoWidget({
-    Key key,
-    @required this.phoneHeight,
-    @required this.getPhotos,
-  }) : super(key: key);
-
   final double phoneHeight;
   final Function getPhotos;
+  List<String> imagesPath;
+
+  EditPhotoWidget(this.phoneHeight, this.getPhotos, this.imagesPath);
 
   @override
   _EditPhotoWidgetState createState() => _EditPhotoWidgetState();
 }
 
 class _EditPhotoWidgetState extends State<EditPhotoWidget> {
-  List<String> imagesPath = [];
+  List<String> imagesPath;
   final _picker = ImagePicker();
+
+  initState() {
+    imagesPath = widget.imagesPath.toList();
+    widget.getPhotos(imagesPath);
+  }
 
   _updateState() {
     setState(() {});
@@ -27,8 +29,6 @@ class _EditPhotoWidgetState extends State<EditPhotoWidget> {
   _imgFromCamera() async {
     PickedFile pick =
         await _picker.getImage(source: ImageSource.camera, imageQuality: 50);
-
-    print(pick.path);
 
     if (pick != null) {
       setState(
@@ -45,8 +45,6 @@ class _EditPhotoWidgetState extends State<EditPhotoWidget> {
   _imgFromGallery() async {
     PickedFile pick =
         await _picker.getImage(source: ImageSource.gallery, imageQuality: 50);
-
-    print(pick.path);
 
     if (pick != null) {
       setState(

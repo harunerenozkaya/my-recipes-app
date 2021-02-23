@@ -16,26 +16,51 @@ class RecipeDetail extends StatefulWidget {
   _RecipeDetailState createState() => _RecipeDetailState();
 }
 
-class _RecipeDetailState extends State<RecipeDetail> {
-  Recipe recipe;
+Recipe recipe;
 
-  getRecipeInfo() {
-    Hive.box("recipes").values.toList().forEach(
+class _RecipeDetailState extends State<RecipeDetail> {
+  List getDataofRecipe(String recipeId) {
+    List recipeData;
+
+    var index = 0;
+    Hive.box("recipes").values.forEach(
       (element) {
-        if (element.recipeId == widget.recipeId) {
-          recipe = element;
+        if (element.recipeId == recipeId) {
+          recipeData = [
+            Hive.box("recipes").getAt(index).recipeId,
+            Hive.box("recipes").getAt(index).imagesPath,
+            Hive.box("recipes").getAt(index).ingredients,
+            Hive.box("recipes").getAt(index).steps,
+            Hive.box("recipes").getAt(index).recipeDuration,
+            Hive.box("recipes").getAt(index).category,
+            Hive.box("recipes").getAt(index).price,
+            Hive.box("recipes").getAt(index).recipeName,
+            Hive.box("recipes").getAt(index).isFavorite
+          ];
         }
+        index++;
       },
     );
+    return recipeData;
   }
 
   @override
   Widget build(BuildContext context) {
     final phoneHeight = MediaQuery.of(context).size.height;
     final phoneWidth = MediaQuery.of(context).size.width;
+    List recipeData = getDataofRecipe(widget.recipeId);
 
-    getRecipeInfo();
-    print(recipe.isFavorite);
+    recipe = Recipe(
+      recipeData[0],
+      recipeData[1],
+      recipeData[2],
+      recipeData[3],
+      recipeData[4],
+      recipeData[5],
+      recipeData[6],
+      recipeData[7],
+      recipeData[8],
+    );
 
     return Scaffold(
       backgroundColor: Color.fromARGB(255, 252, 242, 249),
@@ -64,7 +89,8 @@ class _RecipeDetailState extends State<RecipeDetail> {
               Expanded(
                 child: RaisedButton(
                   onPressed: () {
-                    Navigator.pushNamed(context, "editPage/${recipe.recipeId}");
+                    Navigator.popAndPushNamed(
+                        context, "editPage/${recipe.recipeId}");
                   },
                   shape: CircleBorder(),
                   color: Colors.white,
@@ -225,9 +251,6 @@ class _RecipeDetailState extends State<RecipeDetail> {
                         recipe.price,
                         recipe.recipeName,
                         true));
-
-                //element.isFavorite = true;
-                //recipe.isFavorite = true;
               } else if (recipe.isFavorite == true) {
                 Hive.box("recipes").putAt(
                     index,

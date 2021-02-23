@@ -2,14 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:myRecipes/widgets/editRecipeWidgets/stepWidgetEdited.dart';
 
 class EditStepsWidget extends StatefulWidget {
-  EditStepsWidget({
-    Key key,
-    @required this.phoneHeight,
-    @required this.getStep,
-  }) : super(key: key);
-
   final double phoneHeight;
   final Function getStep;
+  List<String> steps;
+  EditStepsWidget(this.phoneHeight, this.getStep, this.steps);
 
   @override
   _EditStepsWidgetState createState() => _EditStepsWidgetState();
@@ -18,6 +14,11 @@ class EditStepsWidget extends StatefulWidget {
 class _EditStepsWidgetState extends State<EditStepsWidget> {
   List<String> steps = [];
   String step = "";
+
+  initState() {
+    steps = widget.steps.toList();
+    widget.getStep(steps);
+  }
 
   void updateStateMainWidget() {
     setState(() {});

@@ -28,8 +28,6 @@ class _AddPhotoWidgetState extends State<AddPhotoWidget> {
     PickedFile pick =
         await _picker.getImage(source: ImageSource.camera, imageQuality: 50);
 
-    print(pick.path);
-
     if (pick != null) {
       setState(
         () {
@@ -45,8 +43,6 @@ class _AddPhotoWidgetState extends State<AddPhotoWidget> {
   _imgFromGallery() async {
     PickedFile pick =
         await _picker.getImage(source: ImageSource.gallery, imageQuality: 50);
-
-    print(pick.path);
 
     if (pick != null) {
       setState(

@@ -10,7 +10,7 @@ import 'package:hive/hive.dart';
 
 // ignore: must_be_immutable
 class EditRecipePage extends StatelessWidget {
-  String recipeId;
+  final String recipeId;
 
   EditRecipePage(this.recipeId);
 
@@ -20,6 +20,19 @@ class EditRecipePage extends StatelessWidget {
   String recipeDuration;
   String category;
   String price;
+
+  Recipe recipe;
+
+  // Gelen recipeId'nin ait olduğu recipe'yi bulur.
+  getRecipeInfo() {
+    Hive.box("recipes").values.toList().forEach(
+      (element) {
+        if (element.recipeId == recipeId) {
+          recipe = element;
+        }
+      },
+    );
+  }
 
   // Child widgetlerden gelen verileri buraya taşıyoruz ki saveRecipe fonskiyonu ile db'ye ekleyebilelim.
   void getPhotos(List<String> photoss) => imagesPath = photoss;
@@ -41,6 +54,8 @@ class EditRecipePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final phoneHeight = MediaQuery.of(context).size.height;
+
+    getRecipeInfo();
 
     return Scaffold(
       bottomNavigationBar: Container(
@@ -97,7 +112,7 @@ class EditRecipePage extends StatelessWidget {
         preferredSize: Size.fromHeight(phoneHeight * 0.06),
         child: AppBar(
           title: Text(
-            "Edit Recipe $recipeId",
+            "Edit Recipe",
             style: TextStyle(
                 fontSize: phoneHeight * 0.04, fontWeight: FontWeight.bold),
           ),
@@ -117,7 +132,10 @@ class EditRecipePage extends StatelessWidget {
                 Expanded(
                   flex: 5,
                   child: EditPhotoWidget(
-                      phoneHeight: phoneHeight, getPhotos: getPhotos),
+                    phoneHeight,
+                    getPhotos,
+                    recipe.imagesPath,
+                  ),
                 ),
                 Expanded(
                   flex: 1,
@@ -126,8 +144,9 @@ class EditRecipePage extends StatelessWidget {
                 Expanded(
                   flex: 6,
                   child: EditIngredientsWidget(
-                    phoneHeight: phoneHeight,
-                    getIngredients: getIngredients,
+                    phoneHeight,
+                    getIngredients,
+                    recipe.ingredients,
                   ),
                 ),
                 Expanded(
@@ -137,8 +156,9 @@ class EditRecipePage extends StatelessWidget {
                 Expanded(
                   flex: 6,
                   child: EditStepsWidget(
-                    phoneHeight: phoneHeight,
-                    getStep: getSteps,
+                    phoneHeight,
+                    getSteps,
+                    recipe.steps,
                   ),
                 ),
                 Expanded(
@@ -147,11 +167,8 @@ class EditRecipePage extends StatelessWidget {
                 ),
                 Expanded(
                   flex: 1,
-                  child: EditCustomsWidget(
-                    getDuration: getDuration,
-                    getCategory: getCategory,
-                    getPrice: getPrice,
-                  ),
+                  child: EditCustomsWidget(getDuration, getCategory, getPrice,
+                      recipe.recipeDuration, recipe.category, recipe.price),
                 ),
               ],
             ),
@@ -163,7 +180,7 @@ class EditRecipePage extends StatelessWidget {
 
   // Recipe'yi veritabanına kaydeder.
   void saveRecipe(BuildContext context) async {
-    String recipeName;
+    String recipeName = recipe.recipeName;
 
     if (ingredients.isEmpty) {
       showFinishAlert(context, "Please add any ingredient.");
@@ -215,7 +232,7 @@ class EditRecipePage extends StatelessWidget {
       barrierDismissible: false,
       context: context,
       builder: (context) => AlertDialog(
-        title: Text("Your recipe has added succesfully"),
+        title: Text("Your recipe has edited succesfully"),
         actions: [
           RaisedButton(
             child: Text("Okay"),
@@ -233,8 +250,9 @@ class EditRecipePage extends StatelessWidget {
       barrierDismissible: false,
       context: context,
       builder: (context) => AlertDialog(
-        title: Text("What is your recipe name?"),
+        title: Text("Do you edit recipe name?"),
         content: TextField(
+          controller: TextEditingController(text: recipeName),
           decoration: InputDecoration(
             labelText: "Recipe Name",
             hintText: "Recipe Name",
@@ -248,15 +266,30 @@ class EditRecipePage extends StatelessWidget {
         ),
         actions: [
           RaisedButton(
-            onPressed: () async {
+            onPressed: () {
               // Name boş mu dolu mu kontrol eder.
               if ((recipeName == null) | (recipeName == "")) {
               } else {
-                //Veritabanına ekle
-                await recipeBox.add(
-                  Recipe(recipeId, imagesPath, ingredients, steps,
-                      recipeDuration, category, price, recipeName, false),
-                );
+                int index = 0;
+                //Veritabanındaki recipeyi düzenle
+                recipeBox.values.toList().forEach((element) {
+                  if (element.recipeId == recipe.recipeId) {
+                    recipeBox.putAt(
+                        index,
+                        Recipe(
+                            recipeId,
+                            imagesPath,
+                            ingredients,
+                            steps,
+                            recipeDuration,
+                            category,
+                            price,
+                            recipeName,
+                            recipe.isFavorite));
+                  }
+                  index++;
+                });
+
                 Navigator.pop(context);
                 // Başarılı mesajını döndürür.
                 showFinishSuccesfulAlert(context);

@@ -4,16 +4,15 @@ import 'package:flutter_duration_picker/flutter_duration_picker.dart';
 import 'package:flutter_material_pickers/flutter_material_pickers.dart';
 
 class EditCustomsWidget extends StatefulWidget {
-  EditCustomsWidget({
-    Key key,
-    @required this.getDuration,
-    @required this.getCategory,
-    @required this.getPrice,
-  }) : super(key: key);
-
   final Function getDuration;
   final Function getCategory;
   final Function getPrice;
+  final String ownDuration;
+  final String ownCategory;
+  final String ownPrice;
+
+  EditCustomsWidget(this.getDuration, this.getCategory, this.getPrice,
+      this.ownDuration, this.ownCategory, this.ownPrice);
 
   @override
   _EditCustomsWidgetState createState() => _EditCustomsWidgetState();
@@ -23,6 +22,25 @@ class _EditCustomsWidgetState extends State<EditCustomsWidget> {
   Duration recipeDuration;
   String category;
   String price;
+
+  initState() {
+    category = widget.ownCategory.toString();
+    price = widget.ownPrice.toString();
+
+    List hourMinute = stringDurationConverter();
+    recipeDuration = Duration(hours: hourMinute[0], minutes: hourMinute[1]);
+
+    widget.getCategory(category);
+    widget.getPrice(price);
+    widget.getDuration(recipeDuration.toString());
+  }
+
+  List<int> stringDurationConverter() {
+    String hour = widget.ownDuration.split(":").toList()[0];
+    String minute = widget.ownDuration.split(":").toList()[1];
+
+    return [int.parse(hour), int.parse(minute)];
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -102,7 +120,7 @@ class _EditCustomsWidgetState extends State<EditCustomsWidget> {
                     Expanded(
                       flex: 4,
                       child: AutoSizeText(
-                        category == null ? "  Category" : " $category",
+                        "  $category",
                         style: TextStyle(fontWeight: FontWeight.w600),
                         maxLines: 1,
                       ),
@@ -139,11 +157,15 @@ class _EditCustomsWidgetState extends State<EditCustomsWidget> {
                       child: Icon(Icons.attach_money),
                     ),
                     Expanded(
-                      flex: 4,
-                      child: AutoSizeText(
-                        price == null ? "  Amount" : "   $price",
-                        style: TextStyle(fontWeight: FontWeight.w600),
-                        maxLines: 1,
+                      flex: 10,
+                      child: Container(
+                        child: Center(
+                          child: AutoSizeText(
+                            "$price",
+                            style: TextStyle(fontWeight: FontWeight.w600),
+                            maxLines: 1,
+                          ),
+                        ),
                       ),
                     ),
                   ],
