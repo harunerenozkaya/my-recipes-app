@@ -27,7 +27,7 @@ class RecipeAdapter extends TypeAdapter<Recipe> {
       fields[5] as String,
       fields[6] as String,
       fields[8] as String,
-      isFavorite: fields[7] as bool,
+      fields[7] as bool,
     );
   }
 

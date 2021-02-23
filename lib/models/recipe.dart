@@ -23,12 +23,14 @@ class Recipe {
   @HiveField(8)
   String recipeName;
 
-  Recipe(this.recipeId, this.imagesPath, this.ingredients, this.steps,
-      this.recipeDuration, this.category, this.price, this.recipeName,
-      {this.isFavorite = false});
-
-  /*@override
-  String toString() {
-    print("$recipeId , $price");
-  }*/
+  Recipe(
+      this.recipeId,
+      this.imagesPath,
+      this.ingredients,
+      this.steps,
+      this.recipeDuration,
+      this.category,
+      this.price,
+      this.recipeName,
+      this.isFavorite);
 }

@@ -2,14 +2,18 @@ import 'dart:math';
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:myRecipes/models/recipe.dart';
-import 'package:myRecipes/widgets/addRecipeWidgets/add_customs_widget.dart';
-import 'package:myRecipes/widgets/addRecipeWidgets/add_ingredients_widget.dart';
-import 'package:myRecipes/widgets/addRecipeWidgets/add_photo_widget.dart';
-import 'package:myRecipes/widgets/addRecipeWidgets/add_step_widget.dart';
+import 'package:myRecipes/widgets/editRecipeWidgets/edit_customs_widget.dart';
+import 'package:myRecipes/widgets/editRecipeWidgets/edit_ingredients_widget.dart';
+import 'package:myRecipes/widgets/editRecipeWidgets/edit_photo_widget.dart';
+import 'package:myRecipes/widgets/editRecipeWidgets/edit_step_widget.dart';
 import 'package:hive/hive.dart';
 
 // ignore: must_be_immutable
-class AddNewRecipePage extends StatelessWidget {
+class EditRecipePage extends StatelessWidget {
+  String recipeId;
+
+  EditRecipePage(this.recipeId);
+
   List<String> imagesPath = [];
   List<Map> ingredients = [];
   List steps = [];
@@ -93,7 +97,7 @@ class AddNewRecipePage extends StatelessWidget {
         preferredSize: Size.fromHeight(phoneHeight * 0.06),
         child: AppBar(
           title: Text(
-            "Add New Recipe",
+            "Edit Recipe $recipeId",
             style: TextStyle(
                 fontSize: phoneHeight * 0.04, fontWeight: FontWeight.bold),
           ),
@@ -112,7 +116,7 @@ class AddNewRecipePage extends StatelessWidget {
               children: [
                 Expanded(
                   flex: 5,
-                  child: AddPhotoWidget(
+                  child: EditPhotoWidget(
                       phoneHeight: phoneHeight, getPhotos: getPhotos),
                 ),
                 Expanded(
@@ -121,7 +125,7 @@ class AddNewRecipePage extends StatelessWidget {
                 ),
                 Expanded(
                   flex: 6,
-                  child: AddIngredientsWidget(
+                  child: EditIngredientsWidget(
                     phoneHeight: phoneHeight,
                     getIngredients: getIngredients,
                   ),
@@ -132,7 +136,7 @@ class AddNewRecipePage extends StatelessWidget {
                 ),
                 Expanded(
                   flex: 6,
-                  child: AddStepsWidget(
+                  child: EditStepsWidget(
                     phoneHeight: phoneHeight,
                     getStep: getSteps,
                   ),
@@ -143,7 +147,7 @@ class AddNewRecipePage extends StatelessWidget {
                 ),
                 Expanded(
                   flex: 1,
-                  child: AddCustomsWidget(
+                  child: EditCustomsWidget(
                     getDuration: getDuration,
                     getCategory: getCategory,
                     getPrice: getPrice,

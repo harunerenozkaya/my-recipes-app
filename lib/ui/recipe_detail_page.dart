@@ -35,6 +35,7 @@ class _RecipeDetailState extends State<RecipeDetail> {
     final phoneWidth = MediaQuery.of(context).size.width;
 
     getRecipeInfo();
+    print(recipe.isFavorite);
 
     return Scaffold(
       backgroundColor: Color.fromARGB(255, 252, 242, 249),
@@ -62,7 +63,9 @@ class _RecipeDetailState extends State<RecipeDetail> {
               ),
               Expanded(
                 child: RaisedButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.pushNamed(context, "editPage/${recipe.recipeId}");
+                  },
                   shape: CircleBorder(),
                   color: Colors.white,
                   child: Icon(
@@ -203,19 +206,46 @@ class _RecipeDetailState extends State<RecipeDetail> {
   }
 
   changeIsFavoriteStatus() {
+    var index = 0;
     Hive.box("recipes").values.toList().forEach(
       (element) {
         setState(
           () {
             if (element.recipeId == widget.recipeId) {
               if (recipe.isFavorite == false) {
-                element.isFavorite = true;
+                Hive.box("recipes").putAt(
+                    index,
+                    Recipe(
+                        recipe.recipeId,
+                        recipe.imagesPath,
+                        recipe.ingredients,
+                        recipe.steps,
+                        recipe.recipeDuration,
+                        recipe.category,
+                        recipe.price,
+                        recipe.recipeName,
+                        true));
+
+                //element.isFavorite = true;
+                //recipe.isFavorite = true;
               } else if (recipe.isFavorite == true) {
-                element.isFavorite = false;
+                Hive.box("recipes").putAt(
+                    index,
+                    Recipe(
+                        recipe.recipeId,
+                        recipe.imagesPath,
+                        recipe.ingredients,
+                        recipe.steps,
+                        recipe.recipeDuration,
+                        recipe.category,
+                        recipe.price,
+                        recipe.recipeName,
+                        false));
               }
             }
           },
         );
+        index++;
       },
     );
   }

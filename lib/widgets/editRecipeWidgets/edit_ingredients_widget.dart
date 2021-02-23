@@ -1,10 +1,10 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_material_pickers/flutter_material_pickers.dart';
-import 'ingredientWidgetAdded.dart';
+import 'package:myRecipes/widgets/addRecipeWidgets/ingredientWidgetAdded.dart';
 
-class AddIngredientsWidget extends StatefulWidget {
-  AddIngredientsWidget({
+class EditIngredientsWidget extends StatefulWidget {
+  EditIngredientsWidget({
     Key key,
     @required this.phoneHeight,
     @required this.getIngredients,
@@ -16,10 +16,10 @@ class AddIngredientsWidget extends StatefulWidget {
   static const List<String> units = ["kg", "g", "lb", "spoon", "glass"];
 
   @override
-  _AddIngredientsWidgetState createState() => _AddIngredientsWidgetState();
+  _EditIngredientsWidgetState createState() => _EditIngredientsWidgetState();
 }
 
-class _AddIngredientsWidgetState extends State<AddIngredientsWidget> {
+class _EditIngredientsWidgetState extends State<EditIngredientsWidget> {
   List<Map> ingredients = [];
 
   String ingredientUnit = "kg";
@@ -166,7 +166,7 @@ class _AddIngredientsWidgetState extends State<AddIngredientsWidget> {
                                 cancelText: "Cancel",
                                 confirmText: "Choose",
                                 title: "Choose unit",
-                                items: AddIngredientsWidget.units,
+                                items: EditIngredientsWidget.units,
                                 onChanged: (value) {
                                   setState(
                                     () {
