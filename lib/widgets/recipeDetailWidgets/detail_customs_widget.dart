@@ -32,6 +32,7 @@ class _DetailCustomsWidgetState extends State<DetailCustomsWidget> {
 
   @override
   Widget build(BuildContext context) {
+    double phoneHeight = MediaQuery.of(context).size.height;
     return Container(
       child: Row(
         children: [
@@ -55,6 +56,7 @@ class _DetailCustomsWidgetState extends State<DetailCustomsWidget> {
                       flex: 1,
                       child: Icon(
                         Icons.timer,
+                        size: phoneHeight * 0.027,
                       ),
                     ),
                     Expanded(
@@ -92,7 +94,10 @@ class _DetailCustomsWidgetState extends State<DetailCustomsWidget> {
                   children: [
                     Expanded(
                       flex: 1,
-                      child: Icon(Icons.list),
+                      child: Icon(
+                        Icons.list,
+                        size: phoneHeight * 0.027,
+                      ),
                     ),
                     Expanded(
                       flex: 4,
@@ -129,7 +134,10 @@ class _DetailCustomsWidgetState extends State<DetailCustomsWidget> {
                   children: [
                     Expanded(
                       flex: 1,
-                      child: Icon(Icons.attach_money),
+                      child: Icon(
+                        Icons.attach_money,
+                        size: phoneHeight * 0.027,
+                      ),
                     ),
                     Expanded(
                       flex: 4,

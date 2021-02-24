@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:myRecipes/ui/add_new_recipe_page.dart';
 import 'package:myRecipes/ui/category_page.dart';
 import 'package:myRecipes/ui/edit_recipe_page.dart';
@@ -7,12 +8,16 @@ import './ui/recipe_detail_page.dart';
 import 'package:hive/hive.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'models/recipe.dart';
+import 'package:flutter/services.dart';
+import 'app_localization.dart';
 
 void main() async {
   await Hive.initFlutter("db");
   Hive.registerAdapter<Recipe>(RecipeAdapter());
   await Hive.openBox("recipes");
-  runApp(MyApp());
+  runApp(
+    MyApp(),
+  );
 }
 
 class MyApp extends StatelessWidget {
@@ -22,7 +27,8 @@ class MyApp extends StatelessWidget {
     List args = settings.name.split("/");
     switch (args[0]) {
       case "categoryPage":
-        if (args[1] == "Home") {
+        // ignore: unrelated_type_equality_checks
+        if (args[2] == "home") {
           return MaterialPageRoute(
             builder: (context) => MyHomePage(),
           );
@@ -44,6 +50,11 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // Sadece dikey kullanım
+    SystemChrome.setPreferredOrientations([
+      DeviceOrientation.portraitUp,
+      DeviceOrientation.portraitDown,
+    ]);
     return MaterialApp(
       routes: {
         "/": (context) => MyHomePage(),
@@ -65,6 +76,15 @@ class MyApp extends StatelessWidget {
         ),
         buttonColor: Color.fromARGB(255, 235, 172, 215),
       ),
+      localizationsDelegates: [
+        const DemoLocalizationsDelegate(),
+        GlobalMaterialLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+      ],
+      supportedLocales: [
+        const Locale('en', ''),
+        const Locale('tr', ''),
+      ],
       title: 'My Recipes',
       debugShowCheckedModeBanner: false,
     );

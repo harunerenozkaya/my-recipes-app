@@ -1,25 +1,27 @@
 import 'package:flutter/material.dart';
 
-class MenuDrawer extends StatelessWidget {
-  static const Map menuItemNamesId = {
-    "Home": "home",
-    "Practical": "practical",
-    "Soup": "soup",
-    "Meat Meal": "meat_meal",
-    "Vegetable": "vegetable_meal",
-    "Legumes": "legumes",
-    "Salad": "salad",
-    "Pastry": "pastry",
-    "Desert": "desert",
-    "Snack": "snack",
-    "Appetizer": "appetizer",
-    "Drink": "drink"
-  };
+import '../app_localization.dart';
 
+class MenuDrawer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final double phoneWidth = MediaQuery.of(context).size.width;
     final double phoneHeight = MediaQuery.of(context).size.height;
+
+    Map menuItemNamesId = {
+      DemoLocalizations.of(context).translate("home"): "home",
+      DemoLocalizations.of(context).translate("practical"): "practical",
+      DemoLocalizations.of(context).translate("soup"): "soup",
+      DemoLocalizations.of(context).translate("meatmeal"): "meat_meal",
+      DemoLocalizations.of(context).translate("vegetable"): "vegetable_meal",
+      DemoLocalizations.of(context).translate("legumes"): "legumes",
+      DemoLocalizations.of(context).translate("salad"): "salad",
+      DemoLocalizations.of(context).translate("pastry"): "pastry",
+      DemoLocalizations.of(context).translate("desert"): "desert",
+      DemoLocalizations.of(context).translate("snack"): "snack",
+      DemoLocalizations.of(context).translate("appetizer"): "appetizer",
+      DemoLocalizations.of(context).translate("drink"): "drink"
+    };
 
     return Container(
       width: phoneWidth * 0.4,
@@ -33,7 +35,7 @@ class MenuDrawer extends StatelessWidget {
                 child: Container(
                   alignment: Alignment.bottomCenter,
                   child: Text(
-                    "Categories",
+                    DemoLocalizations.of(context).translate("categories_title"),
                     style: TextStyle(fontSize: 18),
                   ),
                 ),

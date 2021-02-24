@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:myRecipes/widgets/recipeDetailWidgets/photoWidgetDetailed.dart';
 
+import '../../app_localization.dart';
+
 class DetailPhotoWidget extends StatefulWidget {
   List<String> imagesPath = [];
   final double phoneHeight;
@@ -22,7 +24,7 @@ class _DetailPhotoWidgetState extends State<DetailPhotoWidget> {
             child: Container(
               alignment: Alignment.bottomLeft,
               child: Text(
-                "Photos",
+                DemoLocalizations.of(context).translate("photos_title"),
                 style: TextStyle(fontSize: widget.phoneHeight * 0.027),
               ),
             ),

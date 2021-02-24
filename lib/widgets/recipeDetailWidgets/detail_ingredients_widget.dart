@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../../app_localization.dart';
 import 'ingredientWidgetDetailed.dart';
 
 class DetailIngredientsWidget extends StatefulWidget {
@@ -29,7 +30,7 @@ class _DetailIngredientsWidgetState extends State<DetailIngredientsWidget> {
             child: Container(
               alignment: Alignment.centerLeft,
               child: Text(
-                "Ingredients",
+                DemoLocalizations.of(context).translate("ingredients_title"),
                 style: TextStyle(fontSize: widget.phoneHeight * 0.03),
               ),
             ),

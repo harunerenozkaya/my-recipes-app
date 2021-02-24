@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:myRecipes/widgets/recipeDetailWidgets/stepWidgetDetailed.dart';
 
+import '../../app_localization.dart';
+
 class DetailStepsWidget extends StatefulWidget {
   final List<String> steps;
   final double phoneHeight;
@@ -29,7 +31,7 @@ class _DetailStepsWidgetState extends State<DetailStepsWidget> {
             child: Container(
               alignment: Alignment.centerLeft,
               child: Text(
-                "Steps",
+                DemoLocalizations.of(context).translate("steps_title"),
                 style: TextStyle(fontSize: widget.phoneHeight * 0.03),
               ),
             ),

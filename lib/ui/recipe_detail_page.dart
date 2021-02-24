@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
 import 'package:myRecipes/models/recipe.dart';
+import '../app_localization.dart';
 import '../widgets/recipeDetailWidgets/detail_photo_widget.dart';
 import '../widgets/recipeDetailWidgets/detail_ingredients_widget.dart';
 import '../widgets/recipeDetailWidgets/detail_step_widget.dart';
@@ -65,7 +66,7 @@ class _RecipeDetailState extends State<RecipeDetail> {
     return Scaffold(
       backgroundColor: Color.fromARGB(255, 252, 242, 249),
       bottomNavigationBar: Container(
-        height: phoneHeight * 0.065,
+        height: phoneHeight * 0.056,
         margin: EdgeInsets.fromLTRB(
             phoneWidth * 0.1, 0, phoneWidth * 0.1, phoneHeight * 0.01),
         child: Container(
@@ -75,48 +76,57 @@ class _RecipeDetailState extends State<RecipeDetail> {
           child: Row(
             children: [
               Expanded(
-                child: RaisedButton(
-                  onPressed: () => showDeleteAlert(context),
-                  shape: CircleBorder(),
-                  color: Colors.white,
-                  child: Icon(
-                    Icons.delete,
-                    color: Colors.purple[300],
-                    size: 25,
+                child: ButtonTheme(
+                  height: phoneHeight * 0.045,
+                  child: RaisedButton(
+                    onPressed: () => showDeleteAlert(context),
+                    shape: CircleBorder(),
+                    color: Colors.white,
+                    child: Icon(
+                      Icons.delete,
+                      color: Colors.purple[300],
+                      size: phoneHeight * 0.03,
+                    ),
                   ),
                 ),
               ),
               Expanded(
-                child: RaisedButton(
-                  onPressed: () {
-                    Navigator.popAndPushNamed(
-                        context, "editPage/${recipe.recipeId}");
-                  },
-                  shape: CircleBorder(),
-                  color: Colors.white,
-                  child: Icon(
-                    Icons.edit,
-                    color: Colors.purple[300],
-                    size: 25,
+                child: ButtonTheme(
+                  height: phoneHeight * 0.045,
+                  child: RaisedButton(
+                    onPressed: () {
+                      Navigator.popAndPushNamed(
+                          context, "editPage/${recipe.recipeId}");
+                    },
+                    shape: CircleBorder(),
+                    color: Colors.white,
+                    child: Icon(
+                      Icons.edit,
+                      color: Colors.purple[300],
+                      size: phoneHeight * 0.03,
+                    ),
                   ),
                 ),
               ),
               Expanded(
-                child: RaisedButton(
-                  onPressed: () => changeIsFavoriteStatus(),
-                  shape: CircleBorder(),
-                  color: Colors.white,
-                  child: recipe.isFavorite == false
-                      ? Icon(
-                          Icons.star_border_outlined,
-                          color: Colors.purple[300],
-                          size: 25,
-                        )
-                      : Icon(
-                          Icons.star,
-                          color: Colors.purple[300],
-                          size: 25,
-                        ),
+                child: ButtonTheme(
+                  height: phoneHeight * 0.045,
+                  child: RaisedButton(
+                    onPressed: () => changeIsFavoriteStatus(),
+                    shape: CircleBorder(),
+                    color: Colors.white,
+                    child: recipe.isFavorite == false
+                        ? Icon(
+                            Icons.star_border_outlined,
+                            color: Colors.purple[300],
+                            size: phoneHeight * 0.03,
+                          )
+                        : Icon(
+                            Icons.star,
+                            color: Colors.purple[300],
+                            size: phoneHeight * 0.03,
+                          ),
+                  ),
                 ),
               )
             ],
@@ -148,47 +158,43 @@ class _RecipeDetailState extends State<RecipeDetail> {
       ),
       body: Container(
         padding: EdgeInsets.all(10),
-        child: SingleChildScrollView(
-          primary: true,
-          child: ConstrainedBox(
-            constraints: BoxConstraints(
-                maxHeight: MediaQuery.of(context).size.height * 0.80),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Expanded(
-                  flex: 5,
-                  child: DetailPhotoWidget(recipe.imagesPath, phoneHeight),
-                ),
-                Expanded(
-                  flex: 1,
-                  child: SizedBox(),
-                ),
-                Expanded(
-                  flex: 6,
-                  child:
-                      DetailIngredientsWidget(recipe.ingredients, phoneHeight),
-                ),
-                Expanded(
-                  flex: 1,
-                  child: SizedBox(),
-                ),
-                Expanded(
-                  flex: 6,
-                  child: DetailStepsWidget(recipe.steps, phoneHeight),
-                ),
-                Expanded(
-                  flex: 1,
-                  child: SizedBox(),
-                ),
-                Expanded(
-                  flex: 1,
-                  child: DetailCustomsWidget(
-                      recipe.recipeDuration, recipe.category, recipe.price),
-                ),
-              ],
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Expanded(
+              flex: 100,
+              child: DetailPhotoWidget(recipe.imagesPath, phoneHeight),
             ),
-          ),
+            Expanded(
+              flex: 20,
+              child: SizedBox(),
+            ),
+            Expanded(
+              flex: 120,
+              child: DetailIngredientsWidget(recipe.ingredients, phoneHeight),
+            ),
+            Expanded(
+              flex: 20,
+              child: SizedBox(),
+            ),
+            Expanded(
+              flex: 120,
+              child: DetailStepsWidget(recipe.steps, phoneHeight),
+            ),
+            Expanded(
+              flex: 20,
+              child: SizedBox(),
+            ),
+            Expanded(
+              flex: 20,
+              child: DetailCustomsWidget(
+                  recipe.recipeDuration, recipe.category, recipe.price),
+            ),
+            Expanded(
+              flex: 10,
+              child: SizedBox(),
+            ),
+          ],
         ),
       ),
     );
@@ -198,18 +204,19 @@ class _RecipeDetailState extends State<RecipeDetail> {
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
-        title: Text("This recipe will delete !\nAre you sure ?"),
+        title: Text(
+            DemoLocalizations.of(context).translate("alert_recipe_delete")),
         actions: [
           RaisedButton(
             onPressed: () {
               Navigator.pop(context);
             },
-            child: Text("Abort"),
+            child: Text(DemoLocalizations.of(context).translate("abort")),
           ),
           RaisedButton(
             onPressed: () => deleteRecipe(context),
             child: Text(
-              "Delete",
+              DemoLocalizations.of(context).translate("delete"),
             ),
             color: Color.fromARGB(255, 235, 172, 215),
           )
@@ -224,9 +231,10 @@ class _RecipeDetailState extends State<RecipeDetail> {
       (element) {
         if (element.recipeId == widget.recipeId) {
           Hive.box("recipes").deleteAt(index);
+          print("deleteded $index");
           Navigator.popAndPushNamed(context, "/");
-          index++;
         }
+        index++;
       },
     );
   }

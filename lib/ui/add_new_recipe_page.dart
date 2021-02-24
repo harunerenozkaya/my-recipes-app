@@ -8,6 +8,8 @@ import 'package:myRecipes/widgets/addRecipeWidgets/add_photo_widget.dart';
 import 'package:myRecipes/widgets/addRecipeWidgets/add_step_widget.dart';
 import 'package:hive/hive.dart';
 
+import '../app_localization.dart';
+
 // ignore: must_be_immutable
 class AddNewRecipePage extends StatelessWidget {
   List<String> imagesPath = [];
@@ -60,7 +62,7 @@ class AddNewRecipePage extends StatelessWidget {
                     child: Container(
                       child: Center(
                         child: Text(
-                          "Abort",
+                          DemoLocalizations.of(context).translate("abort"),
                         ),
                       ),
                     ),
@@ -78,7 +80,9 @@ class AddNewRecipePage extends StatelessWidget {
                     onPressed: () => saveRecipe(context),
                     child: Container(
                       child: Center(
-                        child: Text("Okay"),
+                        child: Text(
+                          DemoLocalizations.of(context).translate("okay"),
+                        ),
                       ),
                     ),
                   ),
@@ -93,7 +97,7 @@ class AddNewRecipePage extends StatelessWidget {
         preferredSize: Size.fromHeight(phoneHeight * 0.06),
         child: AppBar(
           title: Text(
-            "Add New Recipe",
+            DemoLocalizations.of(context).translate("add_new_recipe_title"),
             style: TextStyle(
                 fontSize: phoneHeight * 0.04, fontWeight: FontWeight.bold),
           ),
@@ -162,15 +166,20 @@ class AddNewRecipePage extends StatelessWidget {
     String recipeName;
 
     if (ingredients.isEmpty) {
-      showFinishAlert(context, "Please add any ingredient.");
+      showFinishAlert(
+          context, DemoLocalizations.of(context).translate("please_add_ing"));
     } else if (steps.isEmpty) {
-      showFinishAlert(context, "Please add any step.");
+      showFinishAlert(
+          context, DemoLocalizations.of(context).translate("please_add_step"));
     } else if (recipeDuration == null) {
-      showFinishAlert(context, "Please define duration");
+      showFinishAlert(context,
+          DemoLocalizations.of(context).translate("please_add_duration"));
     } else if (category == null) {
-      showFinishAlert(context, "Please define a category for recipe");
+      showFinishAlert(context,
+          DemoLocalizations.of(context).translate("please_add_category"));
     } else if (price == null) {
-      showFinishAlert(context, "Please define a amount");
+      showFinishAlert(
+          context, DemoLocalizations.of(context).translate("please_add_price"));
     } else {
       var recipeBox = Hive.box("recipes");
       String recipeId = getRandomString();
@@ -211,10 +220,11 @@ class AddNewRecipePage extends StatelessWidget {
       barrierDismissible: false,
       context: context,
       builder: (context) => AlertDialog(
-        title: Text("Your recipe has added succesfully"),
+        title: Text(DemoLocalizations.of(context)
+            .translate("recipe_added_succesfully")),
         actions: [
           RaisedButton(
-            child: Text("Okay"),
+            child: Text(DemoLocalizations.of(context).translate("okay")),
             //Ana menüye yönlendirir.
             onPressed: () => Navigator.popAndPushNamed(context, "/"),
           ),
@@ -229,11 +239,12 @@ class AddNewRecipePage extends StatelessWidget {
       barrierDismissible: false,
       context: context,
       builder: (context) => AlertDialog(
-        title: Text("What is your recipe name?"),
+        title:
+            Text(DemoLocalizations.of(context).translate("what_recipe_name")),
         content: TextField(
           decoration: InputDecoration(
-            labelText: "Recipe Name",
-            hintText: "Recipe Name",
+            labelText: DemoLocalizations.of(context).translate("recipe_name"),
+            hintText: DemoLocalizations.of(context).translate("recipe_name"),
             border: OutlineInputBorder(
               borderSide: BorderSide(width: 3),
             ),
@@ -258,7 +269,7 @@ class AddNewRecipePage extends StatelessWidget {
                 showFinishSuccesfulAlert(context);
               }
             },
-            child: Text("Okay"),
+            child: Text(DemoLocalizations.of(context).translate("okay")),
           ),
         ],
       ),

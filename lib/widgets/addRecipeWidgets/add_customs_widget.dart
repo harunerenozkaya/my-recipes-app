@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_duration_picker/flutter_duration_picker.dart';
 import 'package:flutter_material_pickers/flutter_material_pickers.dart';
 
+import '../../app_localization.dart';
+
 class AddCustomsWidget extends StatefulWidget {
   AddCustomsWidget({
     Key key,
@@ -26,6 +28,7 @@ class _AddCustomsWidgetState extends State<AddCustomsWidget> {
 
   @override
   Widget build(BuildContext context) {
+    double phoneHeight = MediaQuery.of(context).size.height;
     return Container(
       child: Row(
         children: [
@@ -51,13 +54,14 @@ class _AddCustomsWidgetState extends State<AddCustomsWidget> {
                       flex: 1,
                       child: Icon(
                         Icons.timer,
+                        size: phoneHeight * 0.027,
                       ),
                     ),
                     Expanded(
                       flex: 4,
                       child: AutoSizeText(
                         recipeDuration == null
-                            ? "  Duration"
+                            ? "     ${DemoLocalizations.of(context).translate("duration")}"
                             : recipeDuration.inHours < 1
                                 ? "     ${recipeDuration.inMinutes}m"
                                 : recipeDuration.inHours > 0 &&
@@ -97,12 +101,17 @@ class _AddCustomsWidgetState extends State<AddCustomsWidget> {
                   children: [
                     Expanded(
                       flex: 1,
-                      child: Icon(Icons.list),
+                      child: Icon(
+                        Icons.list,
+                        size: phoneHeight * 0.027,
+                      ),
                     ),
                     Expanded(
                       flex: 4,
                       child: AutoSizeText(
-                        category == null ? "  Category" : " $category",
+                        category == null
+                            ? "   ${DemoLocalizations.of(context).translate("category")}"
+                            : " $category",
                         style: TextStyle(fontWeight: FontWeight.w600),
                         maxLines: 1,
                       ),
@@ -136,12 +145,17 @@ class _AddCustomsWidgetState extends State<AddCustomsWidget> {
                   children: [
                     Expanded(
                       flex: 1,
-                      child: Icon(Icons.attach_money),
+                      child: Icon(
+                        Icons.attach_money,
+                        size: phoneHeight * 0.027,
+                      ),
                     ),
                     Expanded(
                       flex: 4,
                       child: AutoSizeText(
-                        price == null ? "  Amount" : "   $price",
+                        price == null
+                            ? "   ${DemoLocalizations.of(context).translate("price")}"
+                            : "   $price",
                         style: TextStyle(fontWeight: FontWeight.w600),
                         maxLines: 1,
                       ),
@@ -161,11 +175,11 @@ class _AddCustomsWidgetState extends State<AddCustomsWidget> {
       barrierDismissible: false,
       context: context,
       builder: (context) => AlertDialog(
-        title: Text("How much does it cost?"),
+        title: Text(DemoLocalizations.of(context).translate("how_much_cost")),
         content: TextField(
           decoration: InputDecoration(
-            labelText: "Price",
-            hintText: "Price",
+            labelText: DemoLocalizations.of(context).translate("price"),
+            hintText: DemoLocalizations.of(context).translate("price"),
             border: OutlineInputBorder(
               borderSide: BorderSide(width: 3),
             ),
@@ -187,7 +201,7 @@ class _AddCustomsWidgetState extends State<AddCustomsWidget> {
                 },
               );
             },
-            child: Text("Cancel"),
+            child: Text(DemoLocalizations.of(context).translate("cancel")),
           ),
           RaisedButton(
             onPressed: () {
@@ -197,7 +211,7 @@ class _AddCustomsWidgetState extends State<AddCustomsWidget> {
                 },
               );
             },
-            child: Text("Okay"),
+            child: Text(DemoLocalizations.of(context).translate("okay")),
             color: Color.fromARGB(255, 235, 172, 215),
           ),
         ],
@@ -208,19 +222,19 @@ class _AddCustomsWidgetState extends State<AddCustomsWidget> {
   void showCategoryAlert(BuildContext context) {
     return showMaterialRadioPicker(
       items: [
-        "Practical",
-        "Soup",
-        "Meat Meal",
-        "Vegetable",
-        "Legumes",
-        "Salad",
-        "Pastry",
-        "Desert",
-        "Snack",
-        "Appetizer",
-        "Drink"
+        DemoLocalizations.of(context).translate("practical"),
+        DemoLocalizations.of(context).translate("soup"),
+        DemoLocalizations.of(context).translate("meatmeal"),
+        DemoLocalizations.of(context).translate("vegetable"),
+        DemoLocalizations.of(context).translate("legumes"),
+        DemoLocalizations.of(context).translate("salad"),
+        DemoLocalizations.of(context).translate("pastry"),
+        DemoLocalizations.of(context).translate("desert"),
+        DemoLocalizations.of(context).translate("snack"),
+        DemoLocalizations.of(context).translate("appetizer"),
+        DemoLocalizations.of(context).translate("drink"),
       ],
-      title: "What is the category?",
+      title: DemoLocalizations.of(context).translate("what_category"),
       headerColor: Color.fromARGB(255, 235, 172, 215),
       context: context,
       onChanged: (val) {
@@ -240,7 +254,8 @@ class _AddCustomsWidgetState extends State<AddCustomsWidget> {
       context: context,
       builder: (context) {
         return AlertDialog(
-          title: Text("How much does it take to ready?"),
+          title: Text(
+              DemoLocalizations.of(context).translate("how_much_take_time")),
           content: DurationPicker(
             snapToMins: 5,
             onChange: (val) {
@@ -255,7 +270,9 @@ class _AddCustomsWidgetState extends State<AddCustomsWidget> {
           actions: [
             RaisedButton(
               color: Color.fromARGB(255, 235, 172, 215),
-              child: Text("Okay"),
+              child: Text(
+                DemoLocalizations.of(context).translate("okay"),
+              ),
               onPressed: () {
                 Navigator.pop(context);
               },

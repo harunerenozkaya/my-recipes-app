@@ -3,6 +3,8 @@ import 'package:myRecipes/widgets/menu_drawer.dart';
 import 'package:myRecipes/widgets/recipe_box.dart';
 import 'package:hive/hive.dart';
 
+import '../app_localization.dart';
+
 class MyHomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -14,7 +16,7 @@ class MyHomePage extends StatelessWidget {
       backgroundColor: Color.fromARGB(255, 252, 242, 249),
       appBar: AppBar(
         title: Text(
-          "My Recipes",
+          DemoLocalizations.of(context).translate("home_title"),
           style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
         ),
         centerTitle: true,
@@ -41,7 +43,8 @@ class MyHomePage extends StatelessWidget {
                 padding: EdgeInsets.only(bottom: phoneHeight * 0.004),
                 alignment: Alignment.bottomLeft,
                 child: Text(
-                  "My Favorite Recipes",
+                  DemoLocalizations.of(context)
+                      .translate("favorite_recipes_title"),
                   style: TextStyle(fontSize: 20),
                 ),
               ),
@@ -73,7 +76,10 @@ class MyHomePage extends StatelessWidget {
                       )
                     : Container(
                         child: Center(
-                          child: Text("There is not any favorite recipe."),
+                          child: Text(
+                            DemoLocalizations.of(context)
+                                .translate("there_is_not_fv_rcp"),
+                          ),
                         ),
                       ),
               ),
@@ -84,7 +90,7 @@ class MyHomePage extends StatelessWidget {
                 alignment: Alignment.bottomLeft,
                 padding: EdgeInsets.only(bottom: phoneHeight * 0.004),
                 child: Text(
-                  "All Recipes",
+                  DemoLocalizations.of(context).translate("all_recipes_title"),
                   style: TextStyle(fontSize: 20),
                 ),
               ),
@@ -139,7 +145,8 @@ class MyHomePage extends StatelessWidget {
                     : Container(
                         child: Center(
                           child: Text(
-                            "There is not any recipe.\nYou can add new recipes with the button in the \nbottom right corner.",
+                            DemoLocalizations.of(context)
+                                .translate("there_is_not_rcp"),
                             textAlign: TextAlign.center,
                           ),
                         ),

@@ -3,6 +3,8 @@ import 'package:myRecipes/widgets/menu_drawer.dart';
 import 'package:myRecipes/widgets/recipe_box.dart';
 import 'package:hive/hive.dart';
 
+import '../app_localization.dart';
+
 class CategoryPage extends StatefulWidget {
   final String categoryName;
   final String categoryId;
@@ -24,7 +26,7 @@ class _CategoryPageState extends State<CategoryPage> {
       backgroundColor: Color.fromARGB(255, 252, 242, 249),
       appBar: AppBar(
         title: Text(
-          "My Recipes",
+          DemoLocalizations.of(context).translate("home_title"),
           style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
         ),
         centerTitle: true,
@@ -34,7 +36,6 @@ class _CategoryPageState extends State<CategoryPage> {
           Navigator.of(context).pushNamedAndRemoveUntil(
               "/addNewRecipe", (Route<dynamic> route) => false);
         },
-        tooltip: 'Add New ${widget.categoryName} Recipe',
         child: Icon(
           Icons.add,
           size: 40,
@@ -52,7 +53,7 @@ class _CategoryPageState extends State<CategoryPage> {
                 padding: EdgeInsets.only(bottom: phoneHeight * 0.004),
                 alignment: Alignment.bottomLeft,
                 child: Text(
-                  "My Favorite ${widget.categoryName} Recipes",
+                  "${DemoLocalizations.of(context).translate("before_category_title_fav")} ${widget.categoryName} ${DemoLocalizations.of(context).translate("after_category_title_fav")}",
                   style: TextStyle(fontSize: 20),
                 ),
               ),
@@ -85,7 +86,7 @@ class _CategoryPageState extends State<CategoryPage> {
                     : Container(
                         child: Center(
                           child: Text(
-                              "There is not any favorite  ${widget.categoryName} recipe."),
+                              "${DemoLocalizations.of(context).translate("fav_before_category_recipe")} ${widget.categoryName} ${DemoLocalizations.of(context).translate("fav_after_category_recipe")}."),
                         ),
                       ),
               ),
@@ -96,7 +97,7 @@ class _CategoryPageState extends State<CategoryPage> {
                 alignment: Alignment.bottomLeft,
                 padding: EdgeInsets.only(bottom: phoneHeight * 0.004),
                 child: Text(
-                  "All ${widget.categoryName} Recipes",
+                  "${DemoLocalizations.of(context).translate("before_category_title")} ${widget.categoryName} ${DemoLocalizations.of(context).translate("after_category_title")}",
                   style: TextStyle(fontSize: 20),
                 ),
               ),
@@ -126,7 +127,7 @@ class _CategoryPageState extends State<CategoryPage> {
                     : Container(
                         child: Center(
                           child: Text(
-                            "There is not any  ${widget.categoryName} recipe.\nYou can add new recipes with the button in the \nbottom right corner.",
+                            "${DemoLocalizations.of(context).translate("before_category_recipe")} ${widget.categoryName} ${DemoLocalizations.of(context).translate("after_category_recipe")} ",
                             textAlign: TextAlign.center,
                           ),
                         ),
