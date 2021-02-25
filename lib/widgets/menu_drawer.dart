@@ -23,6 +23,7 @@ class MenuDrawer extends StatelessWidget {
       DemoLocalizations.of(context).translate("drink"): "drink"
     };
 
+    print(phoneWidth);
     return Container(
       width: phoneWidth * 0.4,
       child: Drawer(
@@ -36,7 +37,7 @@ class MenuDrawer extends StatelessWidget {
                   alignment: Alignment.bottomCenter,
                   child: Text(
                     DemoLocalizations.of(context).translate("categories_title"),
-                    style: TextStyle(fontSize: 18),
+                    style: TextStyle(fontSize: phoneHeight * 0.025),
                   ),
                 ),
               ),
@@ -52,7 +53,8 @@ class MenuDrawer extends StatelessWidget {
                 flex: 60,
                 child: Transform.translate(
                   // Kategorileri başlıga yakınlaştırdım
-                  offset: Offset(0, -phoneHeight * 0.02),
+                  offset: Offset(phoneWidth > 600.0 ? phoneWidth * 0.02 : 0,
+                      -phoneHeight * 0.02),
                   child: Container(
                     child: ListView.builder(
                       itemExtent: phoneHeight * 0.072,
@@ -61,7 +63,11 @@ class MenuDrawer extends StatelessWidget {
                       itemBuilder: (context, index) => ListTile(
                         title: Transform.translate(
                             // Title'yi leading'e yaklaştırdı
-                            offset: Offset(-phoneWidth * 0.03, 0),
+                            offset: Offset(
+                                phoneWidth > 600.0
+                                    ? -phoneWidth * 0.003
+                                    : -phoneWidth * 0.031,
+                                0),
                             child: Text(
                               "${menuItemNamesId.keys.toList()[index]}",
                               style: TextStyle(fontSize: phoneWidth / 26),
@@ -69,7 +75,7 @@ class MenuDrawer extends StatelessWidget {
                         leading: Icon(
                           Icons.star_outline_sharp,
                           color: Color.fromARGB(255, 235, 172, 215),
-                          size: 30,
+                          size: phoneHeight * 0.04,
                         ),
                         visualDensity: VisualDensity(horizontal: -4),
                         onTap: () {

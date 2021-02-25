@@ -90,7 +90,7 @@ class _AddIngredientsWidgetState extends State<AddIngredientsWidget> {
         ),
         Container(
           width: phoneWidth * 0.25,
-          height: phoneWidth * 0.1,
+          height: widget.phoneHeight * 0.055,
           child: RaisedButton(
             shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(7),
