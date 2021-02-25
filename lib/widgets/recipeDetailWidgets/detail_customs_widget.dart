@@ -24,17 +24,18 @@ class _DetailCustomsWidgetState extends State<DetailCustomsWidget> {
     List timePeriods = time.split(":");
 
     if (timePeriods[0] == "0") {
-      return "      ${timePeriods[1]}${DemoLocalizations.of(context).translate("minute_tag")}";
+      return "${timePeriods[1]}${DemoLocalizations.of(context).translate("minute_tag")}";
     } else if (timePeriods[0] != "0" && timePeriods[1] == "00") {
-      return "      ${timePeriods[0]}${DemoLocalizations.of(context).translate("hour_tag")}";
+      return "${timePeriods[0]}${DemoLocalizations.of(context).translate("hour_tag")}";
     } else {
-      return "   ${timePeriods[0]}${DemoLocalizations.of(context).translate("hour_tag")} ${timePeriods[1]}${DemoLocalizations.of(context).translate("minute_tag")}";
+      return "${timePeriods[0]}${DemoLocalizations.of(context).translate("hour_tag")} ${timePeriods[1]}${DemoLocalizations.of(context).translate("minute_tag")}";
     }
   }
 
   @override
   Widget build(BuildContext context) {
     double phoneHeight = MediaQuery.of(context).size.height;
+    double phoneWidth = MediaQuery.of(context).size.width;
     return Container(
       child: Row(
         children: [
@@ -63,10 +64,16 @@ class _DetailCustomsWidgetState extends State<DetailCustomsWidget> {
                     ),
                     Expanded(
                       flex: 4,
-                      child: AutoSizeText(
-                        parseTime(widget.recipeDuration),
-                        style: TextStyle(fontWeight: FontWeight.w600),
-                        maxLines: 1,
+                      child: Padding(
+                        padding: EdgeInsets.only(
+                            left: phoneWidth > 600.0
+                                ? phoneWidth * 0.063
+                                : phoneWidth * 0.035),
+                        child: AutoSizeText(
+                          parseTime(widget.recipeDuration),
+                          style: TextStyle(fontWeight: FontWeight.w600),
+                          maxLines: 1,
+                        ),
                       ),
                     ),
                   ],
@@ -103,10 +110,16 @@ class _DetailCustomsWidgetState extends State<DetailCustomsWidget> {
                     ),
                     Expanded(
                       flex: 4,
-                      child: AutoSizeText(
-                        "  ${widget.category}",
-                        style: TextStyle(fontWeight: FontWeight.w600),
-                        maxLines: 1,
+                      child: Padding(
+                        padding: EdgeInsets.only(
+                            left: phoneWidth > 600.0
+                                ? phoneWidth * 0.03
+                                : phoneWidth * 0.00),
+                        child: AutoSizeText(
+                          "  ${widget.category}",
+                          style: TextStyle(fontWeight: FontWeight.w600),
+                          maxLines: 1,
+                        ),
                       ),
                     ),
                   ],
@@ -143,10 +156,16 @@ class _DetailCustomsWidgetState extends State<DetailCustomsWidget> {
                     ),
                     Expanded(
                       flex: 4,
-                      child: AutoSizeText(
-                        "       ${widget.price}",
-                        style: TextStyle(fontWeight: FontWeight.w600),
-                        maxLines: 1,
+                      child: Padding(
+                        padding: EdgeInsets.only(
+                            left: phoneWidth > 600.0
+                                ? phoneWidth * 0.068
+                                : phoneWidth * 0.05),
+                        child: AutoSizeText(
+                          "${widget.price}",
+                          style: TextStyle(fontWeight: FontWeight.w600),
+                          maxLines: 1,
+                        ),
                       ),
                     ),
                   ],

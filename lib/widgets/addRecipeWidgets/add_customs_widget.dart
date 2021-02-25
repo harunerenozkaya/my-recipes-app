@@ -29,6 +29,7 @@ class _AddCustomsWidgetState extends State<AddCustomsWidget> {
   @override
   Widget build(BuildContext context) {
     double phoneHeight = MediaQuery.of(context).size.height;
+    double phoneWidth = MediaQuery.of(context).size.width;
     return Container(
       child: Row(
         children: [
@@ -36,7 +37,7 @@ class _AddCustomsWidgetState extends State<AddCustomsWidget> {
             flex: 4,
             child: GestureDetector(
               onTap: () {
-                showDurationAlert(context);
+                showDurationAlert(context, phoneHeight);
               },
               child: Container(
                 padding: EdgeInsets.all(1),
@@ -59,17 +60,23 @@ class _AddCustomsWidgetState extends State<AddCustomsWidget> {
                     ),
                     Expanded(
                       flex: 4,
-                      child: AutoSizeText(
-                        recipeDuration == null
-                            ? "    ${DemoLocalizations.of(context).translate("duration")}"
-                            : recipeDuration.inHours < 1
-                                ? "     ${recipeDuration.inMinutes}${DemoLocalizations.of(context).translate("minute_tag")}"
-                                : recipeDuration.inHours > 0 &&
-                                        recipeDuration.inMinutes % 60 == 0
-                                    ? "       ${recipeDuration.inHours}${DemoLocalizations.of(context).translate("hour_tag")}"
-                                    : "   ${recipeDuration.inHours}${DemoLocalizations.of(context).translate("hour_tag")} ${recipeDuration.inMinutes % 60}${DemoLocalizations.of(context).translate("minute_tag")} ",
-                        style: TextStyle(fontWeight: FontWeight.w600),
-                        maxLines: 1,
+                      child: Padding(
+                        padding: EdgeInsets.only(
+                            left: phoneWidth > 600.0
+                                ? phoneWidth * 0.03
+                                : phoneWidth * 0),
+                        child: AutoSizeText(
+                          recipeDuration == null
+                              ? "    ${DemoLocalizations.of(context).translate("duration")}"
+                              : recipeDuration.inHours < 1
+                                  ? "     ${recipeDuration.inMinutes}${DemoLocalizations.of(context).translate("minute_tag")}"
+                                  : recipeDuration.inHours > 0 &&
+                                          recipeDuration.inMinutes % 60 == 0
+                                      ? "       ${recipeDuration.inHours}${DemoLocalizations.of(context).translate("hour_tag")}"
+                                      : "   ${recipeDuration.inHours}${DemoLocalizations.of(context).translate("hour_tag")} ${recipeDuration.inMinutes % 60}${DemoLocalizations.of(context).translate("minute_tag")} ",
+                          style: TextStyle(fontWeight: FontWeight.w600),
+                          maxLines: 1,
+                        ),
                       ),
                     ),
                   ],
@@ -108,12 +115,18 @@ class _AddCustomsWidgetState extends State<AddCustomsWidget> {
                     ),
                     Expanded(
                       flex: 4,
-                      child: AutoSizeText(
-                        category == null
-                            ? "   ${DemoLocalizations.of(context).translate("category")}"
-                            : " $category",
-                        style: TextStyle(fontWeight: FontWeight.w600),
-                        maxLines: 1,
+                      child: Padding(
+                        padding: EdgeInsets.only(
+                            left: phoneWidth > 600.0
+                                ? phoneWidth * 0.03
+                                : phoneWidth * 0),
+                        child: AutoSizeText(
+                          category == null
+                              ? "   ${DemoLocalizations.of(context).translate("category")}"
+                              : " $category",
+                          style: TextStyle(fontWeight: FontWeight.w600),
+                          maxLines: 1,
+                        ),
                       ),
                     ),
                   ],
@@ -152,12 +165,18 @@ class _AddCustomsWidgetState extends State<AddCustomsWidget> {
                     ),
                     Expanded(
                       flex: 4,
-                      child: AutoSizeText(
-                        price == null
-                            ? "   ${DemoLocalizations.of(context).translate("price")}"
-                            : "   $price",
-                        style: TextStyle(fontWeight: FontWeight.w600),
-                        maxLines: 1,
+                      child: Padding(
+                        padding: EdgeInsets.only(
+                            left: phoneWidth > 600.0
+                                ? phoneWidth * 0.03
+                                : phoneWidth * 0.03),
+                        child: AutoSizeText(
+                          price == null
+                              ? "${DemoLocalizations.of(context).translate("price")}"
+                              : "$price",
+                          style: TextStyle(fontWeight: FontWeight.w600),
+                          maxLines: 1,
+                        ),
                       ),
                     ),
                   ],
@@ -248,37 +267,31 @@ class _AddCustomsWidgetState extends State<AddCustomsWidget> {
     );
   }
 
-  Future showDurationAlert(BuildContext context) {
-    return showDialog(
-      useSafeArea: true,
+  Future showDurationAlert(BuildContext context, double phoneHeight) async {
+    Duration resultingDuration = await showDurationPicker(
       context: context,
-      builder: (context) {
-        return AlertDialog(
-          title: Text(
-              DemoLocalizations.of(context).translate("how_much_take_time")),
-          content: DurationPicker(
-            snapToMins: 5,
-            onChange: (val) {
-              setState(
-                () {
-                  recipeDuration = val;
-                  widget.getDuration(recipeDuration.toString());
-                },
-              );
-            },
+      initialTime: new Duration(minutes: 0),
+      header: Container(
+        alignment: Alignment.centerLeft,
+        color: Color.fromARGB(255, 235, 172, 215),
+        child: Center(
+          child: Text(
+            DemoLocalizations.of(context).translate("how_much_take_time"),
+            style: TextStyle(fontSize: phoneHeight * 0.020),
           ),
-          actions: [
-            RaisedButton(
-              color: Color.fromARGB(255, 235, 172, 215),
-              child: Text(
-                DemoLocalizations.of(context).translate("okay"),
-              ),
-              onPressed: () {
-                Navigator.pop(context);
-              },
-            )
-          ],
-        );
+        ),
+      ),
+      snapToMins: 5,
+      heightx: 1.3,
+      heightHeader: 15,
+      buttonColorOk: Color.fromARGB(255, 235, 172, 215),
+      buttonColorCancel: Color.fromARGB(255, 220, 220, 220),
+    );
+
+    setState(
+      () {
+        recipeDuration = resultingDuration;
+        widget.getDuration(recipeDuration.toString());
       },
     );
   }

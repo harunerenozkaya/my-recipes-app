@@ -171,7 +171,7 @@ class AddNewRecipePage extends StatelessWidget {
     } else if (steps.isEmpty) {
       showFinishAlert(
           context, DemoLocalizations.of(context).translate("please_add_step"));
-    } else if (recipeDuration == null) {
+    } else if ((recipeDuration == null) | (recipeDuration == "null")) {
       showFinishAlert(context,
           DemoLocalizations.of(context).translate("please_add_duration"));
     } else if (category == null) {

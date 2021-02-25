@@ -28,7 +28,7 @@ dependencies:
   flutter_material_pickers: ^1.9.2  
   auto_size_text: ^2.1.0
   image_picker: ^0.6.6+5
-  flutter_duration_picker: "^1.0.0"
+  flutter_duration_picker: ^1.0.4
   hive: ^1.4.4+1
   hive_flutter: ^0.3.1
   path_provider: ^1.6.27
