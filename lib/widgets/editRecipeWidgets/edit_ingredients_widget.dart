@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_material_pickers/flutter_material_pickers.dart';
 import 'package:myRecipes/widgets/addRecipeWidgets/ingredientWidgetAdded.dart';
 
+import '../../app_localization.dart';
+
 class EditIngredientsWidget extends StatefulWidget {
   final double phoneHeight;
   final Function getIngredients;
@@ -10,8 +12,6 @@ class EditIngredientsWidget extends StatefulWidget {
 
   EditIngredientsWidget(
       this.phoneHeight, this.getIngredients, this.ingredients);
-
-  static const List<String> units = ["kg", "g", "lb", "spoon", "glass"];
 
   @override
   _EditIngredientsWidgetState createState() => _EditIngredientsWidgetState();
@@ -38,6 +38,14 @@ class _EditIngredientsWidgetState extends State<EditIngredientsWidget> {
     double phoneWidth = MediaQuery.of(context).size.width;
     double keyboardHeight = MediaQuery.of(context).viewInsets.bottom;
 
+    List<String> units = [
+      "kg",
+      "g",
+      "lb",
+      DemoLocalizations.of(context).translate("spoon"),
+      DemoLocalizations.of(context).translate("glass"),
+    ];
+
     return Stack(
       alignment: Alignment.bottomRight,
       children: [
@@ -49,7 +57,8 @@ class _EditIngredientsWidgetState extends State<EditIngredientsWidget> {
                 child: Container(
                   alignment: Alignment.centerLeft,
                   child: Text(
-                    "Ingredients",
+                    DemoLocalizations.of(context)
+                        .translate("ingredients_title"),
                     style: TextStyle(fontSize: widget.phoneHeight * 0.03),
                   ),
                 ),
@@ -92,10 +101,10 @@ class _EditIngredientsWidgetState extends State<EditIngredientsWidget> {
                 side: BorderSide(color: Colors.purple[300], width: 3)),
             color: Color.fromARGB(255, 252, 242, 249),
             child: AutoSizeText(
-              "     Add Ingredient",
-            ),
+                "${DemoLocalizations.of(context).translate("add_ingredient")}",
+                textAlign: TextAlign.center),
             onPressed: () {
-              showIngredientAlert(context, keyboardHeight);
+              showIngredientAlert(context, keyboardHeight, units);
             },
           ),
         ),
@@ -103,7 +112,7 @@ class _EditIngredientsWidgetState extends State<EditIngredientsWidget> {
     );
   }
 
-  Future showIngredientAlert(BuildContext context, kh) {
+  Future showIngredientAlert(BuildContext context, kh, units) {
     return showDialog(
       context: (context),
       builder: (context) => StatefulBuilder(
@@ -117,15 +126,17 @@ class _EditIngredientsWidgetState extends State<EditIngredientsWidget> {
                   onPressed: () {
                     Navigator.pop(context);
                   },
-                  child: Text("Cancel"),
+                  child:
+                      Text(DemoLocalizations.of(context).translate("cancel")),
                 ),
                 RaisedButton(
                   onPressed: () => addNewIngredientFunc(),
-                  child: Text("Add"),
+                  child: Text(DemoLocalizations.of(context).translate("add")),
                   color: Color.fromARGB(255, 235, 172, 215),
                 ),
               ],
-              title: Text("Add New Ingredients"),
+              title: Text(
+                  DemoLocalizations.of(context).translate("alert_add_new_ing")),
               content: SingleChildScrollView(
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
@@ -135,8 +146,10 @@ class _EditIngredientsWidgetState extends State<EditIngredientsWidget> {
                       maxLength: 15,
                       cursorHeight: 30,
                       decoration: InputDecoration(
-                          labelText: "Ingredient Name",
-                          hintText: "Ingredient Name",
+                          labelText: DemoLocalizations.of(context)
+                              .translate("ingredient_name"),
+                          hintText: DemoLocalizations.of(context)
+                              .translate("ingredient_name"),
                           border: OutlineInputBorder(gapPadding: 10)),
                     ),
                     SizedBox(
@@ -151,8 +164,10 @@ class _EditIngredientsWidgetState extends State<EditIngredientsWidget> {
                             onChanged: (value) => ingredientAmount = value,
                             cursorHeight: 30,
                             decoration: InputDecoration(
-                                labelText: "Amount",
-                                hintText: "Amount",
+                                labelText: DemoLocalizations.of(context)
+                                    .translate("amount"),
+                                hintText: DemoLocalizations.of(context)
+                                    .translate("amount"),
                                 border: OutlineInputBorder(gapPadding: 10)),
                           ),
                         ),
@@ -167,10 +182,13 @@ class _EditIngredientsWidgetState extends State<EditIngredientsWidget> {
                               showMaterialScrollPicker(
                                 selectedItem: "lb",
                                 context: context,
-                                cancelText: "Cancel",
-                                confirmText: "Choose",
-                                title: "Choose unit",
-                                items: EditIngredientsWidget.units,
+                                cancelText: DemoLocalizations.of(context)
+                                    .translate("cancel"),
+                                confirmText: DemoLocalizations.of(context)
+                                    .translate("choose"),
+                                title: DemoLocalizations.of(context)
+                                    .translate("choose_unit"),
+                                items: units,
                                 onChanged: (value) {
                                   setState(
                                     () {
@@ -214,14 +232,15 @@ class _EditIngredientsWidgetState extends State<EditIngredientsWidget> {
         context: context,
         builder: (context) => AlertDialog(
           content: Text(
-            "Ingredient name or amount can't be blank.",
+            DemoLocalizations.of(context)
+                .translate("ingredient_name_cant_blank"),
             style: TextStyle(fontWeight: FontWeight.bold),
           ),
-          backgroundColor: Colors.red,
+          backgroundColor: Color.fromARGB(255, 235, 172, 215),
           actions: [
             RaisedButton(
               onPressed: () => Navigator.pop(context),
-              child: Text("Okay"),
+              child: Text(DemoLocalizations.of(context).translate("okay")),
               color: Colors.white,
             ),
           ],

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:myRecipes/widgets/editRecipeWidgets/stepWidgetEdited.dart';
 
+import '../../app_localization.dart';
+
 class EditStepsWidget extends StatefulWidget {
   final double phoneHeight;
   final Function getStep;
@@ -40,7 +42,7 @@ class _EditStepsWidgetState extends State<EditStepsWidget> {
                 child: Container(
                   alignment: Alignment.centerLeft,
                   child: Text(
-                    "Steps",
+                    DemoLocalizations.of(context).translate("steps_title"),
                     style: TextStyle(fontSize: widget.phoneHeight * 0.03),
                   ),
                 ),
@@ -80,7 +82,7 @@ class _EditStepsWidgetState extends State<EditStepsWidget> {
                 borderRadius: BorderRadius.circular(7),
                 side: BorderSide(color: Colors.purple[300], width: 3)),
             color: Color.fromARGB(255, 252, 242, 249),
-            child: Text("Add Step"),
+            child: Text(DemoLocalizations.of(context).translate("add_steps")),
             onPressed: () {
               showStepDialog(context);
             },
@@ -102,15 +104,16 @@ class _EditStepsWidgetState extends State<EditStepsWidget> {
                 onPressed: () {
                   Navigator.pop(context);
                 },
-                child: Text("Cancel"),
+                child: Text(DemoLocalizations.of(context).translate("cancel")),
               ),
               RaisedButton(
                 onPressed: () => addNewStepFunction(),
-                child: Text("Add"),
+                child: Text(DemoLocalizations.of(context).translate("add")),
                 color: Color.fromARGB(255, 235, 172, 215),
               ),
             ],
-            title: Text("Add New Step"),
+            title: Text(
+                DemoLocalizations.of(context).translate("alert_add_new_step")),
             content: Column(
               mainAxisSize: MainAxisSize.min,
               children: [
@@ -119,8 +122,10 @@ class _EditStepsWidgetState extends State<EditStepsWidget> {
                   maxLength: 50,
                   cursorHeight: 30,
                   decoration: InputDecoration(
-                      labelText: "Step Description",
-                      hintText: "Step Description",
+                      labelText: DemoLocalizations.of(context)
+                          .translate("step_description"),
+                      hintText: DemoLocalizations.of(context)
+                          .translate("step_description"),
                       border: OutlineInputBorder(gapPadding: 10)),
                 ),
                 SizedBox(
@@ -146,14 +151,14 @@ class _EditStepsWidgetState extends State<EditStepsWidget> {
         context: context,
         builder: (context) => AlertDialog(
           content: Text(
-            "Step can't be blank.",
+            DemoLocalizations.of(context).translate("step_name_cant_blank"),
             style: TextStyle(fontWeight: FontWeight.bold),
           ),
-          backgroundColor: Colors.red,
+          backgroundColor: Color.fromARGB(255, 235, 172, 215),
           actions: [
             RaisedButton(
               onPressed: () => Navigator.pop(context),
-              child: Text("Okay"),
+              child: Text(DemoLocalizations.of(context).translate("okay")),
               color: Colors.white,
             ),
           ],

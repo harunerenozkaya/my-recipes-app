@@ -61,13 +61,13 @@ class _AddCustomsWidgetState extends State<AddCustomsWidget> {
                       flex: 4,
                       child: AutoSizeText(
                         recipeDuration == null
-                            ? "     ${DemoLocalizations.of(context).translate("duration")}"
+                            ? "    ${DemoLocalizations.of(context).translate("duration")}"
                             : recipeDuration.inHours < 1
-                                ? "     ${recipeDuration.inMinutes}m"
+                                ? "     ${recipeDuration.inMinutes}${DemoLocalizations.of(context).translate("minute_tag")}"
                                 : recipeDuration.inHours > 0 &&
                                         recipeDuration.inMinutes % 60 == 0
-                                    ? "       ${recipeDuration.inHours}h"
-                                    : "   ${recipeDuration.inHours}h ${recipeDuration.inMinutes % 60}m ",
+                                    ? "       ${recipeDuration.inHours}${DemoLocalizations.of(context).translate("hour_tag")}"
+                                    : "   ${recipeDuration.inHours}${DemoLocalizations.of(context).translate("hour_tag")} ${recipeDuration.inMinutes % 60}${DemoLocalizations.of(context).translate("minute_tag")} ",
                         style: TextStyle(fontWeight: FontWeight.w600),
                         maxLines: 1,
                       ),

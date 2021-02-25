@@ -1,6 +1,8 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 
+import '../../app_localization.dart';
+
 class DetailCustomsWidget extends StatefulWidget {
   final String recipeDuration;
   final String category;
@@ -22,11 +24,11 @@ class _DetailCustomsWidgetState extends State<DetailCustomsWidget> {
     List timePeriods = time.split(":");
 
     if (timePeriods[0] == "0") {
-      return "      ${timePeriods[1]}m";
+      return "      ${timePeriods[1]}${DemoLocalizations.of(context).translate("minute_tag")}";
     } else if (timePeriods[0] != "0" && timePeriods[1] == "00") {
-      return "      ${timePeriods[0]}h";
+      return "      ${timePeriods[0]}${DemoLocalizations.of(context).translate("hour_tag")}";
     } else {
-      return "   ${timePeriods[0]}h ${timePeriods[1]}m";
+      return "   ${timePeriods[0]}${DemoLocalizations.of(context).translate("hour_tag")} ${timePeriods[1]}${DemoLocalizations.of(context).translate("minute_tag")}";
     }
   }
 

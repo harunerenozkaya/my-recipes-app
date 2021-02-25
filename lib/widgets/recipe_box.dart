@@ -3,6 +3,8 @@ import 'dart:io';
 
 import 'package:loading_gifs/loading_gifs.dart';
 
+import '../app_localization.dart';
+
 class RecipeBox extends StatelessWidget {
   final String recipeId;
   final String recipeName;
@@ -14,15 +16,15 @@ class RecipeBox extends StatelessWidget {
   RecipeBox(this.recipeId, this.recipeName, this.recipeImagePath, this.category,
       this.time, this.money);
 
-  String parseTime(String time) {
+  String parseTime(String time, context) {
     List timePeriods = time.split(":");
 
     if (timePeriods[0] == "0") {
-      return "${timePeriods[1]}m";
+      return "${timePeriods[1]}${DemoLocalizations.of(context).translate("minute_tag")}";
     } else if (timePeriods[0] != "0" && timePeriods[1] == "00") {
-      return "${timePeriods[0]}h";
+      return "${timePeriods[0]}${DemoLocalizations.of(context).translate("hour_tag")}";
     } else {
-      return "${timePeriods[0]}h ${timePeriods[1]}m";
+      return "${timePeriods[0]}${DemoLocalizations.of(context).translate("hour_tag")} ${timePeriods[1]}${DemoLocalizations.of(context).translate("minute_tag")}";
     }
   }
 
@@ -115,7 +117,7 @@ class RecipeBox extends StatelessWidget {
                             child: FittedBox(
                               fit: BoxFit.fitWidth,
                               child: Text(
-                                parseTime(time),
+                                parseTime(time, context),
                                 style: TextStyle(color: Colors.white),
                               ),
                             ),

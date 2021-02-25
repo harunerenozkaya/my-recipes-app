@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_duration_picker/flutter_duration_picker.dart';
 import 'package:flutter_material_pickers/flutter_material_pickers.dart';
 
+import '../../app_localization.dart';
+
 class EditCustomsWidget extends StatefulWidget {
   final Function getDuration;
   final Function getCategory;
@@ -77,13 +79,13 @@ class _EditCustomsWidgetState extends State<EditCustomsWidget> {
                       flex: 4,
                       child: AutoSizeText(
                         recipeDuration == null
-                            ? "  Duration"
+                            ? "    ${DemoLocalizations.of(context).translate("duration")}"
                             : recipeDuration.inHours < 1
-                                ? "     ${recipeDuration.inMinutes}m"
+                                ? "     ${recipeDuration.inMinutes}${DemoLocalizations.of(context).translate("minute_tag")}"
                                 : recipeDuration.inHours > 0 &&
                                         recipeDuration.inMinutes % 60 == 0
-                                    ? "       ${recipeDuration.inHours}h"
-                                    : "   ${recipeDuration.inHours}h ${recipeDuration.inMinutes % 60}m ",
+                                    ? "       ${recipeDuration.inHours}${DemoLocalizations.of(context).translate("hour_tag")}"
+                                    : "   ${recipeDuration.inHours}${DemoLocalizations.of(context).translate("hour_tag")} ${recipeDuration.inMinutes % 60}${DemoLocalizations.of(context).translate("minute_tag")} ",
                         style: TextStyle(fontWeight: FontWeight.w600),
                         maxLines: 1,
                       ),
@@ -191,11 +193,11 @@ class _EditCustomsWidgetState extends State<EditCustomsWidget> {
       barrierDismissible: false,
       context: context,
       builder: (context) => AlertDialog(
-        title: Text("How much does it cost?"),
+        title: Text(DemoLocalizations.of(context).translate("how_much_cost")),
         content: TextField(
           decoration: InputDecoration(
-            labelText: "Price",
-            hintText: "Price",
+            labelText: DemoLocalizations.of(context).translate("price"),
+            hintText: DemoLocalizations.of(context).translate("price"),
             border: OutlineInputBorder(
               borderSide: BorderSide(width: 3),
             ),
@@ -217,7 +219,7 @@ class _EditCustomsWidgetState extends State<EditCustomsWidget> {
                 },
               );
             },
-            child: Text("Cancel"),
+            child: Text(DemoLocalizations.of(context).translate("cancel")),
           ),
           RaisedButton(
             onPressed: () {
@@ -227,7 +229,7 @@ class _EditCustomsWidgetState extends State<EditCustomsWidget> {
                 },
               );
             },
-            child: Text("Okay"),
+            child: Text(DemoLocalizations.of(context).translate("okay")),
           ),
         ],
       ),
@@ -237,19 +239,19 @@ class _EditCustomsWidgetState extends State<EditCustomsWidget> {
   void showCategoryAlert(BuildContext context) {
     return showMaterialRadioPicker(
       items: [
-        "Practical",
-        "Soup",
-        "Meat Meal",
-        "Vegetable",
-        "Legumes",
-        "Salad",
-        "Pastry",
-        "Desert",
-        "Snack",
-        "Appetizer",
-        "Drink"
+        DemoLocalizations.of(context).translate("practical"),
+        DemoLocalizations.of(context).translate("soup"),
+        DemoLocalizations.of(context).translate("meatmeal"),
+        DemoLocalizations.of(context).translate("vegetable"),
+        DemoLocalizations.of(context).translate("legumes"),
+        DemoLocalizations.of(context).translate("salad"),
+        DemoLocalizations.of(context).translate("pastry"),
+        DemoLocalizations.of(context).translate("desert"),
+        DemoLocalizations.of(context).translate("snack"),
+        DemoLocalizations.of(context).translate("appetizer"),
+        DemoLocalizations.of(context).translate("drink"),
       ],
-      title: "What is the category?",
+      title: DemoLocalizations.of(context).translate("what_category"),
       headerColor: Colors.purple[300],
       context: context,
       onChanged: (val) {
@@ -269,7 +271,8 @@ class _EditCustomsWidgetState extends State<EditCustomsWidget> {
       context: context,
       builder: (context) {
         return AlertDialog(
-          title: Text("How much does it take to ready?"),
+          title: Text(
+              DemoLocalizations.of(context).translate("how_much_take_time")),
           content: DurationPicker(
             snapToMins: 5,
             onChange: (val) {
@@ -283,7 +286,7 @@ class _EditCustomsWidgetState extends State<EditCustomsWidget> {
           ),
           actions: [
             RaisedButton(
-              child: Text("Okay"),
+              child: Text(DemoLocalizations.of(context).translate("okay")),
               onPressed: () {
                 Navigator.pop(context);
               },

@@ -55,6 +55,7 @@ class MenuDrawer extends StatelessWidget {
                   offset: Offset(0, -phoneHeight * 0.02),
                   child: Container(
                     child: ListView.builder(
+                      itemExtent: phoneHeight * 0.072,
                       primary: false,
                       itemCount: menuItemNamesId.length,
                       itemBuilder: (context, index) => ListTile(

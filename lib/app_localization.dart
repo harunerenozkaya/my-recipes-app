@@ -82,6 +82,11 @@ class DemoLocalizations {
       "after_category_title": "Recipes",
       "alert_recipe_delete": "This recipe will delete !\nAre you sure ?",
       "delete": "Delete",
+      "edit_recipe_title": "Edit Recipe",
+      "do_you_edit_recipe_name": "Do you want to edit recipe name?",
+      "edit_succesfully": "Your recipe has edited succesfully",
+      "hour_tag": "h",
+      "minute_tag": "m",
     },
     'tr': {
       'home_title': 'Benim Tariflerim',
@@ -142,7 +147,7 @@ class DemoLocalizations {
       "please_add_duration": "Lütfen süreyi girin",
       "please_add_category": "Lütfen bir kategori belirleyin",
       "please_add_price": "Lütfen maliyeti girin",
-      "fav_before_category_recipe": "Hiç favori",
+      "fav_before_category_recipe": "Henüz hiç favori",
       "fav_after_category_recipe": "tarifi yok",
       "before_category_recipe": "Henüz hiç",
       "after_category_recipe":
@@ -153,6 +158,11 @@ class DemoLocalizations {
       "after_category_title": "Tariflerim",
       "alert_recipe_delete": "Bu tarif silinecek !\nEmin misin ?",
       "delete": "Sil",
+      "edit_recipe_title": "Tarifi Düzenle",
+      "do_you_edit_recipe_name": "Tarifin ismini değiştirmek istiyor musunuz?",
+      "edit_succesfully": "Tarifin başarıyla düzenlendi.",
+      "hour_tag": "s",
+      "minute_tag": "dk",
     },
   };
 
@@ -170,8 +180,6 @@ class DemoLocalizationsDelegate
 
   @override
   Future<DemoLocalizations> load(Locale locale) {
-    // Returning a SynchronousFuture here because an async "load" operation
-    // isn't needed to produce an instance of DemoLocalizations.
     return SynchronousFuture<DemoLocalizations>(DemoLocalizations(locale));
   }
 

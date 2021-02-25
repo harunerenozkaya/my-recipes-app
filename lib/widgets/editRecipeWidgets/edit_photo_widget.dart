@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:myRecipes/widgets/editRecipeWidgets/photoWidgetEdited.dart';
 
+import '../../app_localization.dart';
+
 class EditPhotoWidget extends StatefulWidget {
   final double phoneHeight;
   final Function getPhotos;
@@ -71,7 +73,7 @@ class _EditPhotoWidgetState extends State<EditPhotoWidget> {
                 child: Container(
                   alignment: Alignment.bottomLeft,
                   child: Text(
-                    "Photos",
+                    DemoLocalizations.of(context).translate("photos_title"),
                     style: TextStyle(fontSize: widget.phoneHeight * 0.027),
                   ),
                 ),
@@ -101,7 +103,7 @@ class _EditPhotoWidgetState extends State<EditPhotoWidget> {
                 borderRadius: BorderRadius.circular(7),
                 side: BorderSide(color: Colors.purple[300], width: 3)),
             color: Color.fromARGB(255, 252, 242, 249),
-            child: Text("Add Photo"),
+            child: Text(DemoLocalizations.of(context).translate("add_photo")),
             onPressed: () => _showPicker(context),
           ),
         ),
@@ -119,7 +121,8 @@ class _EditPhotoWidgetState extends State<EditPhotoWidget> {
               children: <Widget>[
                 ListTile(
                   leading: Icon(Icons.photo_library),
-                  title: Text('Photo Library'),
+                  title:
+                      Text(DemoLocalizations.of(context).translate("gallery")),
                   onTap: () {
                     _imgFromGallery();
                     Navigator.of(context).pop();
@@ -127,7 +130,8 @@ class _EditPhotoWidgetState extends State<EditPhotoWidget> {
                 ),
                 ListTile(
                   leading: Icon(Icons.photo_camera),
-                  title: Text('Camera'),
+                  title:
+                      Text(DemoLocalizations.of(context).translate("camera")),
                   onTap: () {
                     _imgFromCamera();
                     Navigator.of(context).pop();
