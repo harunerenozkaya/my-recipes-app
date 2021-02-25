@@ -73,12 +73,10 @@ class _CategoryPageState extends State<CategoryPage> {
                     vertical: phoneHeight * 0.005,
                     horizontal: phoneWidth * 0.001),
                 child: findFavoriteCategoryRecipeCount() != 0
-                    ? ListView.separated(
+                    ? ListView.builder(
+                        itemExtent: phoneWidth * 0.46,
                         scrollDirection: Axis.horizontal,
                         itemCount: findFavoriteCategoryRecipeCount(),
-                        separatorBuilder: (context, index) => SizedBox(
-                          width: phoneWidth * 0.02,
-                        ),
                         itemBuilder: (context, index) {
                           return getFavoriteCategoryRecipeList()[index];
                         },

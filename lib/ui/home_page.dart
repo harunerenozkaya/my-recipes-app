@@ -64,12 +64,10 @@ class MyHomePage extends StatelessWidget {
                     vertical: phoneHeight * 0.005,
                     horizontal: phoneWidth * 0.001),
                 child: findFavoriteRecipeCount() != 0
-                    ? ListView.separated(
+                    ? ListView.builder(
+                        itemExtent: phoneWidth * 0.46,
                         scrollDirection: Axis.horizontal,
                         itemCount: findFavoriteRecipeCount(),
-                        separatorBuilder: (context, index) => SizedBox(
-                          width: phoneWidth * 0.02,
-                        ),
                         itemBuilder: (context, index) {
                           return getAllFavoriteRecipesList()[index];
                         },
