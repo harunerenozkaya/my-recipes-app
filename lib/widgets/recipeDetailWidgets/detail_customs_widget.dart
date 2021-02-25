@@ -41,43 +41,40 @@ class _DetailCustomsWidgetState extends State<DetailCustomsWidget> {
         children: [
           Expanded(
             flex: 4,
-            child: GestureDetector(
-              onTap: () {},
-              child: Container(
-                padding: EdgeInsets.all(1),
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.all(Radius.elliptical(8, 8)),
-                  color: Color.fromARGB(255, 252, 242, 249),
-                  border: Border.all(
-                    width: 3,
-                    color: Colors.purple[300],
+            child: Container(
+              padding: EdgeInsets.all(1),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.all(Radius.elliptical(8, 8)),
+                color: Color.fromARGB(255, 252, 242, 249),
+                border: Border.all(
+                  width: 3,
+                  color: Colors.purple[300],
+                ),
+              ),
+              child: Row(
+                children: [
+                  Expanded(
+                    flex: 1,
+                    child: Icon(
+                      Icons.timer,
+                      size: phoneHeight * 0.027,
+                    ),
                   ),
-                ),
-                child: Row(
-                  children: [
-                    Expanded(
-                      flex: 1,
-                      child: Icon(
-                        Icons.timer,
-                        size: phoneHeight * 0.027,
+                  Expanded(
+                    flex: 4,
+                    child: Padding(
+                      padding: EdgeInsets.only(
+                          left: phoneWidth > 600.0
+                              ? phoneWidth * 0.063
+                              : phoneWidth * 0.035),
+                      child: AutoSizeText(
+                        parseTime(widget.recipeDuration),
+                        style: TextStyle(fontWeight: FontWeight.w600),
+                        maxLines: 1,
                       ),
                     ),
-                    Expanded(
-                      flex: 4,
-                      child: Padding(
-                        padding: EdgeInsets.only(
-                            left: phoneWidth > 600.0
-                                ? phoneWidth * 0.063
-                                : phoneWidth * 0.035),
-                        child: AutoSizeText(
-                          parseTime(widget.recipeDuration),
-                          style: TextStyle(fontWeight: FontWeight.w600),
-                          maxLines: 1,
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
+                  ),
+                ],
               ),
             ),
           ),
@@ -87,43 +84,40 @@ class _DetailCustomsWidgetState extends State<DetailCustomsWidget> {
           ),
           Expanded(
             flex: 4,
-            child: GestureDetector(
-              onTap: () {},
-              child: Container(
-                padding: EdgeInsets.all(1),
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.all(Radius.elliptical(8, 8)),
-                  color: Color.fromARGB(255, 252, 242, 249),
-                  border: Border.all(
-                    width: 3,
-                    color: Colors.purple[300],
+            child: Container(
+              padding: EdgeInsets.all(1),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.all(Radius.elliptical(8, 8)),
+                color: Color.fromARGB(255, 252, 242, 249),
+                border: Border.all(
+                  width: 3,
+                  color: Colors.purple[300],
+                ),
+              ),
+              child: Row(
+                children: [
+                  Expanded(
+                    flex: 1,
+                    child: Icon(
+                      Icons.list,
+                      size: phoneHeight * 0.027,
+                    ),
                   ),
-                ),
-                child: Row(
-                  children: [
-                    Expanded(
-                      flex: 1,
-                      child: Icon(
-                        Icons.list,
-                        size: phoneHeight * 0.027,
+                  Expanded(
+                    flex: 4,
+                    child: Padding(
+                      padding: EdgeInsets.only(
+                          left: phoneWidth > 600.0
+                              ? phoneWidth * 0.03
+                              : phoneWidth * 0.00),
+                      child: AutoSizeText(
+                        "  ${widget.category}",
+                        style: TextStyle(fontWeight: FontWeight.w600),
+                        maxLines: 1,
                       ),
                     ),
-                    Expanded(
-                      flex: 4,
-                      child: Padding(
-                        padding: EdgeInsets.only(
-                            left: phoneWidth > 600.0
-                                ? phoneWidth * 0.03
-                                : phoneWidth * 0.00),
-                        child: AutoSizeText(
-                          "  ${widget.category}",
-                          style: TextStyle(fontWeight: FontWeight.w600),
-                          maxLines: 1,
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
+                  ),
+                ],
               ),
             ),
           ),
@@ -133,43 +127,40 @@ class _DetailCustomsWidgetState extends State<DetailCustomsWidget> {
           ),
           Expanded(
             flex: 4,
-            child: GestureDetector(
-              onTap: () {},
-              child: Container(
-                padding: EdgeInsets.all(1),
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.all(Radius.elliptical(8, 8)),
-                  color: Color.fromARGB(255, 252, 242, 249),
-                  border: Border.all(
-                    width: 3,
-                    color: Colors.purple[300],
+            child: Container(
+              padding: EdgeInsets.all(1),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.all(Radius.elliptical(8, 8)),
+                color: Color.fromARGB(255, 252, 242, 249),
+                border: Border.all(
+                  width: 3,
+                  color: Colors.purple[300],
+                ),
+              ),
+              child: Row(
+                children: [
+                  Expanded(
+                    flex: 1,
+                    child: Icon(
+                      Icons.attach_money,
+                      size: phoneHeight * 0.027,
+                    ),
                   ),
-                ),
-                child: Row(
-                  children: [
-                    Expanded(
-                      flex: 1,
-                      child: Icon(
-                        Icons.attach_money,
-                        size: phoneHeight * 0.027,
+                  Expanded(
+                    flex: 4,
+                    child: Padding(
+                      padding: EdgeInsets.only(
+                          left: phoneWidth > 600.0
+                              ? phoneWidth * 0.068
+                              : phoneWidth * 0.05),
+                      child: AutoSizeText(
+                        "${widget.price}",
+                        style: TextStyle(fontWeight: FontWeight.w600),
+                        maxLines: 1,
                       ),
                     ),
-                    Expanded(
-                      flex: 4,
-                      child: Padding(
-                        padding: EdgeInsets.only(
-                            left: phoneWidth > 600.0
-                                ? phoneWidth * 0.068
-                                : phoneWidth * 0.05),
-                        child: AutoSizeText(
-                          "${widget.price}",
-                          style: TextStyle(fontWeight: FontWeight.w600),
-                          maxLines: 1,
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
+                  ),
+                ],
               ),
             ),
           ),

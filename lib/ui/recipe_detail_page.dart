@@ -45,6 +45,10 @@ class _RecipeDetailState extends State<RecipeDetail> {
     return recipeData;
   }
 
+  Future<bool> _onWillPop() {
+    Navigator.popAndPushNamed(context, "/");
+  }
+
   @override
   Widget build(BuildContext context) {
     final phoneHeight = MediaQuery.of(context).size.height;
@@ -63,138 +67,141 @@ class _RecipeDetailState extends State<RecipeDetail> {
       recipeData[8],
     );
 
-    return Scaffold(
-      backgroundColor: Color.fromARGB(255, 252, 242, 249),
-      bottomNavigationBar: Container(
-        height: phoneHeight * 0.056,
-        margin: EdgeInsets.fromLTRB(
-            phoneWidth * 0.1, 0, phoneWidth * 0.1, phoneHeight * 0.01),
-        child: Container(
-          decoration: BoxDecoration(
+    return WillPopScope(
+      onWillPop: _onWillPop,
+      child: Scaffold(
+        backgroundColor: Color.fromARGB(255, 252, 242, 249),
+        bottomNavigationBar: Container(
+          height: phoneHeight * 0.056,
+          margin: EdgeInsets.fromLTRB(
+              phoneWidth * 0.1, 0, phoneWidth * 0.1, phoneHeight * 0.01),
+          child: Container(
+            decoration: BoxDecoration(
+                color: Color.fromARGB(255, 235, 172, 215),
+                borderRadius: BorderRadius.all(Radius.elliptical(15, 15))),
+            child: Row(
+              children: [
+                Expanded(
+                  child: ButtonTheme(
+                    height: phoneHeight * 0.045,
+                    child: RaisedButton(
+                      onPressed: () => showDeleteAlert(context),
+                      shape: CircleBorder(),
+                      color: Colors.white,
+                      child: Icon(
+                        Icons.delete,
+                        color: Colors.purple[300],
+                        size: phoneHeight * 0.03,
+                      ),
+                    ),
+                  ),
+                ),
+                Expanded(
+                  child: ButtonTheme(
+                    height: phoneHeight * 0.045,
+                    child: RaisedButton(
+                      onPressed: () {
+                        Navigator.pushNamed(
+                            context, "editPage/${recipe.recipeId}");
+                      },
+                      shape: CircleBorder(),
+                      color: Colors.white,
+                      child: Icon(
+                        Icons.edit,
+                        color: Colors.purple[300],
+                        size: phoneHeight * 0.03,
+                      ),
+                    ),
+                  ),
+                ),
+                Expanded(
+                  child: ButtonTheme(
+                    height: phoneHeight * 0.045,
+                    child: RaisedButton(
+                      onPressed: () => changeIsFavoriteStatus(),
+                      shape: CircleBorder(),
+                      color: Colors.white,
+                      child: recipe.isFavorite == false
+                          ? Icon(
+                              Icons.star_border_outlined,
+                              color: Colors.purple[300],
+                              size: phoneHeight * 0.03,
+                            )
+                          : Icon(
+                              Icons.star,
+                              color: Colors.purple[300],
+                              size: phoneHeight * 0.03,
+                            ),
+                    ),
+                  ),
+                )
+              ],
+            ),
+          ),
+        ),
+        appBar: PreferredSize(
+          preferredSize: Size.fromHeight(phoneHeight * 0.06),
+          child: AppBar(
+            centerTitle: true,
+            title: Text(
+              recipe.recipeName,
+              style: TextStyle(
+                  fontSize: phoneHeight * 0.04, fontWeight: FontWeight.bold),
+            ),
+            leading: RaisedButton(
+              onPressed: () {
+                Navigator.popAndPushNamed(context, "/");
+              },
               color: Color.fromARGB(255, 235, 172, 215),
-              borderRadius: BorderRadius.all(Radius.elliptical(15, 15))),
-          child: Row(
+              elevation: 0,
+              child: Icon(
+                Icons.arrow_back_outlined,
+                color: Colors.white,
+                size: 30,
+              ),
+            ),
+          ),
+        ),
+        body: Container(
+          padding: EdgeInsets.all(10),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Expanded(
-                child: ButtonTheme(
-                  height: phoneHeight * 0.045,
-                  child: RaisedButton(
-                    onPressed: () => showDeleteAlert(context),
-                    shape: CircleBorder(),
-                    color: Colors.white,
-                    child: Icon(
-                      Icons.delete,
-                      color: Colors.purple[300],
-                      size: phoneHeight * 0.03,
-                    ),
-                  ),
-                ),
+                flex: 100,
+                child: DetailPhotoWidget(recipe.imagesPath, phoneHeight),
               ),
               Expanded(
-                child: ButtonTheme(
-                  height: phoneHeight * 0.045,
-                  child: RaisedButton(
-                    onPressed: () {
-                      Navigator.popAndPushNamed(
-                          context, "editPage/${recipe.recipeId}");
-                    },
-                    shape: CircleBorder(),
-                    color: Colors.white,
-                    child: Icon(
-                      Icons.edit,
-                      color: Colors.purple[300],
-                      size: phoneHeight * 0.03,
-                    ),
-                  ),
-                ),
+                flex: 20,
+                child: SizedBox(),
               ),
               Expanded(
-                child: ButtonTheme(
-                  height: phoneHeight * 0.045,
-                  child: RaisedButton(
-                    onPressed: () => changeIsFavoriteStatus(),
-                    shape: CircleBorder(),
-                    color: Colors.white,
-                    child: recipe.isFavorite == false
-                        ? Icon(
-                            Icons.star_border_outlined,
-                            color: Colors.purple[300],
-                            size: phoneHeight * 0.03,
-                          )
-                        : Icon(
-                            Icons.star,
-                            color: Colors.purple[300],
-                            size: phoneHeight * 0.03,
-                          ),
-                  ),
-                ),
-              )
+                flex: 120,
+                child: DetailIngredientsWidget(recipe.ingredients, phoneHeight),
+              ),
+              Expanded(
+                flex: 20,
+                child: SizedBox(),
+              ),
+              Expanded(
+                flex: 120,
+                child: DetailStepsWidget(recipe.steps, phoneHeight),
+              ),
+              Expanded(
+                flex: 20,
+                child: SizedBox(),
+              ),
+              Expanded(
+                flex: 20,
+                child: DetailCustomsWidget(
+                    recipe.recipeDuration, recipe.category, recipe.price),
+              ),
+              Expanded(
+                flex: 10,
+                child: SizedBox(),
+              ),
             ],
           ),
-        ),
-      ),
-      appBar: PreferredSize(
-        preferredSize: Size.fromHeight(phoneHeight * 0.06),
-        child: AppBar(
-          centerTitle: true,
-          title: Text(
-            recipe.recipeName,
-            style: TextStyle(
-                fontSize: phoneHeight * 0.04, fontWeight: FontWeight.bold),
-          ),
-          leading: RaisedButton(
-            onPressed: () {
-              Navigator.popAndPushNamed(context, "/");
-            },
-            color: Color.fromARGB(255, 235, 172, 215),
-            elevation: 0,
-            child: Icon(
-              Icons.arrow_back_outlined,
-              color: Colors.white,
-              size: 30,
-            ),
-          ),
-        ),
-      ),
-      body: Container(
-        padding: EdgeInsets.all(10),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Expanded(
-              flex: 100,
-              child: DetailPhotoWidget(recipe.imagesPath, phoneHeight),
-            ),
-            Expanded(
-              flex: 20,
-              child: SizedBox(),
-            ),
-            Expanded(
-              flex: 120,
-              child: DetailIngredientsWidget(recipe.ingredients, phoneHeight),
-            ),
-            Expanded(
-              flex: 20,
-              child: SizedBox(),
-            ),
-            Expanded(
-              flex: 120,
-              child: DetailStepsWidget(recipe.steps, phoneHeight),
-            ),
-            Expanded(
-              flex: 20,
-              child: SizedBox(),
-            ),
-            Expanded(
-              flex: 20,
-              child: DetailCustomsWidget(
-                  recipe.recipeDuration, recipe.category, recipe.price),
-            ),
-            Expanded(
-              flex: 10,
-              child: SizedBox(),
-            ),
-          ],
         ),
       ),
     );

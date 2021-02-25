@@ -76,7 +76,7 @@ class EditRecipePage extends StatelessWidget {
                     color: Color.fromARGB(255, 235, 172, 215),
                     onPressed: () {
                       deleteImagesWhenAbort();
-                      Navigator.popAndPushNamed(context, "/");
+                      Navigator.pop(context);
                     },
                     child: Container(
                       child: Center(
@@ -246,8 +246,9 @@ class EditRecipePage extends StatelessWidget {
           RaisedButton(
             child: Text(DemoLocalizations.of(context).translate("okay")),
             //Ana menüye yönlendirir.
-            onPressed: () => Navigator.popAndPushNamed(context, "/"),
-          ),
+            onPressed: () => Navigator.of(context)
+                .pushNamedAndRemoveUntil("/", (Route<dynamic> route) => false),
+          )
         ],
       ),
     );

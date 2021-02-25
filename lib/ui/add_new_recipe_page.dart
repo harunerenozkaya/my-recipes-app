@@ -226,7 +226,8 @@ class AddNewRecipePage extends StatelessWidget {
           RaisedButton(
             child: Text(DemoLocalizations.of(context).translate("okay")),
             //Ana menüye yönlendirir.
-            onPressed: () => Navigator.popAndPushNamed(context, "/"),
+            onPressed: () => Navigator.of(context)
+                .pushNamedAndRemoveUntil("/", (Route<dynamic> route) => false),
           ),
         ],
       ),
