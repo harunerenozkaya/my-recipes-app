@@ -90,6 +90,7 @@ class _AddStepsWidgetState extends State<AddStepsWidget> {
     );
   }
 
+  // Adım ekleme ekranını açar.
   Future showStepDialog(BuildContext context) {
     return showDialog(
       context: (context),
@@ -137,6 +138,7 @@ class _AddStepsWidgetState extends State<AddStepsWidget> {
     );
   }
 
+  // Yeni step'i ekler.
   void addNewStepFunction() {
     if (step != "") {
       steps.add(step);

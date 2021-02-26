@@ -271,7 +271,7 @@ class AddNewRecipePage extends StatelessWidget {
                 Navigator.pop(context);
 
                 //Reklam göster
-                _advertService.showIntersitial();
+                _advertService.showAddToMainIntersitial();
 
                 // Başarılı mesajını döndürür.
                 showFinishSuccesfulAlert(context);

@@ -23,6 +23,7 @@ class _EditPhotoWidgetState extends State<EditPhotoWidget> {
   // ignore: must_call_super
   initState() {
     imagesPath = widget.imagesPath.toList();
+    // Tarifin zaten var olan verilerini edit page'deki boş verilere upload eder.
     widget.getPhotos(imagesPath);
   }
 
@@ -30,6 +31,7 @@ class _EditPhotoWidgetState extends State<EditPhotoWidget> {
     setState(() {});
   }
 
+  // Kamera'dan resim çeker
   _imgFromCamera() async {
     PickedFile pick =
         await _picker.getImage(source: ImageSource.camera, imageQuality: 50);
@@ -46,6 +48,7 @@ class _EditPhotoWidgetState extends State<EditPhotoWidget> {
     }
   }
 
+  // Galeriden resim alır.
   _imgFromGallery() async {
     PickedFile pick =
         await _picker.getImage(source: ImageSource.gallery, imageQuality: 50);
@@ -114,6 +117,7 @@ class _EditPhotoWidgetState extends State<EditPhotoWidget> {
     );
   }
 
+  // Aşağıdan Kamera'dan mı Galeri'den mi resim seçileceğini soran kutucuk açar
   void _showPicker(context) {
     showModalBottomSheet(
       context: context,

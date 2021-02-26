@@ -16,6 +16,7 @@ class RecipeBox extends StatelessWidget {
   RecipeBox(this.recipeId, this.recipeName, this.recipeImagePath, this.category,
       this.time, this.money);
 
+  // Gelen time stringi karçaşık olduğu için istediği düzene sokar.
   String parseTime(String time, context) {
     List timePeriods = time.split(":");
 
@@ -36,6 +37,7 @@ class RecipeBox extends StatelessWidget {
       padding: EdgeInsets.all(7),
       child: GestureDetector(
         onTap: () {
+          // Recipe Id kodu ile hem veri gönderip hem sayfa yönlendime
           Navigator.of(context).pushNamedAndRemoveUntil(
               "detailPage/$recipeId", (Route<dynamic> route) => false);
         },

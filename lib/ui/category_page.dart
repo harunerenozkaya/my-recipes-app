@@ -139,6 +139,7 @@ class _CategoryPageState extends State<CategoryPage> {
     );
   }
 
+  // Bu kategoriye ait favori tarif sayısını bulur
   int findFavoriteCategoryRecipeCount() {
     int count = 0;
     Hive.box("recipes").values.toList().forEach((element) {
@@ -152,6 +153,7 @@ class _CategoryPageState extends State<CategoryPage> {
     return count;
   }
 
+  // Bu kategoriye ait tüm tariflerin sayısını bulur.
   int findAllCategoryRecipeCount() {
     int count = 0;
     Hive.box("recipes").values.toList().forEach((element) {
@@ -163,6 +165,7 @@ class _CategoryPageState extends State<CategoryPage> {
     return count;
   }
 
+  // Bu kategoriye ait tarifleri bir listeye atar.(if else yapılı şeyler listview.builder'de çalışmadığı için)
   List<Widget> getCategoryRecipeList() {
     List<Widget> recipes = [];
     Hive.box("recipes").values.toList().forEach(
@@ -190,6 +193,7 @@ class _CategoryPageState extends State<CategoryPage> {
     return recipes;
   }
 
+  // Bu kategoriye ait favori tarifleri bir listeye atar.(if else yapılı şeyler listview.builder'de çalışmadığı için)
   List<Widget> getFavoriteCategoryRecipeList() {
     List<Widget> recipes = [];
     Hive.box("recipes").values.toList().forEach(

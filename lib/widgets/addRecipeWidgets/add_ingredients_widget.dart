@@ -34,7 +34,10 @@ class _AddIngredientsWidgetState extends State<AddIngredientsWidget> {
     List<String> units = [
       "kg",
       "g",
+      "ml",
+      "L",
       "lb",
+      "pound",
       DemoLocalizations.of(context).translate("spoon"),
       DemoLocalizations.of(context).translate("glass"),
     ];
@@ -109,6 +112,7 @@ class _AddIngredientsWidgetState extends State<AddIngredientsWidget> {
     );
   }
 
+  // Ingredient ekleme ekranını gösterir
   Future showIngredientAlert(BuildContext context, kh, units) {
     return showDialog(
       context: (context),
@@ -178,7 +182,7 @@ class _AddIngredientsWidgetState extends State<AddIngredientsWidget> {
                             color: Color.fromARGB(255, 232, 147, 148),
                             onPressed: () {
                               showMaterialScrollPicker(
-                                selectedItem: "lb",
+                                selectedItem: "L",
                                 context: context,
                                 cancelText: DemoLocalizations.of(context)
                                     .translate("cancel"),
@@ -211,6 +215,7 @@ class _AddIngredientsWidgetState extends State<AddIngredientsWidget> {
     );
   }
 
+  // Ingredient'i ekler ve ekranı yeniler
   void addNewIngredientFunc() {
     if (ingredientAmount != "" && ingredientName != "") {
       Map addingMap = {

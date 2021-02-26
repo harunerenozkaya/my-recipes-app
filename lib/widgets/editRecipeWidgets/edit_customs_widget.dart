@@ -33,6 +33,7 @@ class _EditCustomsWidgetState extends State<EditCustomsWidget> {
     List hourMinute = stringDurationConverter();
     recipeDuration = Duration(hours: hourMinute[0], minutes: hourMinute[1]);
 
+    // Tarifin zaten var olan verilerini edit page'deki boş verilere upload eder.
     widget.getCategory(category);
     widget.getPrice(price);
     widget.getDuration(recipeDuration.toString());
@@ -204,6 +205,7 @@ class _EditCustomsWidgetState extends State<EditCustomsWidget> {
     );
   }
 
+  // Price seçme ekranını gösterir.
   Future showPriceDialog(BuildContext context) {
     return showDialog(
       barrierDismissible: false,
@@ -253,6 +255,7 @@ class _EditCustomsWidgetState extends State<EditCustomsWidget> {
     );
   }
 
+  // Kategori seçme ekranını gösterir.
   void showCategoryAlert(BuildContext context) {
     return showMaterialRadioPicker(
       items: [
@@ -283,6 +286,7 @@ class _EditCustomsWidgetState extends State<EditCustomsWidget> {
     );
   }
 
+  // Zaman seçme ekranını gösterir.
   Future showDurationAlert(BuildContext context, phoneHeight) async {
     Duration resultingDuration = await showDurationPicker(
       context: context,

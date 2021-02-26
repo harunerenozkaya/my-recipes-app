@@ -23,7 +23,6 @@ class MenuDrawer extends StatelessWidget {
       DemoLocalizations.of(context).translate("drink"): "drink"
     };
 
-    print(phoneWidth);
     return Container(
       width: phoneWidth * 0.4,
       child: Drawer(
@@ -79,6 +78,7 @@ class MenuDrawer extends StatelessWidget {
                         ),
                         visualDensity: VisualDensity(horizontal: -4),
                         onTap: () {
+                          // Kategori Sayfasına 1.si Kategori Adı 2.si kategori kodu olmak üzere bir url nabigation ile veri gönderir ve o sayfaya geçer.
                           Navigator.of(context).pushNamedAndRemoveUntil(
                               "categoryPage/${menuItemNamesId.keys.toList()[index]}/${menuItemNamesId.values.toList()[index]}",
                               (Route<dynamic> route) => false);

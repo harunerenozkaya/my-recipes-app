@@ -189,6 +189,7 @@ class _AddCustomsWidgetState extends State<AddCustomsWidget> {
     );
   }
 
+  // Price seçme ekranını gösterir.
   Future showPriceDialog(BuildContext context) {
     return showDialog(
       barrierDismissible: false,
@@ -238,6 +239,7 @@ class _AddCustomsWidgetState extends State<AddCustomsWidget> {
     );
   }
 
+  // Kategori seçme ekranını gösterir.
   void showCategoryAlert(BuildContext context) {
     return showMaterialRadioPicker(
       items: [
@@ -268,6 +270,7 @@ class _AddCustomsWidgetState extends State<AddCustomsWidget> {
     );
   }
 
+  // Zaman seçme ekranını gösterir.
   Future showDurationAlert(BuildContext context, double phoneHeight) async {
     Duration resultingDuration = await showDurationPicker(
       context: context,

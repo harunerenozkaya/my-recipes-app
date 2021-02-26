@@ -52,6 +52,7 @@ class PhotoWidgetDetailed extends StatelessWidget {
     );
   }
 
+  // Sağ üst köşedeki büyüteç simgesi tıklandığında resmi büyütür.
   zoomImage(BuildContext context) {
     showDialog(
       context: context,

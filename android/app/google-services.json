@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "367181862601",
+    "project_id": "my-cook-recipes",
+    "storage_bucket": "my-cook-recipes.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:367181862601:android:52419ebd761ada24d65f18",
+        "android_client_info": {
+          "package_name": "com.yushySoftwares.myCookRecipes"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "367181862601-666vf9c6pcdk53gghaml206s1htchn5q.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCRJqy_7RXOGoqJ_4qQsTjLd59AbwJZgMQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "367181862601-666vf9c6pcdk53gghaml206s1htchn5q.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

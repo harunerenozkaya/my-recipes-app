@@ -1,3 +1,4 @@
+import 'package:firebase_admob/firebase_admob.dart';
 import 'package:flutter/material.dart';
 import 'package:myRecipes/widgets/menu_drawer.dart';
 import 'package:myRecipes/widgets/recipe_box.dart';
@@ -6,13 +7,22 @@ import 'package:hive/hive.dart';
 import '../app_localization.dart';
 
 class MyHomePage extends StatelessWidget {
+  // Reklamların çalışması için admob'u initialize ediyoruz.
+  Future<void> _initAdMob() {
+    return FirebaseAdMob.instance
+        .initialize(appId: "ca-app-pub-2763602296626502~8247078922");
+  }
+
+  // Ana sayfada geri tuşuna basılınca hiç bir şey yapma
+  // ignore: missing_return
+  Future<bool> _onWillPop() {}
+
   @override
   Widget build(BuildContext context) {
     final phoneHeight = MediaQuery.of(context).size.height;
     final phoneWidth = MediaQuery.of(context).size.width;
 
-    // ignore: missing_return
-    Future<bool> _onWillPop() {}
+    _initAdMob();
 
     return WillPopScope(
       onWillPop: _onWillPop,
@@ -28,6 +38,7 @@ class MyHomePage extends StatelessWidget {
         ),
         floatingActionButton: FloatingActionButton(
           onPressed: () {
+            //Floating Action Button'a basılınca yeni tarif ekleme ekranına yönlendir
             Navigator.of(context).pushNamed("/addNewRecipe");
           },
           tooltip: 'Add New Recipe',
@@ -157,6 +168,7 @@ class MyHomePage extends StatelessWidget {
     );
   }
 
+  // Favorilere eklenmiş tarif sayısını bulur.
   int findFavoriteRecipeCount() {
     int count = 0;
     Hive.box("recipes").values.toList().forEach((element) {
@@ -168,6 +180,7 @@ class MyHomePage extends StatelessWidget {
     return count;
   }
 
+  // Eklenmiş tüm tariflerin sayısını bulur
   int findAllRecipeCount() {
     int count = 0;
     Hive.box("recipes").values.toList().forEach((element) {
@@ -177,6 +190,7 @@ class MyHomePage extends StatelessWidget {
     return count;
   }
 
+  // Tüm favori recipe'ları bir listeye koyar
   List<Widget> getAllFavoriteRecipesList() {
     List<Widget> recipes = [];
     Hive.box("recipes").values.toList().forEach(

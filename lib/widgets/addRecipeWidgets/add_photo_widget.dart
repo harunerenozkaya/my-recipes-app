@@ -26,6 +26,7 @@ class _AddPhotoWidgetState extends State<AddPhotoWidget> {
     setState(() {});
   }
 
+  // Kamera'dan resim çeker
   _imgFromCamera() async {
     PickedFile pick =
         await _picker.getImage(source: ImageSource.camera, imageQuality: 50);
@@ -42,6 +43,7 @@ class _AddPhotoWidgetState extends State<AddPhotoWidget> {
     }
   }
 
+  // Galeriden resim alır.
   _imgFromGallery() async {
     PickedFile pick =
         await _picker.getImage(source: ImageSource.gallery, imageQuality: 50);
@@ -111,6 +113,7 @@ class _AddPhotoWidgetState extends State<AddPhotoWidget> {
     );
   }
 
+  // Aşağıdan Kamera'dan mı Galeri'den mi resim seçileceğini soran kutucuk açar
   void _showPicker(context) {
     showModalBottomSheet(
       context: context,

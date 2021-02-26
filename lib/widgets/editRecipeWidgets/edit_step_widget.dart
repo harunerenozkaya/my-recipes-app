@@ -21,6 +21,7 @@ class _EditStepsWidgetState extends State<EditStepsWidget> {
   // ignore: must_call_super
   initState() {
     steps = widget.steps.toList();
+    // Tarifin zaten var olan verilerini edit page'deki boş verilere upload eder.
     widget.getStep(steps);
   }
 
@@ -94,6 +95,7 @@ class _EditStepsWidgetState extends State<EditStepsWidget> {
     );
   }
 
+  // Adım ekleme ekranını açar.
   Future showStepDialog(BuildContext context) {
     return showDialog(
       context: (context),
@@ -141,6 +143,7 @@ class _EditStepsWidgetState extends State<EditStepsWidget> {
     );
   }
 
+  // Yeni step'i ekler.
   void addNewStepFunction() {
     if (step != "") {
       steps.add(step);

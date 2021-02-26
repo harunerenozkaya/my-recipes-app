@@ -20,6 +20,7 @@ class DetailCustomsWidget extends StatefulWidget {
 }
 
 class _DetailCustomsWidgetState extends State<DetailCustomsWidget> {
+  // Gelen zaman string'i dağınık olduğu için istediği formata sokar
   String parseTime(String time) {
     List timePeriods = time.split(":");
 

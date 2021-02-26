@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
 import 'package:myRecipes/models/recipe.dart';
+import 'package:myRecipes/services/advert-service.dart';
 import '../app_localization.dart';
 import '../widgets/recipeDetailWidgets/detail_photo_widget.dart';
 import '../widgets/recipeDetailWidgets/detail_ingredients_widget.dart';
@@ -17,43 +18,22 @@ class RecipeDetail extends StatefulWidget {
   _RecipeDetailState createState() => _RecipeDetailState();
 }
 
-Recipe recipe;
-
 class _RecipeDetailState extends State<RecipeDetail> {
-  List getDataofRecipe(String recipeId) {
-    List recipeData;
+  final AdvertService _advertService = AdvertService();
+  Recipe recipe;
 
-    var index = 0;
-    Hive.box("recipes").values.forEach(
-      (element) {
-        if (element.recipeId == recipeId) {
-          recipeData = [
-            Hive.box("recipes").getAt(index).recipeId,
-            Hive.box("recipes").getAt(index).imagesPath,
-            Hive.box("recipes").getAt(index).ingredients,
-            Hive.box("recipes").getAt(index).steps,
-            Hive.box("recipes").getAt(index).recipeDuration,
-            Hive.box("recipes").getAt(index).category,
-            Hive.box("recipes").getAt(index).price,
-            Hive.box("recipes").getAt(index).recipeName,
-            Hive.box("recipes").getAt(index).isFavorite
-          ];
-        }
-        index++;
-      },
-    );
-    return recipeData;
-  }
-
-  // ignore: missing_return
-  Future<bool> _onWillPop() {
-    Navigator.popAndPushNamed(context, "/");
+  // ignore: must_call_super
+  void initState() {
+    //Sayfaya kaçıncı kez girdiğini tespit eder ve ona göre reklam gösterir.
+    countAndAd();
   }
 
   @override
   Widget build(BuildContext context) {
     final phoneHeight = MediaQuery.of(context).size.height;
     final phoneWidth = MediaQuery.of(context).size.width;
+
+    //Recipe'in datasını çeker ve aşağıdada bir Recipe widget'ına atıyoruz.
     List recipeData = getDataofRecipe(widget.recipeId);
 
     recipe = Recipe(
@@ -102,6 +82,7 @@ class _RecipeDetailState extends State<RecipeDetail> {
                     height: phoneHeight * 0.045,
                     child: RaisedButton(
                       onPressed: () {
+                        // Edit butonuna basıldığında edit sayfasına yönlendirir.
                         Navigator.pushNamed(
                             context, "editPage/${recipe.recipeId}");
                       },
@@ -208,6 +189,60 @@ class _RecipeDetailState extends State<RecipeDetail> {
     );
   }
 
+  //Bu ekranda geri tuşuna basılınca Ana Sayfa'ya yönlendirilir.
+  // ignore: missing_return
+  Future<bool> _onWillPop() {
+    Navigator.popAndPushNamed(context, "/");
+  }
+
+  //Sayfaya kaçıncı kez girdiğini tespit eder ve ona göre reklam gösterir.
+  void countAndAd() {
+    // Suanki giris sayisini al
+    Box openCount = Hive.box("openCounts");
+    int count = openCount.get("detailPage");
+
+    if (count == null) {
+      openCount.put("detailPage", 1);
+    } else {
+      //Her 4 girişte bir reklam göster.
+      if ((count % 4) == 0) {
+        print(count);
+        _advertService.showAddToMainIntersitial();
+        Hive.box("openCounts").put("detailPage", count + 1);
+      } else {
+        print(count);
+        Hive.box("openCounts").put("detailPage", count + 1);
+      }
+    }
+  }
+
+  // Tarif'in data'sını çeker.
+  List getDataofRecipe(String recipeId) {
+    List recipeData;
+
+    var index = 0;
+    Hive.box("recipes").values.forEach(
+      (element) {
+        if (element.recipeId == recipeId) {
+          recipeData = [
+            Hive.box("recipes").getAt(index).recipeId,
+            Hive.box("recipes").getAt(index).imagesPath,
+            Hive.box("recipes").getAt(index).ingredients,
+            Hive.box("recipes").getAt(index).steps,
+            Hive.box("recipes").getAt(index).recipeDuration,
+            Hive.box("recipes").getAt(index).category,
+            Hive.box("recipes").getAt(index).price,
+            Hive.box("recipes").getAt(index).recipeName,
+            Hive.box("recipes").getAt(index).isFavorite
+          ];
+        }
+        index++;
+      },
+    );
+    return recipeData;
+  }
+
+  // Bu tarifi silip silmek istemediğini sorar
   showDeleteAlert(BuildContext context) {
     showDialog(
       context: context,
@@ -234,13 +269,14 @@ class _RecipeDetailState extends State<RecipeDetail> {
     );
   }
 
+  // Tarifi siler ve Ana Sayfaya yönlendirir.
   deleteRecipe(BuildContext context) {
     int index = 0;
     Hive.box("recipes").values.toList().forEach(
       (element) {
         if (element.recipeId == widget.recipeId) {
           Hive.box("recipes").deleteAt(index);
-          print("deleteded $index");
+
           Navigator.popAndPushNamed(context, "/");
         }
         index++;
@@ -248,6 +284,7 @@ class _RecipeDetailState extends State<RecipeDetail> {
     );
   }
 
+  // Tarifi favori ise favori değil , favori değil ise favori yapar. Sayfayı yeniler ve veritabanını günceller.
   changeIsFavoriteStatus() {
     var index = 0;
     Hive.box("recipes").values.toList().forEach(

@@ -2,6 +2,7 @@ import 'dart:math';
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:myRecipes/models/recipe.dart';
+import 'package:myRecipes/services/advert-service.dart';
 import 'package:myRecipes/widgets/editRecipeWidgets/edit_customs_widget.dart';
 import 'package:myRecipes/widgets/editRecipeWidgets/edit_ingredients_widget.dart';
 import 'package:myRecipes/widgets/editRecipeWidgets/edit_photo_widget.dart';
@@ -25,17 +26,6 @@ class EditRecipePage extends StatelessWidget {
 
   Recipe recipe;
 
-  // Gelen recipeId'nin ait olduğu recipe'yi bulur.
-  getRecipeInfo() {
-    Hive.box("recipes").values.toList().forEach(
-      (element) {
-        if (element.recipeId == recipeId) {
-          recipe = element;
-        }
-      },
-    );
-  }
-
   // Child widgetlerden gelen verileri buraya taşıyoruz ki saveRecipe fonskiyonu ile db'ye ekleyebilelim.
   void getPhotos(List<String> photoss) => imagesPath = photoss;
   void getIngredients(List<Map> ingredientss) => ingredients = ingredientss;
@@ -44,19 +34,13 @@ class EditRecipePage extends StatelessWidget {
   void getCategory(String categoryx) => category = categoryx;
   void getPrice(String pricex) => price = pricex;
 
-  // Resim seçildiğinde ancak abort'a tıklandığında storage'ye kaydedilmiş olan image'ler silinir.
-  void deleteImagesWhenAbort() async {
-    imagesPath.forEach(
-      (element) {
-        File(element).delete();
-      },
-    );
-  }
+  final AdvertService _advertService = AdvertService();
 
   @override
   Widget build(BuildContext context) {
     final phoneHeight = MediaQuery.of(context).size.height;
 
+    //Recipe'nin verilerini çeker
     getRecipeInfo();
 
     return Scaffold(
@@ -181,6 +165,26 @@ class EditRecipePage extends StatelessWidget {
     );
   }
 
+  // Gelen recipeId'nin ait olduğu recipe'yi bulur.
+  getRecipeInfo() {
+    Hive.box("recipes").values.toList().forEach(
+      (element) {
+        if (element.recipeId == recipeId) {
+          recipe = element;
+        }
+      },
+    );
+  }
+
+  // Resim yüklendiğinde ancak abort'a tıklandığında storage'ye kaydedilmiş olan image'ler silinir.
+  void deleteImagesWhenAbort() async {
+    imagesPath.forEach(
+      (element) {
+        File(element).delete();
+      },
+    );
+  }
+
   // Recipe'yi veritabanına kaydeder.
   void saveRecipe(BuildContext context) async {
     String recipeName = recipe.recipeName;
@@ -254,6 +258,7 @@ class EditRecipePage extends StatelessWidget {
     );
   }
 
+  // İsim değiştirme ekranını açar ve tamam'a basıldığında recipe'yi günceller
   showGetRecipeNameAndSaveRecipe(
       BuildContext context, String recipeName, Box recipeBox, String recipeId) {
     showDialog(
@@ -283,25 +288,31 @@ class EditRecipePage extends StatelessWidget {
               } else {
                 int index = 0;
                 //Veritabanındaki recipeyi düzenle
-                recipeBox.values.toList().forEach((element) {
-                  if (element.recipeId == recipe.recipeId) {
-                    recipeBox.putAt(
-                        index,
-                        Recipe(
-                            recipeId,
-                            imagesPath,
-                            ingredients,
-                            steps,
-                            recipeDuration,
-                            category,
-                            price,
-                            recipeName,
-                            recipe.isFavorite));
-                  }
-                  index++;
-                });
+                recipeBox.values.toList().forEach(
+                  (element) {
+                    if (element.recipeId == recipe.recipeId) {
+                      recipeBox.putAt(
+                          index,
+                          Recipe(
+                              recipeId,
+                              imagesPath,
+                              ingredients,
+                              steps,
+                              recipeDuration,
+                              category,
+                              price,
+                              recipeName,
+                              recipe.isFavorite));
+                    }
+                    index++;
+                  },
+                );
 
                 Navigator.pop(context);
+
+                //Reklam göster
+                _advertService.showAddToMainIntersitial();
+
                 // Başarılı mesajını döndürür.
                 showFinishSuccesfulAlert(context);
               }

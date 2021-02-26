@@ -28,6 +28,7 @@ class _EditIngredientsWidgetState extends State<EditIngredientsWidget> {
   // ignore: must_call_super
   initState() {
     ingredients = widget.ingredients.toList();
+    // Tarifin zaten var olan verilerini edit page'deki boş verilere upload eder.
     widget.getIngredients(ingredients);
   }
 
@@ -43,7 +44,10 @@ class _EditIngredientsWidgetState extends State<EditIngredientsWidget> {
     List<String> units = [
       "kg",
       "g",
+      "ml",
+      "L",
       "lb",
+      "pound",
       DemoLocalizations.of(context).translate("spoon"),
       DemoLocalizations.of(context).translate("glass"),
     ];
@@ -114,6 +118,7 @@ class _EditIngredientsWidgetState extends State<EditIngredientsWidget> {
     );
   }
 
+  // Ingredient ekleme ekranını gösterir
   Future showIngredientAlert(BuildContext context, kh, units) {
     return showDialog(
       context: (context),
@@ -183,7 +188,7 @@ class _EditIngredientsWidgetState extends State<EditIngredientsWidget> {
                             color: Color.fromARGB(255, 232, 147, 148),
                             onPressed: () {
                               showMaterialScrollPicker(
-                                selectedItem: "lb",
+                                selectedItem: "L",
                                 context: context,
                                 cancelText: DemoLocalizations.of(context)
                                     .translate("cancel"),
@@ -216,6 +221,7 @@ class _EditIngredientsWidgetState extends State<EditIngredientsWidget> {
     );
   }
 
+  // Ingredient'i ekler ve ekranı yeniler
   void addNewIngredientFunc() {
     if (ingredientAmount != "" && ingredientName != "") {
       Map addingMap = {
@@ -231,6 +237,7 @@ class _EditIngredientsWidgetState extends State<EditIngredientsWidget> {
       ingredientAmount = "";
       ingredientName = "";
     } else {
+      // Ingreident Name boş sa uyarı ekranını verir.
       showDialog(
         context: context,
         builder: (context) => AlertDialog(
