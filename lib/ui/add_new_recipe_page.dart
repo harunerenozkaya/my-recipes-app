@@ -2,6 +2,7 @@ import 'dart:math';
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:myRecipes/models/recipe.dart';
+import 'package:myRecipes/services/advert-service.dart';
 import 'package:myRecipes/widgets/addRecipeWidgets/add_customs_widget.dart';
 import 'package:myRecipes/widgets/addRecipeWidgets/add_ingredients_widget.dart';
 import 'package:myRecipes/widgets/addRecipeWidgets/add_photo_widget.dart';
@@ -34,6 +35,8 @@ class AddNewRecipePage extends StatelessWidget {
       },
     );
   }
+
+  final AdvertService _advertService = AdvertService();
 
   @override
   Widget build(BuildContext context) {
@@ -160,7 +163,7 @@ class AddNewRecipePage extends StatelessWidget {
     );
   }
 
-  // Recipe'yi veritabanına kaydeder.
+  // Recipe'yi veritabanına kaydededip kaydetmeteceğini sorgular..
   void saveRecipe(BuildContext context) async {
     String recipeName;
 
@@ -233,6 +236,7 @@ class AddNewRecipePage extends StatelessWidget {
     );
   }
 
+  // Recipe ismini al ve recipe'yi kaydet
   showGetRecipeNameAndSaveRecipe(
       BuildContext context, String recipeName, Box recipeBox, String recipeId) {
     showDialog(
@@ -265,6 +269,10 @@ class AddNewRecipePage extends StatelessWidget {
                       recipeDuration, category, price, recipeName, false),
                 );
                 Navigator.pop(context);
+
+                //Reklam göster
+                _advertService.showIntersitial();
+
                 // Başarılı mesajını döndürür.
                 showFinishSuccesfulAlert(context);
               }

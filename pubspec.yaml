@@ -35,6 +35,7 @@ dependencies:
   loading_gifs: ^0.2.3
   flutter_localizations:
     sdk: flutter
+  firebase_admob: ^0.11.0+1
   
   
 
