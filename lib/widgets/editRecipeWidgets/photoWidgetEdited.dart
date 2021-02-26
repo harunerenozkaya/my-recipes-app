@@ -55,7 +55,7 @@ class PhotoWidgetEdited extends StatelessWidget {
                 _updateState();
               },
               child: Container(
-                color: Colors.purple[300],
+                color: Color.fromARGB(255, 232, 147, 148),
                 child: Icon(
                   Icons.delete,
                   size: phoneHeight * 0.03,

@@ -53,7 +53,7 @@ class RecipeBox extends StatelessWidget {
                 child: Container(
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.all(Radius.elliptical(3, 3)),
-                    color: Colors.purple[300],
+                    color: Color.fromARGB(255, 232, 147, 148),
                   ),
                   child: Center(
                     child: Text(
@@ -88,7 +88,7 @@ class RecipeBox extends StatelessWidget {
                           decoration: BoxDecoration(
                             borderRadius:
                                 BorderRadius.all(Radius.elliptical(3, 3)),
-                            color: Colors.purple[300],
+                            color: Color.fromARGB(255, 232, 147, 148),
                           ),
                           child: Center(
                             child: FittedBox(
@@ -112,7 +112,7 @@ class RecipeBox extends StatelessWidget {
                           decoration: BoxDecoration(
                             borderRadius:
                                 BorderRadius.all(Radius.elliptical(3, 3)),
-                            color: Colors.purple[300],
+                            color: Color.fromARGB(255, 232, 147, 148),
                           ),
                           child: Center(
                             child: FittedBox(
@@ -135,7 +135,7 @@ class RecipeBox extends StatelessWidget {
                           decoration: BoxDecoration(
                             borderRadius:
                                 BorderRadius.all(Radius.elliptical(3, 3)),
-                            color: Colors.purple[300],
+                            color: Color.fromARGB(255, 232, 147, 148),
                           ),
                           child: Center(
                             child: FittedBox(

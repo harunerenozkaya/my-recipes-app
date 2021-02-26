@@ -4,6 +4,7 @@ import 'package:myRecipes/widgets/editRecipeWidgets/photoWidgetEdited.dart';
 
 import '../../app_localization.dart';
 
+// ignore: must_be_immutable
 class EditPhotoWidget extends StatefulWidget {
   final double phoneHeight;
   final Function getPhotos;
@@ -19,6 +20,7 @@ class _EditPhotoWidgetState extends State<EditPhotoWidget> {
   List<String> imagesPath;
   final _picker = ImagePicker();
 
+  // ignore: must_call_super
   initState() {
     imagesPath = widget.imagesPath.toList();
     widget.getPhotos(imagesPath);
@@ -81,10 +83,10 @@ class _EditPhotoWidgetState extends State<EditPhotoWidget> {
               Expanded(
                 flex: 5,
                 child: Container(
+                  padding: EdgeInsets.all(4),
                   decoration: BoxDecoration(
-                    color: Color.fromARGB(255, 235, 172, 215),
+                    color: Color.fromARGB(255, 208, 222, 229),
                     borderRadius: BorderRadius.all(Radius.elliptical(8, 8)),
-                    border: Border.all(color: Colors.purple[300], width: 3),
                   ),
                   child: ListView.builder(
                       scrollDirection: Axis.horizontal,
@@ -101,8 +103,9 @@ class _EditPhotoWidgetState extends State<EditPhotoWidget> {
           child: RaisedButton(
             shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(7),
-                side: BorderSide(color: Colors.purple[300], width: 3)),
-            color: Color.fromARGB(255, 252, 242, 249),
+                side: BorderSide(
+                    color: Color.fromARGB(255, 232, 147, 148), width: 3)),
+            color: Color.fromARGB(255, 255, 255, 255),
             child: Text(DemoLocalizations.of(context).translate("add_photo")),
             onPressed: () => _showPicker(context),
           ),

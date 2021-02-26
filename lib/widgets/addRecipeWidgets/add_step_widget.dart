@@ -49,12 +49,11 @@ class _AddStepsWidgetState extends State<AddStepsWidget> {
               Expanded(
                 flex: 5,
                 child: Container(
-                  padding: EdgeInsets.fromLTRB(phoneWidth * 0.01,
-                      widget.phoneHeight * 0.005, phoneWidth * 0.25, 0),
+                  padding: EdgeInsets.fromLTRB(phoneWidth * 0.015,
+                      widget.phoneHeight * 0.01, phoneWidth * 0.25, 0),
                   decoration: BoxDecoration(
-                    color: Color.fromARGB(255, 235, 172, 215),
+                    color: Color.fromARGB(255, 208, 222, 229),
                     borderRadius: BorderRadius.all(Radius.elliptical(8, 8)),
-                    border: Border.all(color: Colors.purple[300], width: 3),
                   ),
                   child: ListView.separated(
                       primary: false,
@@ -74,9 +73,11 @@ class _AddStepsWidgetState extends State<AddStepsWidget> {
           height: phoneHeight * 0.05,
           child: RaisedButton(
             shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(7),
-                side: BorderSide(color: Colors.purple[300], width: 3)),
-            color: Color.fromARGB(255, 252, 242, 249),
+              borderRadius: BorderRadius.circular(7),
+              side: BorderSide(
+                  color: Color.fromARGB(255, 232, 147, 148), width: 3),
+            ),
+            color: Color.fromARGB(255, 255, 255, 255),
             child: Text(
               DemoLocalizations.of(context).translate("add_steps"),
             ),
@@ -106,7 +107,7 @@ class _AddStepsWidgetState extends State<AddStepsWidget> {
               RaisedButton(
                 onPressed: () => addNewStepFunction(),
                 child: Text(DemoLocalizations.of(context).translate("add")),
-                color: Color.fromARGB(255, 235, 172, 215),
+                color: Color.fromARGB(255, 232, 147, 148),
               ),
             ],
             title: Text(
@@ -149,9 +150,9 @@ class _AddStepsWidgetState extends State<AddStepsWidget> {
         builder: (context) => AlertDialog(
           content: Text(
             DemoLocalizations.of(context).translate("step_name_cant_blank"),
-            style: TextStyle(fontWeight: FontWeight.bold),
+            style: TextStyle(fontWeight: FontWeight.bold, color: Colors.white),
           ),
-          backgroundColor: Color.fromARGB(255, 235, 172, 215),
+          backgroundColor: Color.fromARGB(255, 232, 147, 148),
           actions: [
             RaisedButton(
               onPressed: () => Navigator.pop(context),

@@ -63,18 +63,18 @@ class MyApp extends StatelessWidget {
       onGenerateRoute: (settings) => generateRoute(settings),
       theme: ThemeData(
         floatingActionButtonTheme: FloatingActionButtonThemeData(
-          backgroundColor: Color.fromARGB(255, 252, 242, 249),
+          backgroundColor: Color.fromARGB(255, 255, 255, 255),
         ),
         appBarTheme: AppBarTheme(
-            color: Color.fromARGB(255, 235, 172, 215),
+            color: Color.fromARGB(255, 232, 147, 148),
             iconTheme: IconThemeData(color: Colors.white)),
-        accentColor: Color.fromARGB(255, 235, 172, 215),
-        primaryColor: Color.fromARGB(255, 235, 172, 215),
-        primaryColorDark: Color.fromARGB(255, 235, 172, 215),
+        accentColor: Color.fromARGB(255, 232, 147, 148),
+        primaryColor: Color.fromARGB(255, 232, 147, 148),
+        primaryColorDark: Color.fromARGB(255, 232, 147, 148),
         primaryTextTheme: TextTheme(
           headline6: TextStyle(color: Colors.white),
         ),
-        buttonColor: Color.fromARGB(255, 235, 172, 215),
+        buttonColor: Color.fromARGB(255, 232, 147, 148),
       ),
       localizationsDelegates: [
         const DemoLocalizationsDelegate(),

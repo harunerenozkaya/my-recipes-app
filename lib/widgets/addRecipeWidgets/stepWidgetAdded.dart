@@ -24,7 +24,7 @@ class StepWidget extends StatelessWidget {
             flex: 1,
             child: Container(
               decoration: BoxDecoration(
-                color: Colors.purple[300],
+                color: Color.fromARGB(255, 232, 147, 148),
                 borderRadius: BorderRadius.only(
                   topLeft: Radius.circular(8),
                   bottomLeft: Radius.circular(8),
@@ -63,7 +63,7 @@ class StepWidget extends StatelessWidget {
               },
               child: Container(
                 decoration: BoxDecoration(
-                  color: Colors.purple[300],
+                  color: Color.fromARGB(255, 232, 147, 148),
                   borderRadius: BorderRadius.only(
                     topRight: Radius.circular(8),
                     bottomRight: Radius.circular(8),

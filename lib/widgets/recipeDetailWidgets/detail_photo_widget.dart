@@ -3,6 +3,7 @@ import 'package:myRecipes/widgets/recipeDetailWidgets/photoWidgetDetailed.dart';
 
 import '../../app_localization.dart';
 
+// ignore: must_be_immutable
 class DetailPhotoWidget extends StatefulWidget {
   List<String> imagesPath = [];
   final double phoneHeight;
@@ -32,10 +33,10 @@ class _DetailPhotoWidgetState extends State<DetailPhotoWidget> {
           Expanded(
             flex: 5,
             child: Container(
+              padding: EdgeInsets.all(4),
               decoration: BoxDecoration(
-                color: Color.fromARGB(255, 235, 172, 215),
+                color: Color.fromARGB(255, 208, 222, 229),
                 borderRadius: BorderRadius.all(Radius.elliptical(8, 8)),
-                border: Border.all(color: Colors.purple[300], width: 3),
               ),
               child: ListView.builder(
                   scrollDirection: Axis.horizontal,

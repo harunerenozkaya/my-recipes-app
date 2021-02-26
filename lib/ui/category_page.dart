@@ -16,6 +16,7 @@ class CategoryPage extends StatefulWidget {
 }
 
 class _CategoryPageState extends State<CategoryPage> {
+  // ignore: missing_return
   Future<bool> _onWillPop() {
     Navigator.popAndPushNamed(context, "/");
   }
@@ -29,7 +30,7 @@ class _CategoryPageState extends State<CategoryPage> {
       onWillPop: _onWillPop,
       child: Scaffold(
         drawer: MenuDrawer(),
-        backgroundColor: Color.fromARGB(255, 252, 242, 249),
+        backgroundColor: Color.fromARGB(255, 255, 255, 255),
         appBar: AppBar(
           title: Text(
             DemoLocalizations.of(context).translate("home_title"),
@@ -45,7 +46,7 @@ class _CategoryPageState extends State<CategoryPage> {
           child: Icon(
             Icons.add,
             size: 40,
-            color: Color.fromARGB(255, 235, 172, 215),
+            color: Color.fromARGB(255, 232, 147, 148),
           ),
         ),
         body: Container(
@@ -69,11 +70,7 @@ class _CategoryPageState extends State<CategoryPage> {
                 child: Container(
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.all(Radius.elliptical(8, 8)),
-                    color: Color.fromARGB(255, 235, 172, 215),
-                    border: Border.all(
-                      width: 3,
-                      color: Colors.purple[300],
-                    ),
+                    color: Color.fromARGB(255, 208, 222, 229),
                   ),
                   padding: EdgeInsets.symmetric(
                       vertical: phoneHeight * 0.005,
@@ -111,11 +108,7 @@ class _CategoryPageState extends State<CategoryPage> {
                 child: Container(
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.all(Radius.elliptical(8, 8)),
-                    color: Color.fromARGB(255, 235, 172, 215),
-                    border: Border.all(
-                      width: 3,
-                      color: Colors.purple[300],
-                    ),
+                    color: Color.fromARGB(255, 208, 222, 229),
                   ),
                   child: findAllCategoryRecipeCount() != 0
                       ? GridView.builder(

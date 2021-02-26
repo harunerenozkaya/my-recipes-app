@@ -25,6 +25,7 @@ class _EditCustomsWidgetState extends State<EditCustomsWidget> {
   String category;
   String price;
 
+  // ignore: must_call_super
   initState() {
     category = widget.ownCategory.toString();
     price = widget.ownPrice.toString();
@@ -61,10 +62,10 @@ class _EditCustomsWidgetState extends State<EditCustomsWidget> {
                 padding: EdgeInsets.all(1),
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.all(Radius.elliptical(8, 8)),
-                  color: Color.fromARGB(255, 252, 242, 249),
+                  color: Color.fromARGB(255, 255, 255, 255),
                   border: Border.all(
                     width: 3,
-                    color: Colors.purple[300],
+                    color: Color.fromARGB(255, 232, 147, 148),
                   ),
                 ),
                 child: Row(
@@ -116,10 +117,10 @@ class _EditCustomsWidgetState extends State<EditCustomsWidget> {
                 padding: EdgeInsets.all(1),
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.all(Radius.elliptical(8, 8)),
-                  color: Color.fromARGB(255, 252, 242, 249),
+                  color: Color.fromARGB(255, 255, 255, 255),
                   border: Border.all(
                     width: 3,
-                    color: Colors.purple[300],
+                    color: Color.fromARGB(255, 232, 147, 148),
                   ),
                 ),
                 child: Row(
@@ -164,10 +165,10 @@ class _EditCustomsWidgetState extends State<EditCustomsWidget> {
                 padding: EdgeInsets.all(1),
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.all(Radius.elliptical(8, 8)),
-                  color: Color.fromARGB(255, 252, 242, 249),
+                  color: Color.fromARGB(255, 255, 255, 255),
                   border: Border.all(
                     width: 3,
-                    color: Colors.purple[300],
+                    color: Color.fromARGB(255, 232, 147, 148),
                   ),
                 ),
                 child: Row(
@@ -237,6 +238,7 @@ class _EditCustomsWidgetState extends State<EditCustomsWidget> {
             child: Text(DemoLocalizations.of(context).translate("cancel")),
           ),
           RaisedButton(
+            color: Color.fromARGB(255, 232, 147, 148),
             onPressed: () {
               setState(
                 () {
@@ -267,8 +269,9 @@ class _EditCustomsWidgetState extends State<EditCustomsWidget> {
         DemoLocalizations.of(context).translate("drink"),
       ],
       title: DemoLocalizations.of(context).translate("what_category"),
-      headerColor: Colors.purple[300],
+      headerColor: Color.fromARGB(255, 232, 147, 148),
       context: context,
+      headerTextColor: Colors.black,
       onChanged: (val) {
         setState(
           () {
@@ -286,7 +289,7 @@ class _EditCustomsWidgetState extends State<EditCustomsWidget> {
       initialTime: new Duration(minutes: 0),
       header: Container(
         alignment: Alignment.centerLeft,
-        color: Color.fromARGB(255, 235, 172, 215),
+        color: Color.fromARGB(255, 232, 147, 148),
         child: Center(
           child: Text(
             DemoLocalizations.of(context).translate("how_much_take_time"),
@@ -297,7 +300,7 @@ class _EditCustomsWidgetState extends State<EditCustomsWidget> {
       snapToMins: 5,
       heightx: 1.3,
       heightHeader: 15,
-      buttonColorOk: Color.fromARGB(255, 235, 172, 215),
+      buttonColorOk: Color.fromARGB(255, 232, 147, 148),
       buttonColorCancel: Color.fromARGB(255, 220, 220, 220),
     );
 

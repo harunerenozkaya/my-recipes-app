@@ -45,6 +45,7 @@ class _RecipeDetailState extends State<RecipeDetail> {
     return recipeData;
   }
 
+  // ignore: missing_return
   Future<bool> _onWillPop() {
     Navigator.popAndPushNamed(context, "/");
   }
@@ -70,14 +71,14 @@ class _RecipeDetailState extends State<RecipeDetail> {
     return WillPopScope(
       onWillPop: _onWillPop,
       child: Scaffold(
-        backgroundColor: Color.fromARGB(255, 252, 242, 249),
+        backgroundColor: Color.fromARGB(255, 255, 255, 255),
         bottomNavigationBar: Container(
           height: phoneHeight * 0.056,
           margin: EdgeInsets.fromLTRB(
               phoneWidth * 0.1, 0, phoneWidth * 0.1, phoneHeight * 0.01),
           child: Container(
             decoration: BoxDecoration(
-                color: Color.fromARGB(255, 235, 172, 215),
+                color: Color.fromARGB(255, 232, 147, 148),
                 borderRadius: BorderRadius.all(Radius.elliptical(15, 15))),
             child: Row(
               children: [
@@ -90,7 +91,7 @@ class _RecipeDetailState extends State<RecipeDetail> {
                       color: Colors.white,
                       child: Icon(
                         Icons.delete,
-                        color: Colors.purple[300],
+                        color: Color.fromARGB(255, 232, 147, 148),
                         size: phoneHeight * 0.03,
                       ),
                     ),
@@ -108,7 +109,7 @@ class _RecipeDetailState extends State<RecipeDetail> {
                       color: Colors.white,
                       child: Icon(
                         Icons.edit,
-                        color: Colors.purple[300],
+                        color: Color.fromARGB(255, 232, 147, 148),
                         size: phoneHeight * 0.03,
                       ),
                     ),
@@ -124,12 +125,12 @@ class _RecipeDetailState extends State<RecipeDetail> {
                       child: recipe.isFavorite == false
                           ? Icon(
                               Icons.star_border_outlined,
-                              color: Colors.purple[300],
+                              color: Color.fromARGB(255, 232, 147, 148),
                               size: phoneHeight * 0.03,
                             )
                           : Icon(
                               Icons.star,
-                              color: Colors.purple[300],
+                              color: Color.fromARGB(255, 232, 147, 148),
                               size: phoneHeight * 0.03,
                             ),
                     ),
@@ -152,7 +153,7 @@ class _RecipeDetailState extends State<RecipeDetail> {
               onPressed: () {
                 Navigator.popAndPushNamed(context, "/");
               },
-              color: Color.fromARGB(255, 235, 172, 215),
+              color: Color.fromARGB(255, 232, 147, 148),
               elevation: 0,
               child: Icon(
                 Icons.arrow_back_outlined,
@@ -219,13 +220,14 @@ class _RecipeDetailState extends State<RecipeDetail> {
               Navigator.pop(context);
             },
             child: Text(DemoLocalizations.of(context).translate("abort")),
+            color: Color.fromARGB(255, 200, 200, 200),
           ),
           RaisedButton(
             onPressed: () => deleteRecipe(context),
             child: Text(
               DemoLocalizations.of(context).translate("delete"),
             ),
-            color: Color.fromARGB(255, 235, 172, 215),
+            color: Color.fromARGB(255, 232, 147, 148),
           )
         ],
       ),

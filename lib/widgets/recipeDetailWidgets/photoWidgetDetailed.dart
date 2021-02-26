@@ -38,7 +38,7 @@ class PhotoWidgetDetailed extends StatelessWidget {
             child: GestureDetector(
               onTap: () => zoomImage(context),
               child: Container(
-                color: Colors.purple[300],
+                color: Color.fromARGB(255, 232, 147, 148),
                 child: Icon(
                   Icons.search,
                   size: phoneHeight * 0.03,

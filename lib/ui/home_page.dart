@@ -11,13 +11,14 @@ class MyHomePage extends StatelessWidget {
     final phoneHeight = MediaQuery.of(context).size.height;
     final phoneWidth = MediaQuery.of(context).size.width;
 
+    // ignore: missing_return
     Future<bool> _onWillPop() {}
 
     return WillPopScope(
       onWillPop: _onWillPop,
       child: Scaffold(
         drawer: MenuDrawer(),
-        backgroundColor: Color.fromARGB(255, 252, 242, 249),
+        backgroundColor: Color.fromARGB(255, 255, 255, 255),
         appBar: AppBar(
           title: Text(
             DemoLocalizations.of(context).translate("home_title"),
@@ -33,7 +34,7 @@ class MyHomePage extends StatelessWidget {
           child: Icon(
             Icons.add,
             size: 40,
-            color: Color.fromARGB(255, 235, 172, 215),
+            color: Color.fromARGB(255, 232, 147, 148),
           ),
         ),
         body: Container(
@@ -58,11 +59,7 @@ class MyHomePage extends StatelessWidget {
                 child: Container(
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.all(Radius.elliptical(8, 8)),
-                    color: Color.fromARGB(255, 235, 172, 215),
-                    border: Border.all(
-                      width: 3,
-                      color: Colors.purple[300],
-                    ),
+                    color: Color.fromARGB(255, 208, 222, 229),
                   ),
                   padding: EdgeInsets.symmetric(
                       vertical: phoneHeight * 0.005,
@@ -103,11 +100,7 @@ class MyHomePage extends StatelessWidget {
                 child: Container(
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.all(Radius.elliptical(8, 8)),
-                    color: Color.fromARGB(255, 235, 172, 215),
-                    border: Border.all(
-                      width: 3,
-                      color: Colors.purple[300],
-                    ),
+                    color: Color.fromARGB(255, 208, 222, 229),
                   ),
                   child: findAllRecipeCount() != 0
                       ? GridView.builder(

@@ -47,7 +47,7 @@ class MenuDrawer extends StatelessWidget {
                     indent: phoneWidth * 0.05,
                     endIndent: phoneWidth * 0.05,
                     thickness: 3,
-                    color: Color.fromARGB(255, 235, 172, 215),
+                    color: Color.fromARGB(255, 232, 147, 148),
                   )),
               Expanded(
                 flex: 60,
@@ -74,7 +74,7 @@ class MenuDrawer extends StatelessWidget {
                             )),
                         leading: Icon(
                           Icons.star_outline_sharp,
-                          color: Color.fromARGB(255, 235, 172, 215),
+                          color: Color.fromARGB(255, 232, 147, 148),
                           size: phoneHeight * 0.04,
                         ),
                         visualDensity: VisualDensity(horizontal: -4),

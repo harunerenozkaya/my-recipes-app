@@ -27,7 +27,7 @@ class IngredientWidgetDetailed extends StatelessWidget {
             flex: 1,
             child: Container(
               decoration: BoxDecoration(
-                  color: Colors.purple[300],
+                  color: Color.fromARGB(255, 232, 147, 148),
                   borderRadius: BorderRadius.only(
                     topLeft: Radius.circular(10),
                     bottomLeft: Radius.circular(10),

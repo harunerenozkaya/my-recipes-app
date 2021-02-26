@@ -43,10 +43,10 @@ class _AddCustomsWidgetState extends State<AddCustomsWidget> {
                 padding: EdgeInsets.all(1),
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.all(Radius.elliptical(8, 8)),
-                  color: Color.fromARGB(255, 252, 242, 249),
+                  color: Color.fromARGB(255, 255, 255, 255),
                   border: Border.all(
                     width: 3,
-                    color: Colors.purple[300],
+                    color: Color.fromARGB(255, 232, 147, 148),
                   ),
                 ),
                 child: Row(
@@ -98,10 +98,10 @@ class _AddCustomsWidgetState extends State<AddCustomsWidget> {
                 padding: EdgeInsets.all(1),
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.all(Radius.elliptical(8, 8)),
-                  color: Color.fromARGB(255, 252, 242, 249),
+                  color: Color.fromARGB(255, 255, 255, 255),
                   border: Border.all(
                     width: 3,
-                    color: Colors.purple[300],
+                    color: Color.fromARGB(255, 232, 147, 148),
                   ),
                 ),
                 child: Row(
@@ -148,10 +148,10 @@ class _AddCustomsWidgetState extends State<AddCustomsWidget> {
                 padding: EdgeInsets.all(1),
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.all(Radius.elliptical(8, 8)),
-                  color: Color.fromARGB(255, 252, 242, 249),
+                  color: Color.fromARGB(255, 255, 255, 255),
                   border: Border.all(
                     width: 3,
-                    color: Colors.purple[300],
+                    color: Color.fromARGB(255, 232, 147, 148),
                   ),
                 ),
                 child: Row(
@@ -231,7 +231,7 @@ class _AddCustomsWidgetState extends State<AddCustomsWidget> {
               );
             },
             child: Text(DemoLocalizations.of(context).translate("okay")),
-            color: Color.fromARGB(255, 235, 172, 215),
+            color: Color.fromARGB(255, 232, 147, 148),
           ),
         ],
       ),
@@ -254,7 +254,8 @@ class _AddCustomsWidgetState extends State<AddCustomsWidget> {
         DemoLocalizations.of(context).translate("drink"),
       ],
       title: DemoLocalizations.of(context).translate("what_category"),
-      headerColor: Color.fromARGB(255, 235, 172, 215),
+      headerColor: Color.fromARGB(255, 232, 147, 148),
+      headerTextColor: Colors.black,
       context: context,
       onChanged: (val) {
         setState(
@@ -273,7 +274,7 @@ class _AddCustomsWidgetState extends State<AddCustomsWidget> {
       initialTime: new Duration(minutes: 0),
       header: Container(
         alignment: Alignment.centerLeft,
-        color: Color.fromARGB(255, 235, 172, 215),
+        color: Color.fromARGB(255, 232, 147, 148),
         child: Center(
           child: Text(
             DemoLocalizations.of(context).translate("how_much_take_time"),
@@ -284,7 +285,7 @@ class _AddCustomsWidgetState extends State<AddCustomsWidget> {
       snapToMins: 5,
       heightx: 1.3,
       heightHeader: 15,
-      buttonColorOk: Color.fromARGB(255, 235, 172, 215),
+      buttonColorOk: Color.fromARGB(255, 232, 147, 148),
       buttonColorCancel: Color.fromARGB(255, 220, 220, 220),
     );
 

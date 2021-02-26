@@ -45,10 +45,10 @@ class _DetailCustomsWidgetState extends State<DetailCustomsWidget> {
               padding: EdgeInsets.all(1),
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.all(Radius.elliptical(8, 8)),
-                color: Color.fromARGB(255, 252, 242, 249),
+                color: Color.fromARGB(255, 255, 255, 255),
                 border: Border.all(
                   width: 3,
-                  color: Colors.purple[300],
+                  color: Color.fromARGB(255, 232, 147, 148),
                 ),
               ),
               child: Row(
@@ -88,10 +88,10 @@ class _DetailCustomsWidgetState extends State<DetailCustomsWidget> {
               padding: EdgeInsets.all(1),
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.all(Radius.elliptical(8, 8)),
-                color: Color.fromARGB(255, 252, 242, 249),
+                color: Color.fromARGB(255, 255, 255, 255),
                 border: Border.all(
                   width: 3,
-                  color: Colors.purple[300],
+                  color: Color.fromARGB(255, 232, 147, 148),
                 ),
               ),
               child: Row(
@@ -131,10 +131,10 @@ class _DetailCustomsWidgetState extends State<DetailCustomsWidget> {
               padding: EdgeInsets.all(1),
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.all(Radius.elliptical(8, 8)),
-                color: Color.fromARGB(255, 252, 242, 249),
+                color: Color.fromARGB(255, 255, 255, 255),
                 border: Border.all(
                   width: 3,
-                  color: Colors.purple[300],
+                  color: Color.fromARGB(255, 232, 147, 148),
                 ),
               ),
               child: Row(

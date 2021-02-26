@@ -7,7 +7,6 @@ import 'package:myRecipes/widgets/addRecipeWidgets/add_ingredients_widget.dart';
 import 'package:myRecipes/widgets/addRecipeWidgets/add_photo_widget.dart';
 import 'package:myRecipes/widgets/addRecipeWidgets/add_step_widget.dart';
 import 'package:hive/hive.dart';
-
 import '../app_localization.dart';
 
 // ignore: must_be_immutable
@@ -52,9 +51,9 @@ class AddNewRecipePage extends StatelessWidget {
                   padding: EdgeInsets.symmetric(horizontal: 5),
                   child: RaisedButton(
                     shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(7),
-                        side: BorderSide(color: Colors.purple[300], width: 3)),
-                    color: Color.fromARGB(255, 235, 172, 215),
+                      borderRadius: BorderRadius.circular(7),
+                    ),
+                    color: Color.fromARGB(255, 232, 147, 148),
                     onPressed: () {
                       deleteImagesWhenAbort();
                       Navigator.popAndPushNamed(context, "/");
@@ -74,9 +73,9 @@ class AddNewRecipePage extends StatelessWidget {
                   padding: EdgeInsets.symmetric(horizontal: 5),
                   child: RaisedButton(
                     shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(7),
-                        side: BorderSide(color: Colors.purple[300], width: 3)),
-                    color: Color.fromARGB(255, 235, 172, 215),
+                      borderRadius: BorderRadius.circular(7),
+                    ),
+                    color: Color.fromARGB(255, 232, 147, 148),
                     onPressed: () => saveRecipe(context),
                     child: Container(
                       child: Center(
@@ -92,7 +91,7 @@ class AddNewRecipePage extends StatelessWidget {
           ),
         ),
       ),
-      backgroundColor: Color.fromARGB(255, 252, 242, 249),
+      backgroundColor: Color.fromARGB(255, 255, 255, 255),
       appBar: PreferredSize(
         preferredSize: Size.fromHeight(phoneHeight * 0.06),
         child: AppBar(

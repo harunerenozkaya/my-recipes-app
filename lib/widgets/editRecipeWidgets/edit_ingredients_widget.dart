@@ -1,10 +1,11 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_material_pickers/flutter_material_pickers.dart';
-import 'package:myRecipes/widgets/addRecipeWidgets/ingredientWidgetAdded.dart';
+import 'package:myRecipes/widgets/editRecipeWidgets/ingredientWidgetEdited.dart';
 
 import '../../app_localization.dart';
 
+// ignore: must_be_immutable
 class EditIngredientsWidget extends StatefulWidget {
   final double phoneHeight;
   final Function getIngredients;
@@ -24,6 +25,7 @@ class _EditIngredientsWidgetState extends State<EditIngredientsWidget> {
   String ingredientName = "";
   String ingredientAmount = "";
 
+  // ignore: must_call_super
   initState() {
     ingredients = widget.ingredients.toList();
     widget.getIngredients(ingredients);
@@ -66,16 +68,15 @@ class _EditIngredientsWidgetState extends State<EditIngredientsWidget> {
               Expanded(
                 flex: 5,
                 child: Container(
-                  padding: EdgeInsets.fromLTRB(phoneWidth * 0.01,
-                      widget.phoneHeight * 0.005, phoneWidth * 0.25, 0),
+                  padding: EdgeInsets.fromLTRB(phoneWidth * 0.015,
+                      widget.phoneHeight * 0.01, phoneWidth * 0.25, 0),
                   decoration: BoxDecoration(
-                    color: Color.fromARGB(255, 235, 172, 215),
+                    color: Color.fromARGB(255, 208, 222, 229),
                     borderRadius: BorderRadius.all(Radius.elliptical(8, 8)),
-                    border: Border.all(color: Colors.purple[300], width: 3),
                   ),
                   child: ListView.separated(
                       primary: false,
-                      itemBuilder: (context, index) => IngredientWidget(
+                      itemBuilder: (context, index) => IngredientWidgetEdited(
                           ingredients[index].values.toList()[0],
                           ingredients[index].values.toList()[2],
                           ingredients[index].values.toList()[1],
@@ -98,8 +99,9 @@ class _EditIngredientsWidgetState extends State<EditIngredientsWidget> {
           child: RaisedButton(
             shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(7),
-                side: BorderSide(color: Colors.purple[300], width: 3)),
-            color: Color.fromARGB(255, 252, 242, 249),
+                side: BorderSide(
+                    color: Color.fromARGB(255, 232, 147, 148), width: 3)),
+            color: Color.fromARGB(255, 255, 255, 255),
             child: AutoSizeText(
                 "${DemoLocalizations.of(context).translate("add_ingredient")}",
                 textAlign: TextAlign.center),
@@ -132,7 +134,7 @@ class _EditIngredientsWidgetState extends State<EditIngredientsWidget> {
                 RaisedButton(
                   onPressed: () => addNewIngredientFunc(),
                   child: Text(DemoLocalizations.of(context).translate("add")),
-                  color: Color.fromARGB(255, 235, 172, 215),
+                  color: Color.fromARGB(255, 232, 147, 148),
                 ),
               ],
               title: Text(
@@ -178,6 +180,7 @@ class _EditIngredientsWidgetState extends State<EditIngredientsWidget> {
                         Expanded(
                           flex: 2,
                           child: RaisedButton(
+                            color: Color.fromARGB(255, 232, 147, 148),
                             onPressed: () {
                               showMaterialScrollPicker(
                                 selectedItem: "lb",
@@ -236,7 +239,7 @@ class _EditIngredientsWidgetState extends State<EditIngredientsWidget> {
                 .translate("ingredient_name_cant_blank"),
             style: TextStyle(fontWeight: FontWeight.bold),
           ),
-          backgroundColor: Color.fromARGB(255, 235, 172, 215),
+          backgroundColor: Color.fromARGB(255, 232, 147, 148),
           actions: [
             RaisedButton(
               onPressed: () => Navigator.pop(context),

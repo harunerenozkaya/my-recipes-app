@@ -3,6 +3,7 @@ import 'package:myRecipes/widgets/editRecipeWidgets/stepWidgetEdited.dart';
 
 import '../../app_localization.dart';
 
+// ignore: must_be_immutable
 class EditStepsWidget extends StatefulWidget {
   final double phoneHeight;
   final Function getStep;
@@ -17,6 +18,7 @@ class _EditStepsWidgetState extends State<EditStepsWidget> {
   List<String> steps = [];
   String step = "";
 
+  // ignore: must_call_super
   initState() {
     steps = widget.steps.toList();
     widget.getStep(steps);
@@ -50,12 +52,11 @@ class _EditStepsWidgetState extends State<EditStepsWidget> {
               Expanded(
                 flex: 5,
                 child: Container(
-                  padding: EdgeInsets.fromLTRB(phoneWidth * 0.01,
-                      widget.phoneHeight * 0.005, phoneWidth * 0.25, 0),
+                  padding: EdgeInsets.fromLTRB(phoneWidth * 0.015,
+                      widget.phoneHeight * 0.01, phoneWidth * 0.25, 0),
                   decoration: BoxDecoration(
-                    color: Color.fromARGB(255, 235, 172, 215),
+                    color: Color.fromARGB(255, 208, 222, 229),
                     borderRadius: BorderRadius.all(Radius.elliptical(8, 8)),
-                    border: Border.all(color: Colors.purple[300], width: 3),
                   ),
                   child: ListView.separated(
                       primary: false,
@@ -80,8 +81,9 @@ class _EditStepsWidgetState extends State<EditStepsWidget> {
           child: RaisedButton(
             shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(7),
-                side: BorderSide(color: Colors.purple[300], width: 3)),
-            color: Color.fromARGB(255, 252, 242, 249),
+                side: BorderSide(
+                    color: Color.fromARGB(255, 232, 147, 148), width: 3)),
+            color: Color.fromARGB(255, 255, 255, 255),
             child: Text(DemoLocalizations.of(context).translate("add_steps")),
             onPressed: () {
               showStepDialog(context);
@@ -109,7 +111,7 @@ class _EditStepsWidgetState extends State<EditStepsWidget> {
               RaisedButton(
                 onPressed: () => addNewStepFunction(),
                 child: Text(DemoLocalizations.of(context).translate("add")),
-                color: Color.fromARGB(255, 235, 172, 215),
+                color: Color.fromARGB(255, 232, 147, 148),
               ),
             ],
             title: Text(
@@ -152,9 +154,9 @@ class _EditStepsWidgetState extends State<EditStepsWidget> {
         builder: (context) => AlertDialog(
           content: Text(
             DemoLocalizations.of(context).translate("step_name_cant_blank"),
-            style: TextStyle(fontWeight: FontWeight.bold),
+            style: TextStyle(fontWeight: FontWeight.bold, color: Colors.white),
           ),
-          backgroundColor: Color.fromARGB(255, 235, 172, 215),
+          backgroundColor: Color.fromARGB(255, 232, 147, 148),
           actions: [
             RaisedButton(
               onPressed: () => Navigator.pop(context),
